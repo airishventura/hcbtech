@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Ganti host berikut melalui proses deployment dengan VITE_SITE_URL yang terverifikasi.
+Sitemap: https://hcbtech.vercel.app/sitemap.xml
+Sitemap: https://hcbtech.vercel.app/sitemap-en.xml

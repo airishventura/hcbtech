@@ -1,0 +1,728 @@
+{
+  "sourceArchive": "wa hcb.zip",
+  "sourceFileCount": 102,
+  "uniqueFileCount": 52,
+  "duplicatePhotoCount": 50,
+  "assets": [
+    {
+      "id": "photo-01",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-01.jpg",
+      "sha256": "5bb855020ab58e9c601284eb8df6087131d9853c4c22656617159543172100b0",
+      "width": 720,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_1_2026-11-21_23-44-10.jpg",
+        "photo_1_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-03",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-03.jpg",
+      "sha256": "e8fbfa1217514ad708804fd29431566e5c9c705a5821d965a68fa74592c6719d",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_3_2026-11-21_23-44-10.jpg",
+        "photo_3_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-05",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-05.jpg",
+      "sha256": "11297f54998ee237c12247c7f6210c8dd4096be899d003552dcf4c53673f1ecb",
+      "width": 720,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_5_2026-11-21_23-44-10.jpg",
+        "photo_5_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-06",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-06.jpg",
+      "sha256": "577ba72114ac0552f1cebfef9216d68e537d39dc21a495550c950c6314ab9645",
+      "width": 720,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_6_2026-11-21_23-44-10.jpg",
+        "photo_6_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-17",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-17.jpg",
+      "sha256": "6a92b4a786f4d371fd53285815650e1fea419ef84114bc23ee24137d2fcbe468",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_17_2026-11-21_23-44-10.jpg",
+        "photo_17_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-18",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-18.jpg",
+      "sha256": "6e134f3047a555a46d3413258fab18ea5c36fac84f2e81841f72d774871df304",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_18_2026-11-21_23-44-10.jpg",
+        "photo_18_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-19",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-19.jpg",
+      "sha256": "231364c8c7d9d7fdb1b65d0069cbefa2d7876a884247b174a5ac20244e572469",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_19_2026-11-21_23-44-10.jpg",
+        "photo_19_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-20",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-20.jpg",
+      "sha256": "921ffb48aadd8ea144d8453da484fb6bb5c02cdd20db8ce2680647c310e2f23b",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_20_2026-11-21_23-44-10.jpg",
+        "photo_20_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-21",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-21.jpg",
+      "sha256": "e8b0808535064b3b04964eecb0786f0f3802c762fd9871806f24f74598a82545",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_21_2026-11-21_23-44-10.jpg",
+        "photo_21_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-22",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-22.jpg",
+      "sha256": "f263a10d56e922cc66203df33a7ac24b04bdb2fbfa39a9a5f8c191323c2609a2",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_22_2026-11-21_23-44-10.jpg",
+        "photo_22_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-29",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-29.jpg",
+      "sha256": "76a5a2d92945a690fd3036d896b3afbc08bed5b657f4696d6052beb921647613",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_29_2026-11-21_23-44-10.jpg",
+        "photo_29_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-34",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-34.jpg",
+      "sha256": "49dae9dade3e29dffa3fd4895006f6fad742c08099b2d83c1db281a5454d5e34",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_34_2026-11-21_23-44-11.jpg",
+        "photo_34_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-36",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-36.jpg",
+      "sha256": "7201712fb9082fd4791857beb47015daa5c51ec22c1603a1a09d018aecaad01d",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_36_2026-11-21_23-44-11.jpg",
+        "photo_36_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-37",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-37.jpg",
+      "sha256": "bec5f127bc7f92e2a1ef6c3a2583333fcf55feb780c0a40131b134787e646611",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_37_2026-11-21_23-44-11.jpg",
+        "photo_37_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-38",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-38.jpg",
+      "sha256": "0784405491cdf6664d331b846403b6675aa05bc40e4207bcbf9fc069fca631de",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_38_2026-11-21_23-44-11.jpg",
+        "photo_38_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-43",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-43.jpg",
+      "sha256": "899874be9dd4191d7e246ecf4697e88fbacc990e414ce6b53689c98cb1a0d7d4",
+      "width": 720,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_43_2026-11-21_23-44-11.jpg",
+        "photo_43_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-44",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-44.jpg",
+      "sha256": "042bad06ca88e9d8e4c32193b0d3a6c993da38f690d1f2d244144e01f50c4184",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_44_2026-11-21_23-44-11.jpg",
+        "photo_44_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-49",
+      "group": "shell-peeler",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/shell-peeler/photo-49.jpg",
+      "sha256": "0afc224b39b78833bf39a658ddfeb68ab0bf3b42815f87567b219620fbe8247d",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_49_2026-11-21_23-44-11.jpg",
+        "photo_49_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-02",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-02.jpg",
+      "sha256": "007340c16fdcd3b0eca6c6ca0c18732a8aa72cfb89c1150c98e5b3b8519ef391",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_2_2026-11-21_23-44-10.jpg",
+        "photo_2_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-08",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-08.jpg",
+      "sha256": "d98175559a1823ad8d3fca2cd0fca645a2e73a7c10a5c3fba8802796b7519fcb",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_8_2026-11-21_23-44-10.jpg",
+        "photo_8_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-23",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-23.jpg",
+      "sha256": "5e4a49bdbdef7e5bfd216f48d5816d087aed6332685f6083fc7da603f5cc2835",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_23_2026-11-21_23-44-10.jpg",
+        "photo_23_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-24",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-24.jpg",
+      "sha256": "53b9b3f6332a98cf3fd5287b6d07b6687ba1742a5cf60dda8a63868d9480f16c",
+      "width": 720,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_24_2026-11-21_23-44-10.jpg",
+        "photo_24_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-28",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-28.jpg",
+      "sha256": "a21d6cee8f1714afab53821c53d61dee9877c6ad6f09f996650e3148f3d8b57d",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_28_2026-11-21_23-44-10.jpg",
+        "photo_28_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-31",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-31.jpg",
+      "sha256": "a76cc2294258ab77369b968bf63a9faab75b98e74bada0a5a599c85741983882",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_31_2026-11-21_23-44-11.jpg",
+        "photo_31_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-35",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-35.jpg",
+      "sha256": "642a35b0a7b37c1ca6770c1631c41fe4a974eb6899267e62e42af3b96a15aa17",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_35_2026-11-21_23-44-11.jpg",
+        "photo_35_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-39",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-39.jpg",
+      "sha256": "81064724c85d2c9fcf2be7338a66bcce2f250fd53320bfcab3d29133daa401c5",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_39_2026-11-21_23-44-11.jpg",
+        "photo_39_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-40",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-40.jpg",
+      "sha256": "d577f90f20453cb2df2dd3024a5f92815bb8f14e61894ffe812eb40802310eb3",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_40_2026-11-21_23-44-11.jpg",
+        "photo_40_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-41",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-41.jpg",
+      "sha256": "103a00aababa09fedc9792fc989d2abc014a5f04267768ccd079e78742c8a804",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_41_2026-11-21_23-44-11.jpg",
+        "photo_41_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-42",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-42.jpg",
+      "sha256": "25b8c117b0e96ffa8c50f342bcb0ee9f15fcc503171f3a81690708bc5db5a68b",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_42_2026-11-21_23-44-11.jpg",
+        "photo_42_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-45",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-45.jpg",
+      "sha256": "0c92096e5e41feb36be8974cad7dacf360b42f2bbbd9a77d39b952aa101e3411",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_45_2026-11-21_23-44-11.jpg",
+        "photo_45_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-46",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-46.jpg",
+      "sha256": "b4f2101a3a0678f7ac036ea823480f4285307a59b6d91ed2f1509b26df643c60",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_46_2026-11-21_23-44-11.jpg",
+        "photo_46_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-47",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-47.jpg",
+      "sha256": "1ba82d8d1172fb7f717dddf1ed2fd8d54fdc53e4e7ed0ffdfefe98dbe5d5b9f7",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_47_2026-11-21_23-44-11.jpg",
+        "photo_47_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-48",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-48.jpg",
+      "sha256": "7642c09a0675f1264f3288c75176523451a0e45bae8e9723eba3dc132a0e29cf",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_48_2026-11-21_23-44-11.jpg",
+        "photo_48_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-50",
+      "group": "coconut-grater",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-grater/photo-50.jpg",
+      "sha256": "64c519fe6f7ee0cce2e56a3d5b8d6546ee02ac325ea25d18cfd880a01de26a69",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_50_2026-11-21_23-44-11.jpg",
+        "photo_50_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-04",
+      "group": "coconut-milk-press",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-milk-press/photo-04.jpg",
+      "sha256": "5b4666fc3c7ca1637312d61bd2af1390b5190d6fdccbfe4f3b8163e65845f672",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_4_2026-11-21_23-44-10.jpg",
+        "photo_4_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-11",
+      "group": "coconut-milk-press",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-milk-press/photo-11.jpg",
+      "sha256": "e622903e82fd8242ced83096ee0f264aa375b3a84c0568940479ac35ebe002a2",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_11_2026-11-21_23-44-10.jpg",
+        "photo_11_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-12",
+      "group": "coconut-milk-press",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-milk-press/photo-12.jpg",
+      "sha256": "1349a41641f61ce0bfc714d03fba9ffac7bfd3348063f85da2619a420c94595d",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_12_2026-11-21_23-44-10.jpg",
+        "photo_12_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-13",
+      "group": "coconut-milk-press",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-milk-press/photo-13.jpg",
+      "sha256": "54a70c165177695c9836aa0834efe374b2a17a45804535ddf90b9f5347da71dc",
+      "width": 1280,
+      "height": 960,
+      "sourceFiles": [
+        "photo_13_2026-11-21_23-44-10.jpg",
+        "photo_13_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-32",
+      "group": "coconut-milk-press",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-milk-press/photo-32.jpg",
+      "sha256": "51e0ac4d7347c9f8b47b7fb36042e2c4dd346924cccc356da62aa15cfa48d162",
+      "width": 720,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_32_2026-11-21_23-44-11.jpg",
+        "photo_32_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-33",
+      "group": "coconut-milk-press",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/coconut-milk-press/photo-33.jpg",
+      "sha256": "5c67432c80363a2cfbd01d7508c83eb2c182e068ccf63564cc4e52187cc61cb0",
+      "width": 720,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_33_2026-11-21_23-44-11.jpg",
+        "photo_33_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-25",
+      "group": "rollers-and-parts",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/rollers-and-parts/photo-25.jpg",
+      "sha256": "f7fe6df25ac5a5d126b2abeb37c51280731f7142ea81b3885d0d441bf885b9ec",
+      "width": 720,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_25_2026-11-21_23-44-10.jpg",
+        "photo_25_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-26",
+      "group": "rollers-and-parts",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/rollers-and-parts/photo-26.jpg",
+      "sha256": "655ade860ade2f18d39035b6241e1d6a48b17b381d1f82b45f06983bcbf853ba",
+      "width": 720,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_26_2026-11-21_23-44-10.jpg",
+        "photo_26_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-27",
+      "group": "rollers-and-parts",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/rollers-and-parts/photo-27.jpg",
+      "sha256": "cda969ac99feb685f4142baf6c556fcf9ea522cc2f5b38afc4816d8402b90dbc",
+      "width": 720,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_27_2026-11-21_23-44-10.jpg",
+        "photo_27_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-07",
+      "group": "workshop",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/workshop/photo-07.jpg",
+      "sha256": "44de2e11b7b6bbad8aa14ae3e1e15a58bd63aa405566262f4fa039af98703f3e",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_7_2026-11-21_23-44-10.jpg",
+        "photo_7_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-09",
+      "group": "workshop",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/workshop/photo-09.jpg",
+      "sha256": "ba4fa083633cb07983c202791ee477c6be385f491542683d0b9ca04a9a31df40",
+      "width": 1280,
+      "height": 960,
+      "sourceFiles": [
+        "photo_9_2026-11-21_23-44-10.jpg",
+        "photo_9_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-10",
+      "group": "workshop",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/workshop/photo-10.jpg",
+      "sha256": "d6b73ffbea7fdc84b6dc012e8e3162413090a8542b1a87e03f16ca4ce79ff114",
+      "width": 1280,
+      "height": 960,
+      "sourceFiles": [
+        "photo_10_2026-11-21_23-44-10.jpg",
+        "photo_10_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-30",
+      "group": "workshop",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/workshop/photo-30.jpg",
+      "sha256": "2805c30176b05e5c6c1893c519a800dfb0a16e04317686650f10f671bc8919a6",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_30_2026-11-21_23-44-11.jpg",
+        "photo_30_2026-11-21_23-44-51.jpg"
+      ]
+    },
+    {
+      "id": "photo-14",
+      "group": "cabinet-unidentified",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/cabinet-unidentified/photo-14.jpg",
+      "sha256": "ae9a0720cdea35e0a1ca01888720b1686018b638341bb1f84182f24a47ff1674",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_14_2026-11-21_23-44-10.jpg",
+        "photo_14_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-15",
+      "group": "cabinet-unidentified",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/cabinet-unidentified/photo-15.jpg",
+      "sha256": "351684583c50f4d6c953c462f906fa376081bd4d81a902d4580b93bb87429a63",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_15_2026-11-21_23-44-10.jpg",
+        "photo_15_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "photo-16",
+      "group": "cabinet-unidentified",
+      "classification": "visual-inference",
+      "exactModel": null,
+      "path": "assets/reference/cabinet-unidentified/photo-16.jpg",
+      "sha256": "8e1562d09f3255db2d388b25184d7623b237a8ebd1acb466d0d1cd4e122215b2",
+      "width": 960,
+      "height": 1280,
+      "sourceFiles": [
+        "photo_16_2026-11-21_23-44-10.jpg",
+        "photo_16_2026-11-21_23-44-50.jpg"
+      ]
+    },
+    {
+      "id": "brand",
+      "group": "brand",
+      "classification": "owner-supplied",
+      "path": "assets/reference/brand/logo_hcbtech.jpeg",
+      "sha256": "cf5cdde946c31890db21c30f2237244836c252e07c907eaa4bf8420dd012c599",
+      "sourceFiles": [
+        "logo_hcbtech.jpeg"
+      ]
+    },
+    {
+      "id": "pricelist",
+      "group": "pricelist",
+      "classification": "owner-supplied",
+      "path": "assets/reference/pricelist/hcb_pricelist.jpeg",
+      "sha256": "1128cade8ad09b632a9b2c085366996cac4a5a612676f03979c4dc10aba1867e",
+      "sourceFiles": [
+        "hcb_pricelist.jpeg"
+      ]
+    }
+  ]
+}
