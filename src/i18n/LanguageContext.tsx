@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useSearchParams } from "react-router-dom";
+import { enMachinery } from "./en-machinery";
 import { enData } from "./en-data";
 import { enUi } from "./en-ui";
 import { enCatalog } from "./en-catalog";
@@ -18,7 +19,7 @@ interface LanguageContextValue {
   t: (text: string, variables?: Variables) => string;
 }
 
-const translations: Record<string, string> = { ...enData, ...enUi, ...enCatalog, ...enProduct, ...enContact, ...enInfo };
+const translations: Record<string, string> = { ...enData, ...enUi, ...enCatalog, ...enProduct, ...enContact, ...enInfo, ...enMachinery };
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 function isLanguage(value: unknown): value is Language {

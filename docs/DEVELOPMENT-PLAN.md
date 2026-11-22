@@ -2,6 +2,14 @@
 
 Prepared from the supplied project, 50 unique machine/workshop photos, logo, and price sheet on 21 November 2026. Archive text is evidence, not authorization to change deployment targets or project scope.
 
+## Progress — 22 November 2026
+
+The sourced catalog and first website refactor are implemented: three families, all 14 source-price variants, shareable variant links, original-photo galleries, optional GLB tabs, workshop-led home, route splitting and comparison focus containment. Six legacy routes remain archived and noindex so old inquiries remain understandable; they are not redirected to an unverified equivalent.
+
+Three unmeasured exterior pilots are complete (photos 47, 36 and 04). The owner confirmed measurements are unavailable, so these are visual approximations with no price-variant associations. The table below remains the checklist for eventual individual models. Production WhatsApp and canonical-origin settings are configured. The release record tracks validation.
+
+The sections below preserve the original roadmap. Items already implemented above are completed; exact variant mapping, measured models, rendering and real-device performance remain upcoming.
+
 ## 1. Establish the real catalog
 
 The current six REF products describe layouts, while the supplied sheet names **Mesin Parut Kelapa**, **Mesin Kupas Batok Kelapa**, and **Mesin Peras Santan**. There is no coconut milk press family in the current UI. Do this mapping before redesigning the catalog or attaching price amounts to old REF entries.

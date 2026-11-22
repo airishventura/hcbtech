@@ -58,7 +58,10 @@ export interface InquiryInput {
 
 export function buildInquiryMessage({ product, variant, name, city, message, language = "id" }: InquiryInput) {
   const english = language === "en";
-  const productPath = `/mesin/${product?.slug ?? ""}${english ? "?lang=en" : ""}`;
+  const query = new URLSearchParams();
+  if (english) query.set("lang", "en");
+  if (variant) query.set("varian", variant.id);
+  const productPath = `/mesin/${product?.slug ?? ""}${query.size ? `?${query}` : ""}`;
   const lines = english ? [
     "Hello HCBTECH, I would like to request a quotation.",
     "",
@@ -66,11 +69,12 @@ export function buildInquiryMessage({ product, variant, name, city, message, lan
     product ? `Page: ${typeof window === "undefined" ? productPath : `${window.location.origin}${productPath}`}` : "",
     variant ? `Preferred configuration: ${variant.label}` : "",
     variant ? `Configuration note: ${variant.note}` : "",
+    variant?.priceKind === "reference" ? `Price-list reference: ${variant.priceSourceId}; ${formatIDR(variant.priceIDR)} (please reconfirm)` : "",
     name?.trim() ? `Name: ${name.trim()}` : "",
     city?.trim() ? `City: ${city.trim()}` : "",
     message?.trim() ? `My requirements: ${message.trim()}` : "My requirements: Please confirm specifications, unit scope, price, and availability.",
     "",
-    "I understand that catalog model names and specifications still await HCBTECH confirmation.",
+    product?.nameStatus === "confirmed" ? "Please confirm the final price, specifications, and availability before ordering." : "I understand that catalog model names and specifications still await HCBTECH confirmation.",
   ] : [
     "Halo HCBTECH, saya ingin meminta penawaran.",
     "",
@@ -78,11 +82,12 @@ export function buildInquiryMessage({ product, variant, name, city, message, lan
     product ? `Halaman: ${typeof window === "undefined" ? productPath : `${window.location.origin}${productPath}`}` : "",
     variant ? `Konfigurasi yang diminati: ${variant.label}` : "",
     variant ? `Catatan konfigurasi: ${variant.note}` : "",
+    variant?.priceKind === "reference" ? `Referensi daftar harga: ${variant.priceSourceId}; ${formatIDR(variant.priceIDR)} (mohon konfirmasi)` : "",
     name?.trim() ? `Nama: ${name.trim()}` : "",
     city?.trim() ? `Kota: ${city.trim()}` : "",
     message?.trim() ? `Kebutuhan saya: ${message.trim()}` : "Kebutuhan saya: Mohon konfirmasi spesifikasi, cakupan unit, harga, dan ketersediaan.",
     "",
-    "Saya memahami nama model dan spesifikasi pada katalog masih menunggu konfirmasi HCBTECH.",
+    product?.nameStatus === "confirmed" ? "Mohon konfirmasi harga akhir, spesifikasi, dan ketersediaan sebelum pemesanan." : "Saya memahami nama model dan spesifikasi pada katalog masih menunggu konfirmasi HCBTECH.",
   ];
   return lines.filter((line, index) => line !== "" || lines[index - 1] !== "").join("\n");
 }

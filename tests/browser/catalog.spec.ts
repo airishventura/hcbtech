@@ -9,15 +9,15 @@ test("filter kategori, penggerak, null-price, pencarian, dan reset bekerja", asy
     return ids.filter((id, index) => ids.indexOf(id) !== index);
   });
   expect(duplicateIds).toEqual([]);
-  await expect(page.locator("article[data-product]")).toHaveCount(6);
-  await page.selectOption(`#${prefix}-category`, "piringan-gearbox");
   await expect(page.locator("article[data-product]")).toHaveCount(3);
+  await page.selectOption(`#${prefix}-category`, "kupas-batok-kelapa");
+  await expect(page.locator("article[data-product]")).toHaveCount(1);
   await page.selectOption(`#${prefix}-drive`, "engine");
   await expect(page.locator("article[data-product]")).toHaveCount(1);
-  await page.selectOption(`#${prefix}-price`, "verified");
+  await page.selectOption(`#${prefix}-price`, "quote");
   await expect(page.getByText("Tidak ada referensi yang cocok.")).toBeVisible();
   await page.getByRole("button", { name: "Reset filter" }).click();
-  await page.getByLabel("Cari mesin, kode referensi, atau kategori").fill("REF-S03");
+  await page.getByLabel("Cari mesin, kode referensi, atau kategori").fill("A22");
   await expect(page.locator("article[data-product]")).toHaveCount(1);
 });
 

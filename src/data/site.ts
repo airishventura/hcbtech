@@ -79,8 +79,8 @@ export const generalFaq = [
     answer: "Belum ada status stok yang diverifikasi. Setiap kartu menampilkan ‘Konfirmasi ketersediaan’. Kirim konfigurasi yang diminati untuk menanyakan unit existing atau kemungkinan pengerjaan.",
   },
   {
-    question: "Mengapa harga tidak ditampilkan?",
-    answer: "Belum ada harga yang diberikan dan diverifikasi pemilik untuk dipublikasikan. Situs sengaja tidak membuat harga mulai, diskon, atau estimasi palsu. Gunakan tombol Minta Penawaran.",
+    question: "Apakah harga daftar sudah final?",
+    answer: "Harga bersumber dari daftar pemilik yang diterima 21 November 2026. Harga akhir, komponen yang termasuk, ketersediaan, dan pengiriman dikonfirmasi sebelum pemesanan.",
   },
   {
     question: "Apakah visualisasi 3D merupakan gambar teknik?",
@@ -102,9 +102,9 @@ export const generalFaq = [
 
 export const confirmationChecklist = [
   { priority: "P0", item: "Environment WhatsApp pada host deployment", reason: "Nomor pemilik sudah diterima dan dinormalisasi ke 6285315527000. Pastikan variabel yang sama dipasang pada host; fallback draf tetap tersedia." },
-  { priority: "P0", item: "Nama model dan SKU final setiap unit", reason: "Semua nama saat ini berstatus sementara; kode REF hanya identitas data internal." },
-  { priority: "P0", item: "Foto asli multi-sudut dan logo pemilik", reason: "Berkas belum tersedia di direktori proyek. Visual saat ini diberi label visualisasi." },
-  { priority: "P0", item: "Harga, cakupan unit, dan ketersediaan", reason: "Semua harga sengaja null dan tidak ada Offer pada structured data." },
+  { priority: "P0", item: "Nama model dan SKU final setiap unit", reason: "Tiga keluarga dan 14 pilihan bersumber dari daftar pemilik. SKU serta identitas unit pada foto masih perlu dicocokkan." },
+  { priority: "P0", item: "Foto asli multi-sudut dan logo pemilik", reason: "Logo dan 50 foto unik sudah diarsipkan. Galeri katalog memakai foto asli dengan label referensi keluarga." },
+  { priority: "P0", item: "Harga, cakupan unit, dan ketersediaan", reason: "Harga daftar ditampilkan sebagai referensi. Stok belum dikonfirmasi dan tidak ada Offer pada structured data." },
   { priority: "P1", item: "Fungsi mesin dan bahan yang boleh diproses", reason: "Deskripsi saat ini hanya observasi bentuk luar." },
   { priority: "P1", item: "Daya, dimensi, kapasitas, material, dan berat", reason: "Dibutuhkan untuk tabel spesifikasi faktual dan rekonstruksi model 3D." },
   { priority: "P1", item: "Alamat bengkel, jam operasional, email, dan peta", reason: "Kontak tidak diisi dengan alamat atau jam buka rekaan." },

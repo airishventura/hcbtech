@@ -1,3 +1,6 @@
+import priceSheet from "../../assets/pricelist.json";
+const referencePrice = (id: string) => priceSheet.variants.find(row => row.id === id)?.listedPriceIDR ?? null;
+
 export type DriveType = "listrik" | "engine" | "listrik-atau-engine";
 export type VerificationStatus = "verified" | "observed" | "unconfirmed";
 export type ModelAccuracy = "none" | "approximation" | "geometry-verified";
@@ -14,7 +17,9 @@ export interface SpecItem {
 export interface ProductVariant {
   id: string;
   label: string;
-  drive: Exclude<DriveType, "listrik-atau-engine">;
+  drive: "listrik" | "engine" | "unconfirmed";
+  priceSourceId?: string;
+  priceKind?: "reference" | "confirmed";
   priceIDR: number | null;
   availability: Availability;
   note: string;
@@ -43,7 +48,7 @@ export interface Product {
   name: string;
   nameStatus: "draft" | "confirmed";
   sku: string | null;
-  category: "piringan-gearbox" | "drum-tertutup";
+  category: "piringan-gearbox" | "drum-tertutup" | "parut-kelapa" | "kupas-batok-kelapa" | "peras-santan";
   familyLabel: string;
   description: string;
   shortDescription: string;
@@ -67,362 +72,488 @@ export interface Product {
   faq: { question: string; answer: string }[];
   featured?: boolean;
   referenceNote: string;
+  defaultVariantId?: string;
+  priceSource?: { receivedDate: string; url: string };
+  modelReferenceNote?: string | null;
 }
-
-const quoteNote = "Belum ada harga terverifikasi. Kirim konfigurasi ini untuk meminta penawaran.";
-
-const driveVariants = (prefix: string): ProductVariant[] => [
-  {
-    id: `${prefix}-listrik`,
-    label: "Motor listrik",
-    drive: "listrik",
-    priceIDR: null,
-    availability: "unconfirmed",
-    note: "Daya, tegangan, dan merek motor menunggu konfirmasi.",
-  },
-  {
-    id: `${prefix}-engine`,
-    label: "Engine bensin",
-    drive: "engine",
-    priceIDR: null,
-    availability: "unconfirmed",
-    note: "Tipe engine dan kesesuaian konfigurasi menunggu konfirmasi.",
-  },
-];
-
-const commonFaq = [
-  {
-    question: "Berapa harga unit ini?",
-    answer: "Harga belum diverifikasi untuk ditampilkan. Pilih konfigurasi penggerak lalu kirim permintaan penawaran agar kebutuhan dan cakupan unit dapat dicek terlebih dahulu.",
-  },
-  {
-    question: "Apakah kapasitas dan dimensi sudah pasti?",
-    answer: "Belum. Nilai kapasitas, dimensi, daya, dan material tidak diisi dengan perkiraan. Tim perlu mengonfirmasi spesifikasi unit yang akan dikerjakan.",
-  },
-];
 
 export const products: Product[] = [
   {
-    id: "REF-D01",
-    slug: "piringan-gearbox-meja-listrik",
-    name: "Unit Piringan + Gearbox / Meja",
-    nameStatus: "draft",
-    sku: null,
-    category: "piringan-gearbox",
-    familyLabel: "Piringan & gearbox",
-    description: "Konfigurasi referensi dengan motor listrik dan gearbox pada rangka meja, piringan vertikal pada poros, serta saluran keluar berbentuk corong. Susunan komponen diringkas dari pengamatan foto referensi; fungsi kerja, hasil olahan, dimensi, dan performa belum diverifikasi.",
-    shortDescription: "Motor listrik terhubung ke gearbox pada rangka meja, dengan piringan vertikal dan corong keluar.",
-    driveType: "listrik",
-    material: null,
-    dimensions: null,
-    capacity: null,
-    features: [
-      { label: "Motor dan gearbox berada pada dudukan atas", status: "observed" },
-      { label: "Piringan vertikal pada poros horizontal", status: "observed" },
-      { label: "Corong serta saluran keluar terintegrasi", status: "observed" },
-      { label: "Fungsi dan material kontak menunggu konfirmasi", status: "unconfirmed" },
+    "id": "HCB-PARUT",
+    "slug": "parut-kelapa",
+    "name": "Mesin Parut Kelapa",
+    "nameStatus": "confirmed",
+    "sku": null,
+    "category": "parut-kelapa",
+    "familyLabel": "Parut kelapa",
+    "description": "Pilihan Mini, Berdiri, dan Jumbo untuk kebutuhan parut kelapa. Pilih tipe serta penggerak pada daftar harga, lalu konfirmasikan unit yang sesuai.",
+    "shortDescription": "Mini, Berdiri, dan Jumbo dengan pilihan penggerak pada daftar pemilik.",
+    "driveType": "listrik-atau-engine",
+    "material": null,
+    "dimensions": null,
+    "capacity": null,
+    "features": [
+      {
+        "label": "Pilihan tipe dan harga bersumber dari daftar pemilik.",
+        "status": "verified"
+      },
+      {
+        "label": "Foto asli tersedia untuk referensi bentuk keluarga mesin.",
+        "status": "observed"
+      },
+      {
+        "label": "Dimensi, material, dan kapasitas dibahas sebelum pemesanan.",
+        "status": "unconfirmed"
+      }
     ],
-    variants: driveVariants("d01"),
-    priceIDR: null,
-    quotationOnly: true,
-    availability: "unconfirmed",
-    gallery: [
-      { src: "/images/products/photo-36.webp", alt: "Foto asli konfigurasi REF-D01 dari pemilik HCBTECH", kind: "original-photo", caption: "Foto referensi pemilik. Nama model dan ukuran akhir dikonfirmasi saat penawaran; 3D tetap skematik.", width: 960, height: 1280 },
-      { src: "/images/visual-disc-electric.webp", alt: "Visualisasi unit piringan dan gearbox dengan motor listrik pada rangka meja", kind: "visualization", caption: "Visualisasi bentuk — bukan foto unit HCBTECH dan bukan geometri terverifikasi." },
+    "variants": [
+      {
+        "id": "PRICE-01",
+        "label": "Mini / Dinamo 1 PK",
+        "drive": "listrik",
+        "priceIDR": referencePrice("PRICE-01"),
+        "priceSourceId": "PRICE-01",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      },
+      {
+        "id": "PRICE-02",
+        "label": "Berdiri / Dinamo 1 PK",
+        "drive": "listrik",
+        "priceIDR": referencePrice("PRICE-02"),
+        "priceSourceId": "PRICE-02",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      },
+      {
+        "id": "PRICE-03",
+        "label": "Berdiri / Dinamo 2 PK",
+        "drive": "listrik",
+        "priceIDR": referencePrice("PRICE-03"),
+        "priceSourceId": "PRICE-03",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      },
+      {
+        "id": "PRICE-04",
+        "label": "Berdiri / Stihl Bensin",
+        "drive": "engine",
+        "priceIDR": referencePrice("PRICE-04"),
+        "priceSourceId": "PRICE-04",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      },
+      {
+        "id": "PRICE-05",
+        "label": "Jumbo / Genset 13 PK",
+        "drive": "unconfirmed",
+        "priceIDR": referencePrice("PRICE-05"),
+        "priceSourceId": "PRICE-05",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      }
     ],
-    demonstrationVideo: null,
-    modelGLB: null,
-    posterImage: "/images/products/photo-36.webp",
-    modelAccuracy: "approximation",
-    specificationsStatus: "awaiting-owner-confirmation",
-    specifications: [
-      { label: "Penggerak pada referensi", value: "Motor listrik", status: "observed", note: "Daya dan tegangan belum diketahui." },
-      { label: "Transmisi", value: "Gearbox pada poros piringan", status: "observed" },
-      { label: "Daya motor", value: null, status: "unconfirmed" },
-      { label: "Diameter piringan", value: null, status: "unconfirmed" },
-      { label: "Material rangka", value: null, status: "unconfirmed" },
-      { label: "Material bagian kontak", value: null, status: "unconfirmed" },
-      { label: "Dimensi keseluruhan", value: null, status: "unconfirmed" },
-      { label: "Kapasitas kerja", value: null, status: "unconfirmed" },
+    "priceIDR": null,
+    "quotationOnly": true,
+    "availability": "unconfirmed",
+    "gallery": [
+      {
+        "src": "/images/products/photo-47.webp",
+        "alt": "Foto referensi mesin parut kelapa dari pemilik HCBTECH — 47",
+        "kind": "original-photo",
+        "caption": "Foto keluarga mesin dari pemilik. Kesesuaian dengan varian yang dipilih dikonfirmasi saat penawaran.",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/products/photo-39.webp",
+        "alt": "Foto referensi mesin parut kelapa dari pemilik HCBTECH — 39",
+        "kind": "original-photo",
+        "caption": "Foto keluarga mesin dari pemilik. Kesesuaian dengan varian yang dipilih dikonfirmasi saat penawaran.",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/products/photo-45.webp",
+        "alt": "Foto referensi mesin parut kelapa dari pemilik HCBTECH — 45",
+        "kind": "original-photo",
+        "caption": "Foto keluarga mesin dari pemilik. Kesesuaian dengan varian yang dipilih dikonfirmasi saat penawaran.",
+        "width": 960,
+        "height": 1280
+      }
     ],
-    hotspots: [
-      { id: "gearbox", label: "Gearbox", description: "Posisi teramati pada referensi; rasio dan tipe belum dikonfirmasi.", position: [-0.55, 1.65, 0], status: "observed" },
-      { id: "disc", label: "Piringan", description: "Diameter, ketebalan, dan fungsi kerja memerlukan konfirmasi.", position: [0.65, 1.55, 0], status: "unconfirmed" },
-      { id: "frame", label: "Rangka meja", description: "Bentuk rangka terlihat; profil dan material belum diukur.", position: [0, 0.55, 0.35], status: "observed" },
+    "demonstrationVideo": null,
+    "modelGLB": "/models/pilot-parut-kelapa-v1.glb",
+    "posterImage": "/images/products/photo-47.webp",
+    "modelAccuracy": "approximation",
+    "specificationsStatus": "partially-verified",
+    "specifications": [
+      {
+        "label": "Pilihan pada daftar harga",
+        "value": "5",
+        "status": "verified"
+      },
+      {
+        "label": "Dimensi keseluruhan",
+        "value": null,
+        "status": "unconfirmed"
+      },
+      {
+        "label": "Material bagian kontak",
+        "value": null,
+        "status": "unconfirmed"
+      },
+      {
+        "label": "Kapasitas kerja",
+        "value": null,
+        "status": "unconfirmed"
+      },
+      {
+        "label": "Berat unit",
+        "value": null,
+        "status": "unconfirmed"
+      }
     ],
-    faq: commonFaq,
-    featured: true,
-    referenceNote: quoteNote,
+    "hotspots": [],
+    "faq": [
+      {
+        "question": "Apakah harga pada daftar sudah final?",
+        "answer": "Harga mengacu pada daftar pemilik yang diterima 21 November 2026. Harga, komponen yang termasuk, stok, dan pengiriman dikonfirmasi sebelum pemesanan."
+      },
+      {
+        "question": "Apakah foto dan 3D mewakili semua varian?",
+        "answer": "Foto menunjukkan referensi keluarga mesin. Model 3D adalah studi bentuk luar tanpa ukuran terukur. Minta foto unit dan spesifikasi varian yang akan dipesan."
+      }
+    ],
+    "featured": true,
+    "referenceNote": "Harga daftar perlu dikonfirmasi kembali sebelum pemesanan.",
+    "defaultVariantId": "PRICE-02",
+    "priceSource": {
+      "receivedDate": "2026-11-21",
+      "url": "/docs/daftar-harga.jpeg"
+    },
+    "modelReferenceNote": "Referensi 3D: bentuk berdiri dengan penggerak listrik, disusun dari foto 47. Bukan model khusus semua varian dan belum memiliki ukuran terukur."
   },
   {
-    id: "REF-D02",
-    slug: "piringan-gearbox-meja-engine",
-    name: "Unit Piringan + Gearbox / Engine",
-    nameStatus: "draft",
-    sku: null,
-    category: "piringan-gearbox",
-    familyLabel: "Piringan & gearbox",
-    description: "Konfigurasi referensi berpenggerak engine pada rangka meja. Engine ditempatkan di bagian bawah, sedangkan gearbox, piringan, dan corong berada di atas. Susunan ini dibedakan dari varian listrik agar diskusi kebutuhan lebih jelas; detail engine dan transmisi belum diverifikasi.",
-    shortDescription: "Rangka meja dengan engine di bagian bawah dan kelompok gearbox-piringan di bagian atas.",
-    driveType: "engine",
-    material: null,
-    dimensions: null,
-    capacity: null,
-    features: [
-      { label: "Engine pada rak bawah rangka", status: "observed" },
-      { label: "Gearbox dan piringan pada bagian atas", status: "observed" },
-      { label: "Saluran keluar mengarah ke sisi rangka", status: "observed" },
-      { label: "Tipe engine dan sistem transmisi belum dikonfirmasi", status: "unconfirmed" },
+    "id": "HCB-KUPAS",
+    "slug": "kupas-batok-kelapa",
+    "name": "Mesin Kupas Batok Kelapa",
+    "nameStatus": "confirmed",
+    "sku": null,
+    "category": "kupas-batok-kelapa",
+    "familyLabel": "Kupas batok",
+    "description": "Pilihan Ampar tanpa kaki, Duduk, dan Berdiri untuk pekerjaan kupas batok kelapa. Daftar pemilik membedakan konfigurasi dinamo dan bensin; penggerak untuk Ampar belum dicantumkan.",
+    "shortDescription": "Ampar, Duduk, dan Berdiri; pilih konfigurasi sesuai kebutuhan kerja.",
+    "driveType": "listrik-atau-engine",
+    "material": null,
+    "dimensions": null,
+    "capacity": null,
+    "features": [
+      {
+        "label": "Pilihan tipe dan harga bersumber dari daftar pemilik.",
+        "status": "verified"
+      },
+      {
+        "label": "Foto asli tersedia untuk referensi bentuk keluarga mesin.",
+        "status": "observed"
+      },
+      {
+        "label": "Dimensi, material, dan kapasitas dibahas sebelum pemesanan.",
+        "status": "unconfirmed"
+      }
     ],
-    variants: driveVariants("d02"),
-    priceIDR: null,
-    quotationOnly: true,
-    availability: "unconfirmed",
-    gallery: [
-      { src: "/images/products/photo-06.webp", alt: "Foto asli konfigurasi REF-D02 dari pemilik HCBTECH", kind: "original-photo", caption: "Foto referensi pemilik. Nama model dan ukuran akhir dikonfirmasi saat penawaran; 3D tetap skematik.", width: 720, height: 1280 },
-      { src: "/images/visual-disc-engine.webp", alt: "Visualisasi unit piringan gearbox dengan engine pada rangka meja", kind: "visualization", caption: "Visualisasi bentuk — bukan dokumentasi unit jadi atau bukti pengujian." },
+    "variants": [
+      {
+        "id": "PRICE-06",
+        "label": "Ampar tanpa kaki",
+        "drive": "unconfirmed",
+        "priceIDR": referencePrice("PRICE-06"),
+        "priceSourceId": "PRICE-06",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Penggerak tidak dicantumkan pada daftar harga. Konfirmasikan konfigurasi dan cakupan unit."
+      },
+      {
+        "id": "PRICE-07",
+        "label": "Duduk / Dinamo",
+        "drive": "listrik",
+        "priceIDR": referencePrice("PRICE-07"),
+        "priceSourceId": "PRICE-07",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      },
+      {
+        "id": "PRICE-08",
+        "label": "Duduk / Bensin",
+        "drive": "engine",
+        "priceIDR": referencePrice("PRICE-08"),
+        "priceSourceId": "PRICE-08",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      },
+      {
+        "id": "PRICE-09",
+        "label": "Berdiri / Dinamo",
+        "drive": "listrik",
+        "priceIDR": referencePrice("PRICE-09"),
+        "priceSourceId": "PRICE-09",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      },
+      {
+        "id": "PRICE-10",
+        "label": "Berdiri / Bensin",
+        "drive": "engine",
+        "priceIDR": referencePrice("PRICE-10"),
+        "priceSourceId": "PRICE-10",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      }
     ],
-    demonstrationVideo: null,
-    modelGLB: null,
-    posterImage: "/images/products/photo-06.webp",
-    modelAccuracy: "approximation",
-    specificationsStatus: "awaiting-owner-confirmation",
-    specifications: [
-      { label: "Penggerak pada referensi", value: "Engine", status: "observed", note: "Merek dan tipe tidak dipublikasikan sebelum dikonfirmasi." },
-      { label: "Posisi penggerak", value: "Rak bawah", status: "observed" },
-      { label: "Tipe / daya engine", value: null, status: "unconfirmed" },
-      { label: "Transmisi engine ke gearbox", value: null, status: "unconfirmed" },
-      { label: "Diameter piringan", value: null, status: "unconfirmed" },
-      { label: "Material rangka", value: null, status: "unconfirmed" },
-      { label: "Dimensi keseluruhan", value: null, status: "unconfirmed" },
-      { label: "Kapasitas kerja", value: null, status: "unconfirmed" },
+    "priceIDR": null,
+    "quotationOnly": true,
+    "availability": "unconfirmed",
+    "gallery": [
+      {
+        "src": "/images/products/photo-36.webp",
+        "alt": "Foto referensi mesin kupas batok kelapa dari pemilik HCBTECH — 36",
+        "kind": "original-photo",
+        "caption": "Foto keluarga mesin dari pemilik. Kesesuaian dengan varian yang dipilih dikonfirmasi saat penawaran.",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/products/photo-06.webp",
+        "alt": "Foto referensi mesin kupas batok kelapa dari pemilik HCBTECH — 06",
+        "kind": "original-photo",
+        "caption": "Foto keluarga mesin dari pemilik. Kesesuaian dengan varian yang dipilih dikonfirmasi saat penawaran.",
+        "width": 720,
+        "height": 1280
+      },
+      {
+        "src": "/images/products/photo-29.webp",
+        "alt": "Foto referensi mesin kupas batok kelapa dari pemilik HCBTECH — 29",
+        "kind": "original-photo",
+        "caption": "Foto keluarga mesin dari pemilik. Kesesuaian dengan varian yang dipilih dikonfirmasi saat penawaran.",
+        "width": 960,
+        "height": 1280
+      }
     ],
-    hotspots: [
-      { id: "engine", label: "Engine", description: "Visual menunjukkan penggerak engine; spesifikasinya belum dikonfirmasi.", position: [0, 0.45, 0], status: "observed" },
-      { id: "disc", label: "Piringan & poros", description: "Geometri hanya pendekatan visual, bukan gambar teknik.", position: [0.65, 1.55, 0], status: "unconfirmed" },
-      { id: "chute", label: "Saluran keluar", description: "Ukuran dan arah akhir mengikuti unit yang dikonfirmasi.", position: [0, 0.85, 0.7], status: "unconfirmed" },
+    "demonstrationVideo": null,
+    "modelGLB": "/models/pilot-kupas-batok-v1.glb",
+    "posterImage": "/images/products/photo-36.webp",
+    "modelAccuracy": "approximation",
+    "specificationsStatus": "partially-verified",
+    "specifications": [
+      {
+        "label": "Pilihan pada daftar harga",
+        "value": "5",
+        "status": "verified"
+      },
+      {
+        "label": "Dimensi keseluruhan",
+        "value": null,
+        "status": "unconfirmed"
+      },
+      {
+        "label": "Material bagian kontak",
+        "value": null,
+        "status": "unconfirmed"
+      },
+      {
+        "label": "Kapasitas kerja",
+        "value": null,
+        "status": "unconfirmed"
+      },
+      {
+        "label": "Berat unit",
+        "value": null,
+        "status": "unconfirmed"
+      }
     ],
-    faq: commonFaq,
-    referenceNote: quoteNote,
+    "hotspots": [],
+    "faq": [
+      {
+        "question": "Apakah harga pada daftar sudah final?",
+        "answer": "Harga mengacu pada daftar pemilik yang diterima 21 November 2026. Harga, komponen yang termasuk, stok, dan pengiriman dikonfirmasi sebelum pemesanan."
+      },
+      {
+        "question": "Apakah foto dan 3D mewakili semua varian?",
+        "answer": "Foto menunjukkan referensi keluarga mesin. Model 3D adalah studi bentuk luar tanpa ukuran terukur. Minta foto unit dan spesifikasi varian yang akan dipesan."
+      }
+    ],
+    "featured": true,
+    "referenceNote": "Harga daftar perlu dikonfirmasi kembali sebelum pemesanan.",
+    "defaultVariantId": "PRICE-09",
+    "priceSource": {
+      "receivedDate": "2026-11-21",
+      "url": "/docs/daftar-harga.jpeg"
+    },
+    "modelReferenceNote": "Referensi 3D: rangka meja, motor listrik, gearbox, dan piringan dari foto 36. Bukan model khusus semua varian dan belum memiliki ukuran terukur."
   },
   {
-    id: "REF-D03",
-    slug: "piringan-gearbox-lantai-transmisi-belt",
-    name: "Unit Piringan + Gearbox / Belt",
-    nameStatus: "draft",
-    sku: null,
-    category: "piringan-gearbox",
-    familyLabel: "Piringan & gearbox",
-    description: "Konfigurasi referensi dengan rangka lantai memanjang, gearbox dan piringan di atas, serta pulley dan belt di sisi rangka. Visual ini membantu membedakan tata letak belt dari model meja. Rasio pulley, penggerak, dan ukuran komponen belum diukur.",
-    shortDescription: "Rangka lantai dengan transmisi pulley-belt di samping dan corong keluar memanjang.",
-    driveType: "listrik",
-    material: null,
-    dimensions: null,
-    capacity: null,
-    features: [
-      { label: "Pulley dan belt terlihat pada sisi rangka", status: "observed" },
-      { label: "Rangka lantai dengan bidang corong memanjang", status: "observed" },
-      { label: "Gearbox menopang poros piringan", status: "observed" },
-      { label: "Pelindung transmisi dan detail keselamatan perlu dikonfirmasi", status: "unconfirmed" },
+    "id": "HCB-PERAS",
+    "slug": "peras-santan",
+    "name": "Mesin Peras Santan",
+    "nameStatus": "confirmed",
+    "sku": null,
+    "category": "peras-santan",
+    "familyLabel": "Peras santan",
+    "description": "Empat pilihan pada daftar pemilik: Mini A10, A11, A22, dan A33. Pilih konfigurasi General, Honda GP160, atau Honda GP200 yang tercantum, lalu bahas bahan, kapasitas, dan cakupan unit.",
+    "shortDescription": "Mini A10, A11, A22, dan A33 dengan konfigurasi penggerak pada daftar harga.",
+    "driveType": "listrik-atau-engine",
+    "material": null,
+    "dimensions": null,
+    "capacity": null,
+    "features": [
+      {
+        "label": "Pilihan tipe dan harga bersumber dari daftar pemilik.",
+        "status": "verified"
+      },
+      {
+        "label": "Foto asli tersedia untuk referensi bentuk keluarga mesin.",
+        "status": "observed"
+      },
+      {
+        "label": "Dimensi, material, dan kapasitas dibahas sebelum pemesanan.",
+        "status": "unconfirmed"
+      }
     ],
-    variants: driveVariants("d03"),
-    priceIDR: null,
-    quotationOnly: true,
-    availability: "unconfirmed",
-    gallery: [
-      { src: "/images/visual-disc-hero.webp", alt: "Visualisasi unit piringan gearbox dengan transmisi belt pada rangka lantai", kind: "visualization", caption: "Visualisasi editorial — proporsi bukan acuan fabrikasi." },
+    "variants": [
+      {
+        "id": "PRICE-11",
+        "label": "Mini A10 / General",
+        "drive": "unconfirmed",
+        "priceIDR": referencePrice("PRICE-11"),
+        "priceSourceId": "PRICE-11",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      },
+      {
+        "id": "PRICE-12",
+        "label": "A11 / Honda GP160",
+        "drive": "engine",
+        "priceIDR": referencePrice("PRICE-12"),
+        "priceSourceId": "PRICE-12",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      },
+      {
+        "id": "PRICE-13",
+        "label": "A22 / Honda GP160",
+        "drive": "engine",
+        "priceIDR": referencePrice("PRICE-13"),
+        "priceSourceId": "PRICE-13",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      },
+      {
+        "id": "PRICE-14",
+        "label": "A33 / Honda GP200",
+        "drive": "engine",
+        "priceIDR": referencePrice("PRICE-14"),
+        "priceSourceId": "PRICE-14",
+        "priceKind": "reference",
+        "availability": "unconfirmed",
+        "note": "Harga dan nama konfigurasi mengikuti daftar pemilik; cakupan unit dan ketersediaan dikonfirmasi."
+      }
     ],
-    demonstrationVideo: null,
-    modelGLB: null,
-    posterImage: "/images/visual-disc-hero.webp",
-    modelAccuracy: "approximation",
-    specificationsStatus: "awaiting-owner-confirmation",
-    specifications: [
-      { label: "Transmisi yang terlihat", value: "Pulley dan belt", status: "observed" },
-      { label: "Tata letak", value: "Rangka lantai", status: "observed" },
-      { label: "Penggerak", value: null, status: "unconfirmed" },
-      { label: "Rasio pulley / gearbox", value: null, status: "unconfirmed" },
-      { label: "Pelindung belt", value: null, status: "unconfirmed" },
-      { label: "Material rangka", value: null, status: "unconfirmed" },
-      { label: "Dimensi keseluruhan", value: null, status: "unconfirmed" },
-      { label: "Kapasitas kerja", value: null, status: "unconfirmed" },
+    "priceIDR": null,
+    "quotationOnly": true,
+    "availability": "unconfirmed",
+    "gallery": [
+      {
+        "src": "/images/products/photo-04.webp",
+        "alt": "Foto referensi mesin peras santan dari pemilik HCBTECH — 04",
+        "kind": "original-photo",
+        "caption": "Foto keluarga mesin dari pemilik. Kesesuaian dengan varian yang dipilih dikonfirmasi saat penawaran.",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/products/photo-12.webp",
+        "alt": "Foto referensi mesin peras santan dari pemilik HCBTECH — 12",
+        "kind": "original-photo",
+        "caption": "Foto keluarga mesin dari pemilik. Kesesuaian dengan varian yang dipilih dikonfirmasi saat penawaran.",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/products/photo-32.webp",
+        "alt": "Foto referensi mesin peras santan dari pemilik HCBTECH — 32",
+        "kind": "original-photo",
+        "caption": "Foto keluarga mesin dari pemilik. Kesesuaian dengan varian yang dipilih dikonfirmasi saat penawaran.",
+        "width": 720,
+        "height": 1280
+      }
     ],
-    hotspots: [
-      { id: "belt", label: "Pulley & belt", description: "Terlihat pada referensi; rasio dan spesifikasi belt belum diketahui.", position: [-0.8, 0.9, 0], status: "observed" },
-      { id: "gearbox", label: "Gearbox", description: "Bentuk dan posisi hanya observasi visual.", position: [-0.45, 1.65, 0], status: "observed" },
-      { id: "guard", label: "Area pelindung", description: "Cakupan pelindung harus dibahas sebelum pembuatan.", position: [-0.85, 1.05, 0.25], status: "unconfirmed" },
+    "demonstrationVideo": null,
+    "modelGLB": "/models/pilot-peras-santan-v1.glb",
+    "posterImage": "/images/products/photo-04.webp",
+    "modelAccuracy": "approximation",
+    "specificationsStatus": "partially-verified",
+    "specifications": [
+      {
+        "label": "Pilihan pada daftar harga",
+        "value": "4",
+        "status": "verified"
+      },
+      {
+        "label": "Dimensi keseluruhan",
+        "value": null,
+        "status": "unconfirmed"
+      },
+      {
+        "label": "Material bagian kontak",
+        "value": null,
+        "status": "unconfirmed"
+      },
+      {
+        "label": "Kapasitas kerja",
+        "value": null,
+        "status": "unconfirmed"
+      },
+      {
+        "label": "Berat unit",
+        "value": null,
+        "status": "unconfirmed"
+      }
     ],
-    faq: commonFaq,
-    referenceNote: quoteNote,
-  },
-  {
-    id: "REF-S01",
-    slug: "drum-tertutup-stainless-listrik",
-    name: "Unit Drum Tertutup / Listrik",
-    nameStatus: "draft",
-    sku: null,
-    category: "drum-tertutup",
-    familyLabel: "Drum tertutup",
-    description: "Konfigurasi referensi dengan housing horizontal tertutup berpenampilan stainless, tutup atas, saluran keluar miring, dan motor listrik pada rangka bawah. Istilah drum dipakai sebagai deskripsi bentuk sementara, bukan penetapan fungsi atau nama model resmi.",
-    shortDescription: "Housing horizontal tertutup, tutup atas, motor bawah, dan saluran keluar stainless.",
-    driveType: "listrik",
-    material: null,
-    dimensions: null,
-    capacity: null,
-    features: [
-      { label: "Housing horizontal dengan penutup atas", status: "observed" },
-      { label: "Saluran keluar lebar di sisi bawah", status: "observed" },
-      { label: "Motor listrik pada rangka bawah", status: "observed" },
-      { label: "Grade stainless dan komponen internal belum dikonfirmasi", status: "unconfirmed" },
+    "hotspots": [],
+    "faq": [
+      {
+        "question": "Apakah harga pada daftar sudah final?",
+        "answer": "Harga mengacu pada daftar pemilik yang diterima 21 November 2026. Harga, komponen yang termasuk, stok, dan pengiriman dikonfirmasi sebelum pemesanan."
+      },
+      {
+        "question": "Apakah foto dan 3D mewakili semua varian?",
+        "answer": "Foto menunjukkan referensi keluarga mesin. Model 3D adalah studi bentuk luar tanpa ukuran terukur. Minta foto unit dan spesifikasi varian yang akan dipesan."
+      }
     ],
-    variants: driveVariants("s01"),
-    priceIDR: null,
-    quotationOnly: true,
-    availability: "unconfirmed",
-    gallery: [
-      { src: "/images/products/photo-47.webp", alt: "Foto asli konfigurasi REF-S01 dari pemilik HCBTECH", kind: "original-photo", caption: "Foto referensi pemilik. Nama model dan ukuran akhir dikonfirmasi saat penawaran; 3D tetap skematik.", width: 960, height: 1280 },
-      { src: "/images/visual-drum-electric.webp", alt: "Visualisasi unit drum tertutup stainless dengan motor listrik bawah", kind: "visualization", caption: "Visualisasi bentuk — bukan foto asli dan bukan model manufaktur." },
-    ],
-    demonstrationVideo: null,
-    modelGLB: null,
-    posterImage: "/images/products/photo-47.webp",
-    modelAccuracy: "approximation",
-    specificationsStatus: "awaiting-owner-confirmation",
-    specifications: [
-      { label: "Penggerak pada referensi", value: "Motor listrik di bawah", status: "observed" },
-      { label: "Housing", value: "Tertutup, tampilan stainless", status: "observed", note: "Grade dan ketebalan material belum diketahui." },
-      { label: "Daya / tegangan motor", value: null, status: "unconfirmed" },
-      { label: "Komponen internal", value: null, status: "unconfirmed" },
-      { label: "Material kontak", value: null, status: "unconfirmed" },
-      { label: "Volume drum", value: null, status: "unconfirmed" },
-      { label: "Dimensi keseluruhan", value: null, status: "unconfirmed" },
-      { label: "Kapasitas kerja", value: null, status: "unconfirmed" },
-    ],
-    hotspots: [
-      { id: "housing", label: "Housing tertutup", description: "Tampilan luar stainless; grade dan ketebalan perlu konfirmasi.", position: [0, 1.55, 0.45], status: "observed" },
-      { id: "motor", label: "Motor listrik", description: "Daya, tegangan, dan transmisi belum dikonfirmasi.", position: [0, 0.4, 0], status: "unconfirmed" },
-      { id: "chute", label: "Saluran keluar", description: "Bentuk visual bukan dimensi fabrikasi.", position: [-0.65, 1.15, 0.35], status: "unconfirmed" },
-    ],
-    faq: commonFaq,
-    featured: true,
-    referenceNote: quoteNote,
-  },
-  {
-    id: "REF-S02",
-    slug: "drum-tertutup-stainless-engine",
-    name: "Unit Drum Tertutup / Engine",
-    nameStatus: "draft",
-    sku: null,
-    category: "drum-tertutup",
-    familyLabel: "Drum tertutup",
-    description: "Konfigurasi referensi dengan housing tertutup pada rangka tinggi dan engine pada bagian bawah. Poros dan dudukan bearing terlihat pada sisi housing. Pilihan ini disajikan untuk mempermudah permintaan penawaran, bukan pernyataan stok atau kesesuaian untuk bahan tertentu.",
-    shortDescription: "Housing tertutup pada rangka tinggi dengan engine bawah dan poros samping.",
-    driveType: "engine",
-    material: null,
-    dimensions: null,
-    capacity: null,
-    features: [
-      { label: "Engine terpasang pada bagian bawah rangka", status: "observed" },
-      { label: "Poros dan dudukan bearing pada sisi housing", status: "observed" },
-      { label: "Tutup dan saluran keluar berbahan tampilan stainless", status: "observed" },
-      { label: "Putaran poros dan mekanisme internal belum dikonfirmasi", status: "unconfirmed" },
-    ],
-    variants: driveVariants("s02"),
-    priceIDR: null,
-    quotationOnly: true,
-    availability: "unconfirmed",
-    gallery: [
-      { src: "/images/products/photo-39.webp", alt: "Foto asli konfigurasi REF-S02 dari pemilik HCBTECH", kind: "original-photo", caption: "Foto referensi pemilik. Nama model dan ukuran akhir dikonfirmasi saat penawaran; 3D tetap skematik.", width: 960, height: 1280 },
-      { src: "/images/visual-drum-engine.webp", alt: "Visualisasi unit drum tertutup stainless dengan engine bawah", kind: "visualization", caption: "Visualisasi bentuk — bukan bukti performa atau konfigurasi final." },
-    ],
-    demonstrationVideo: null,
-    modelGLB: null,
-    posterImage: "/images/products/photo-39.webp",
-    modelAccuracy: "approximation",
-    specificationsStatus: "awaiting-owner-confirmation",
-    specifications: [
-      { label: "Penggerak pada referensi", value: "Engine di bawah", status: "observed" },
-      { label: "Dudukan poros", value: "Bearing samping terlihat", status: "observed" },
-      { label: "Tipe / daya engine", value: null, status: "unconfirmed" },
-      { label: "Transmisi", value: null, status: "unconfirmed" },
-      { label: "Komponen internal", value: null, status: "unconfirmed" },
-      { label: "Grade material housing", value: null, status: "unconfirmed" },
-      { label: "Dimensi keseluruhan", value: null, status: "unconfirmed" },
-      { label: "Kapasitas kerja", value: null, status: "unconfirmed" },
-    ],
-    hotspots: [
-      { id: "engine", label: "Engine bawah", description: "Merek, daya, dan tipe tidak diasumsikan dari tampilan.", position: [0, 0.4, 0], status: "observed" },
-      { id: "shaft", label: "Poros & bearing", description: "Ukuran poros dan jenis bearing memerlukan pengukuran.", position: [0.7, 1.5, 0], status: "unconfirmed" },
-      { id: "housing", label: "Housing", description: "Mekanisme internal tidak direkayasa dari foto luar.", position: [0, 1.6, 0.4], status: "unconfirmed" },
-    ],
-    faq: commonFaq,
-    referenceNote: quoteNote,
-  },
-  {
-    id: "REF-S03",
-    slug: "drum-tertutup-transmisi-belt-samping",
-    name: "Unit Drum Tertutup / Belt Samping",
-    nameStatus: "draft",
-    sku: null,
-    category: "drum-tertutup",
-    familyLabel: "Drum tertutup",
-    description: "Konfigurasi referensi yang menyorot transmisi pulley dan belt pada sisi housing, dengan penggerak pada dasar rangka. Tata letak ini dipisahkan dari konfigurasi lain karena kebutuhan akses perawatan dan pelindung transmisi dapat berbeda; detail tersebut harus dibahas saat penawaran.",
-    shortDescription: "Housing tertutup dengan pulley-belt samping dan penggerak pada dasar rangka.",
-    driveType: "listrik",
-    material: null,
-    dimensions: null,
-    capacity: null,
-    features: [
-      { label: "Pulley dan belt berada di sisi luar housing", status: "observed" },
-      { label: "Penggerak berada pada dasar rangka", status: "observed" },
-      { label: "Penutup atas berengsel terlihat pada referensi", status: "observed" },
-      { label: "Cakupan guard belt belum ditetapkan", status: "unconfirmed" },
-    ],
-    variants: driveVariants("s03"),
-    priceIDR: null,
-    quotationOnly: true,
-    availability: "unconfirmed",
-    gallery: [
-      { src: "/images/products/photo-45.webp", alt: "Foto asli konfigurasi REF-S03 dari pemilik HCBTECH", kind: "original-photo", caption: "Foto referensi pemilik. Nama model dan ukuran akhir dikonfirmasi saat penawaran; 3D tetap skematik.", width: 960, height: 1280 },
-      { src: "/images/visual-drum-belt.webp", alt: "Visualisasi unit drum tertutup dengan pulley dan belt samping", kind: "visualization", caption: "Visualisasi sisi transmisi — bukan gambar kerja atau rekomendasi keselamatan final." },
-    ],
-    demonstrationVideo: null,
-    modelGLB: null,
-    posterImage: "/images/products/photo-45.webp",
-    modelAccuracy: "approximation",
-    specificationsStatus: "awaiting-owner-confirmation",
-    specifications: [
-      { label: "Transmisi yang terlihat", value: "Pulley dan belt samping", status: "observed" },
-      { label: "Penutup atas", value: "Berengsel", status: "observed" },
-      { label: "Penggerak", value: null, status: "unconfirmed" },
-      { label: "Ukuran pulley / belt", value: null, status: "unconfirmed" },
-      { label: "Pelindung transmisi", value: null, status: "unconfirmed" },
-      { label: "Komponen internal", value: null, status: "unconfirmed" },
-      { label: "Dimensi keseluruhan", value: null, status: "unconfirmed" },
-      { label: "Kapasitas kerja", value: null, status: "unconfirmed" },
-    ],
-    hotspots: [
-      { id: "belt", label: "Transmisi samping", description: "Susunan pulley-belt terlihat; ukuran dan rasio belum diukur.", position: [-0.7, 1.0, 0], status: "observed" },
-      { id: "guard", label: "Guard transmisi", description: "Kebutuhan pelindung harus dikonfirmasi pada desain final.", position: [-0.8, 1.15, 0.25], status: "unconfirmed" },
-      { id: "lid", label: "Tutup berengsel", description: "Detail engsel dan penguncian belum diverifikasi.", position: [0, 2.0, 0], status: "observed" },
-    ],
-    faq: commonFaq,
-    featured: true,
-    referenceNote: quoteNote,
-  },
+    "featured": true,
+    "referenceNote": "Harga daftar perlu dikonfirmasi kembali sebelum pemesanan.",
+    "defaultVariantId": "PRICE-11",
+    "priceSource": {
+      "receivedDate": "2026-11-21",
+      "url": "/docs/daftar-harga.jpeg"
+    },
+    "modelReferenceNote": "Referensi 3D: hopper, rol luar, rangka, dan penggerak dari foto 04. Bukan model khusus semua varian dan belum memiliki ukuran terukur."
+  }
 ];
 
-export const categories = [
-  { id: "all", label: "Semua konfigurasi" },
-  { id: "piringan-gearbox", label: "Piringan & gearbox" },
-  { id: "drum-tertutup", label: "Drum tertutup" },
-] as const;
-
-export function getProduct(slug: string) {
-  return products.find((product) => product.slug === slug);
-}
-
-export function getProductPrice(product: Product, variantId?: string) {
-  const variant = product.variants.find((item) => item.id === variantId);
-  return variant?.priceIDR ?? product.priceIDR;
-}
+export const categories = [{"id": "all", "label": "Semua mesin"}, {"id": "parut-kelapa", "label": "Mesin Parut Kelapa"}, {"id": "kupas-batok-kelapa", "label": "Mesin Kupas Batok Kelapa"}, {"id": "peras-santan", "label": "Mesin Peras Santan"}] as const;
+export function getProduct(slug: string) { return products.find(product => product.slug === slug); }
+export function getProductPrice(product: Product, variantId?: string) { return product.variants.find(item => item.id === variantId)?.priceIDR ?? product.priceIDR; }
+export function getPriceRange(product: Product) { const values = product.variants.map(item => item.priceIDR).filter((value): value is number => value !== null); return values.length ? { min: Math.min(...values), max: Math.max(...values) } : null; }

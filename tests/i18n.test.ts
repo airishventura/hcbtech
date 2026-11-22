@@ -3,6 +3,7 @@ import { products } from "../src/data/products";
 import { generalFaq, processSteps, principles, services } from "../src/data/site";
 import { enCatalog } from "../src/i18n/en-catalog";
 import { enContact } from "../src/i18n/en-contact";
+import { enMachinery } from "../src/i18n/en-machinery";
 import { enData } from "../src/i18n/en-data";
 import { enInfo } from "../src/i18n/en-info";
 import { enProduct } from "../src/i18n/en-product";
@@ -11,12 +12,12 @@ import { localizeProducts, localizeSite } from "../src/i18n/localize";
 import { buildInquiryMessage } from "../src/lib/inquiry";
 import { createProductSchema } from "../src/lib/seo";
 
-const dictionary = { ...enData, ...enUi, ...enCatalog, ...enProduct, ...enContact, ...enInfo };
+const dictionary = { ...enData, ...enUi, ...enCatalog, ...enProduct, ...enContact, ...enInfo, ...enMachinery };
 const t = (text: string) => dictionary[text] ?? text;
-const allowedSharedTerms = new Set(["Engine", "Gearbox", "Housing", "TikTok", "Facebook"]);
+const allowedSharedTerms = new Set(["Engine", "Gearbox", "Housing", "TikTok", "Facebook", "Jumbo / Genset 13 PK", "Mini A10 / General", "A11 / Honda GP160", "A22 / Honda GP160", "A33 / Honda GP200"]);
 
 function expectTranslated(source: string, translated: string) {
-  if (!allowedSharedTerms.has(source)) {
+  if (!allowedSharedTerms.has(source) && !/^\d+$/.test(source)) {
     expect(translated.length).toBeGreaterThan(0);
     expect(translated).not.toBe(source);
   }
@@ -32,6 +33,7 @@ describe("cakupan terjemahan data", () => {
       expectTranslated(source.familyLabel, translated.familyLabel);
       expectTranslated(source.description, translated.description);
       expectTranslated(source.shortDescription, translated.shortDescription);
+      if (source.modelReferenceNote) expectTranslated(source.modelReferenceNote, translated.modelReferenceNote ?? "");
       source.features.forEach((item, i) => expectTranslated(item.label, translated.features[i].label));
       source.variants.forEach((item, i) => {
         expectTranslated(item.label, translated.variants[i].label);
@@ -82,15 +84,15 @@ describe("English inquiry dan Product JSON-LD", () => {
     const product = english[0];
     const message = buildInquiryMessage({ product, variant: product.variants[0], name: "Budi", city: "Bandung", language: "en" });
     expect(message).toContain("Hello HCBTECH");
-    expect(message).toContain("Preferred configuration: Electric motor");
+    expect(message).toContain("Preferred configuration: Mini / 1 PK electric motor");
     expect(message).toContain("Name: Budi");
     expect(message).toContain("?lang=en");
   });
 
   it("menggunakan suffix draft English tanpa Offer palsu", () => {
     const schema = createProductSchema(english[0], "https://business.test", "https://business.test/mesin/unit?lang=en", "en") as Record<string, any>;
-    expect(schema.name).toContain("draft model name");
-    expect(schema.name).not.toContain("nama sementara");
+    expect(schema.name).toBe("Coconut Grater");
+    expect(schema.name).not.toContain("draft model name");
     expect(schema.offers).toBeUndefined();
   });
 });

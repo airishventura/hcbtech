@@ -5,7 +5,7 @@ test("toggle English mengubah konten, URL, metadata, 3D, dan inquiry lalu bertah
   await page.getByRole("button", { name: "Switch to English" }).click();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page).toHaveURL(/\?lang=en/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Machines built");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Coconut machinery");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\?lang=en$/);
   await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute("href", /\?lang=en$/);
   await expect(page.locator('link[rel="alternate"][hreflang="x-default"]')).toHaveAttribute("href", /^[^?]+$/);

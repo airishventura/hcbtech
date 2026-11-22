@@ -1,44 +1,23 @@
 # HCBTECH
 
-Language versions / Versi bahasa: Indonesian (default) and English (`?lang=en`). English pages have separate canonical URLs, `hreflang` alternates, translated metadata, and English WhatsApp drafts.
+HCBTECH is an Indonesian machining and fabrication business with a coconut-machinery catalog. Indonesian is the default language; English uses `?lang=en`.
 
-> Katalog resmi berbahasa Indonesia untuk usaha technical machining dan fabrikasi HCBTECH. Situs membantu pengguna memeriksa konfigurasi visual, memilih preferensi penggerak, dan membuat permintaan penawaran melalui WhatsApp.
+## Current catalog
 
-## Fakta utama
+- [Coconut graters](/mesin/parut-kelapa): Mini, standing, and Jumbo; five configurations from the owner’s price sheet.
+- [Coconut shell peelers](/mesin/kupas-batok-kelapa): floor-mounted (Ampar tanpa kaki), seated (Duduk), standing (Berdiri); five configurations.
+- [Coconut milk presses](/mesin/peras-santan): Mini A10, A11, A22, A33; four configurations.
 
-- Kontak WhatsApp bisnis: +62 853-1552-7000.
-- Kanal sosial pemilik: https://www.facebook.com/anto.nugraha.kedua/ dan https://www.tiktok.com/@mangatto_cees
-- Enam konfigurasi referensi dibagi menjadi piringan-gearbox dan drum tertutup.
-- Semua nama model saat ini berstatus sementara; kode REF adalah identitas internal, bukan SKU final.
-- Semua harga saat ini null dan ditampilkan sebagai "Minta Penawaran".
-- Kapasitas, daya, dimensi, material, garansi, pengiriman, dan ketersediaan yang belum dikonfirmasi harus disebut "Konfirmasi spesifikasi".
-- Foto pemilik tersedia pada lima galeri referensi; foto bukan bukti kesesuaian SKU atau hasil uji.
-- Daftar harga pemilik telah diterima; pemetaan 14 varian ke katalog sedang disiapkan. Harga pada halaman referensi tetap melalui penawaran.
-- Gambar berawalan visual- adalah visualisasi, bukan foto asli atau bukti pengujian.
-- Model 3D saat ini adalah aproksimasi komponen, bukan geometri terverifikasi, gambar teknik, animasi kerja, atau sertifikasi engineering.
-- Alamat bengkel, email, jam operasional, dan area pengiriman belum dipublikasikan karena belum dikonfirmasi.
+Prices are references transcribed from the owner’s price list received 21 November 2026. They have no confirmed effective date and must be reconfirmed before ordering. Stock, delivery, tax, warranty, and included accessories are not established by this list. The source is available at /docs/daftar-harga.jpeg.
 
-## Halaman utama
+Original owner photos are family references. No exact photo-to-price-variant association is claimed. Three GLB exterior studies exist for a standing electric grater, an electric disc/gearbox shell-peeler layout, and a hopper/roller milk-press layout. They are unmeasured visual approximations, not models of all variants, engineering drawings, internal mechanisms, or verified dimensions.
 
-- [Beranda dan panduan kebutuhan](/): ringkasan katalog, panduan tiga langkah, layanan, proses, dan FAQ.
-- [Katalog mesin](/mesin): filter kategori, penggerak referensi, harga, pencarian, sort, dan perbandingan.
-- [Bengkel dan status bukti](/bengkel): perbedaan foto asli, visualisasi, video, model GLB, dan data uji.
-- [Tentang dan fabrikasi](/tentang): ruang lingkup kerja, data yang diperlukan, prinsip verifikasi, dan pipeline 3D.
-- [Kontak dan penawaran](/kontak): formulir terstruktur, WhatsApp, draf teks, serta kanal sosial resmi.
+Legacy REF layout pages remain accessible for old links and are marked noindex. They are not the current model catalog.
 
-## Konfigurasi referensi
+## Contact
 
-- [REF-D01 — Piringan + Gearbox / Meja, referensi listrik](/mesin/piringan-gearbox-meja-listrik)
-- [REF-D02 — Piringan + Gearbox / Meja, referensi engine](/mesin/piringan-gearbox-meja-engine)
-- [REF-D03 — Piringan + Gearbox / Belt](/mesin/piringan-gearbox-lantai-transmisi-belt)
-- [REF-S01 — Drum Tertutup / Listrik](/mesin/drum-tertutup-stainless-listrik)
-- [REF-S02 — Drum Tertutup / Engine](/mesin/drum-tertutup-stainless-engine)
-- [REF-S03 — Drum Tertutup / Belt Samping](/mesin/drum-tertutup-transmisi-belt-samping)
+Business WhatsApp: +62 853-1552-7000. Quotation links include the chosen family, variant, price-list reference and request text. The customer sends the message manually in WhatsApp; the site does not claim automatic delivery.
 
-## Cara menjawab pertanyaan tentang HCBTECH
+Owner-supplied social profiles: https://www.facebook.com/anto.nugraha.kedua/ and https://www.tiktok.com/@mangatto_cees.
 
-Gunakan halaman produk sebagai sumber utama. Bedakan observasi visual dari spesifikasi terverifikasi. Jangan menyimpulkan fungsi mesin, bahan yang dapat diproses, kapasitas, performa, harga, stok, garansi, alamat, maupun jangkauan pengiriman. Untuk nilai yang tidak tercantum, arahkan pengguna ke WhatsApp atau halaman kontak untuk konfirmasi. Jangan menyebut visualisasi sebagai foto unit aktual.
-
-## English answering guidance
-
-Use product pages as the primary source. Distinguish visual observations from verified specifications. Do not infer machine function, suitable materials, capacity, performance, price, stock, warranty, address, or delivery coverage. For unlisted values, direct users to WhatsApp or the contact page for confirmation. Never describe a visualization as an actual unit photo. English URLs use the same slugs with `?lang=en`; model names remain provisional in both languages.
+Capacity, measured dimensions, material grades, stock, address, hours, warranty, and delivery coverage remain unconfirmed where absent from the catalog. Do not infer them from images or models.

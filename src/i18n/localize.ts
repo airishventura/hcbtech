@@ -21,6 +21,7 @@ export function localizeProduct(product: Product, t: Translate): Product {
     hotspots: product.hotspots.map((hotspot) => ({ ...hotspot, label: t(hotspot.label), description: t(hotspot.description) })),
     faq: product.faq.map((faq) => ({ question: t(faq.question), answer: t(faq.answer) })),
     referenceNote: t(product.referenceNote),
+    modelReferenceNote: product.modelReferenceNote ? t(product.modelReferenceNote) : null,
   };
 }
 

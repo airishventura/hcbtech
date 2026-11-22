@@ -2,13 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://hcbtech.vercel.app/?lang=en</loc></url>
   <url><loc>https://hcbtech.vercel.app/mesin?lang=en</loc></url>
-  <url><loc>https://hcbtech.vercel.app/mesin/piringan-gearbox-meja-listrik?lang=en</loc></url>
-  <url><loc>https://hcbtech.vercel.app/mesin/piringan-gearbox-meja-engine?lang=en</loc></url>
-  <url><loc>https://hcbtech.vercel.app/mesin/piringan-gearbox-lantai-transmisi-belt?lang=en</loc></url>
-  <url><loc>https://hcbtech.vercel.app/mesin/drum-tertutup-stainless-listrik?lang=en</loc></url>
-  <url><loc>https://hcbtech.vercel.app/mesin/drum-tertutup-stainless-engine?lang=en</loc></url>
-  <url><loc>https://hcbtech.vercel.app/mesin/drum-tertutup-transmisi-belt-samping?lang=en</loc></url>
   <url><loc>https://hcbtech.vercel.app/bengkel?lang=en</loc></url>
   <url><loc>https://hcbtech.vercel.app/tentang?lang=en</loc></url>
   <url><loc>https://hcbtech.vercel.app/kontak?lang=en</loc></url>
+  <url><loc>https://hcbtech.vercel.app/mesin/parut-kelapa?lang=en</loc></url>
+  <url><loc>https://hcbtech.vercel.app/mesin/kupas-batok-kelapa?lang=en</loc></url>
+  <url><loc>https://hcbtech.vercel.app/mesin/peras-santan?lang=en</loc></url>
 </urlset>

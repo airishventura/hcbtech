@@ -19,28 +19,28 @@ Use a Node version supported by Vite 7 (the existing Vercel project uses Node 26
 
 See [asset inventory](assets/README.md), [manifest](assets/manifest.json), and [transcribed price sheet](assets/pricelist.json). The WhatsApp archive contains 50 unique photos (each supplied twice), one logo, and one price sheet. Original JPEGs are preserved outside `public/`; only web derivatives are deployed. A repeatable Pillow importer lives in `scripts/import-assets.py`.
 
-The supplied logo is displayed in the header and footer. Five reference galleries include original photos alongside labeled illustrations. REF-D03 retains its illustration because the exact layout is not established in the supplied photos.
+The supplied logo is displayed in the header and footer. Ten full-frame WebP photo derivatives cover the current family galleries and workshop introduction. The six old REF pages remain accessible for existing links, are marked archived and noindex, and retain their reference content.
 
-The price sheet names three machine families and 14 variants. The old six REF entries describe generic configurations and do not yet map to those variants. Their prices remain null and no stock is asserted. The next development milestone is to replace these generic entries with the sourced family/variant structure; see [development and 3D roadmap](docs/DEVELOPMENT-PLAN.md).
+The current catalog publishes three machine families and all 14 variants from the owner’s sheet. Prices retain their PRICE IDs and are labeled references requiring reconfirmation. Missing drive details, stock, exact photo-to-variant matches and measurements remain unconfirmed. See the [release record](docs/RELEASE-2026-11-22.md) and [development and 3D roadmap](docs/DEVELOPMENT-PLAN.md).
 
 ## Content and media
 
-- `src/data/products.ts`: existing reference catalog, galleries, variant preferences and status fields.
+- `src/data/products.ts`: current family catalog, sourced variants, galleries and verification fields. Legacy entries live separately in `src/data/legacy-products.ts`.
 - `src/data/site.ts`: services, FAQ and process copy.
 - `src/i18n/en-*.ts`: English translations; preserve IDs, slugs and enum values.
 - `src/components/MachineViewer.tsx`: lazy 3D engine with schematic components, keyboard controls, PNG export, fullscreen and WebGL fallback.
-- `public/models/`: future GLBs; `models/source/`: Blender sources.
+- `public/models/`: three exterior GLB pilots; `models/pilots.json`: provenance and size registry; `scripts/build-pilot-models.mjs`: editable procedural sources. `models/source/` reserves future measured Blender sources.
 
-`gallery.kind` distinguishes original photos from illustrations. `modelGLB` remains null: existing interactive models are schematic approximations, not machine-specific reconstructions. Do not mark geometry verified until measured references and approval are recorded. Availability, dimensions, capacity, material grades, and policy details remain unconfirmed where absent from the supplied evidence.
+`gallery.kind` distinguishes original photos from illustrations. Current family GLBs are photo-based exterior approximations without measured scale or exact variant mapping. Rebuild them with `node scripts/build-pilot-models.mjs`. Do not mark geometry verified until measured references and approval are recorded. Availability, dimensions, capacity, material grades, and policy details remain unconfirmed where absent from the supplied evidence.
 
 ## Environment and Vercel
 
-- `VITE_WHATSAPP_NUMBER`: business number in international or Indonesian local format. Empty/invalid values use the contact/draft fallback. The supplied local configuration uses `6285315527000`; set it in Vercel before rebuilding, since the inspected live build had no WhatsApp links.
+- `VITE_WHATSAPP_NUMBER`: business number in international or Indonesian local format. Empty/invalid values use the contact/draft fallback. Production and preview are configured with the supplied business number `6285315527000`.
 - `VITE_SITE_URL`: canonical origin. Empty values use the browser origin. Static robots and sitemap files currently use the observed deployment alias `https://hcbtech.vercel.app`; update these together if the domain changes.
 
 Vercel framework: **Vite**; build: `npm run build`; output: `dist`. `vercel.json` rewrites extensionless routes for the SPA. Hashed build assets are immutable; stable image/model URLs are revalidated so replacing a product photo does not leave year-long stale copies. The 3D engine is a separate chunk loaded when a user opens its tab.
 
-This is a client-rendered SPA. Per-route metadata and structured data are updated in the browser. Server-rendered product HTML, social previews, and true HTTP 404 responses belong to the planned rendering refactor.
+This is a client-rendered SPA. Per-route metadata and structured data are updated in the browser. Server-rendered product HTML, social previews, and true HTTP 404 responses remain in the rendering roadmap. Non-home pages and the viewer load separately.
 
 ## Review
 

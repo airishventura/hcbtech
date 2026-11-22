@@ -4,7 +4,7 @@ import { ArrowUpRight, Menu, MessageCircle, Play, X } from "lucide-react";
 function FacebookMark({ size = 16, className = "" }: { size?: number; className?: string }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}><path d="M13.6 21v-8h2.8l.4-3h-3.2V8.1c0-.9.3-1.6 1.7-1.6h1.8V3.8c-.3 0-1.4-.1-2.5-.1-2.4 0-4.1 1.5-4.1 4.1V10H8v3h2.5v8h3.1Z" /></svg>;
 }
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { buildWhatsAppUrl, FACEBOOK_URL, formatWhatsAppNumber, TIKTOK_URL, getWhatsAppNumber } from "../lib/inquiry";
 import InquiryLink from "./InquiryLink";
@@ -99,7 +99,7 @@ export default function Layout() {
           </motion.div>
         )}
       </AnimatePresence>
-      <main id="konten"><Outlet /></main>
+      <main id="konten"><Suspense fallback={<div className="site-shell min-h-[60vh] pt-[calc(var(--header-height)+60px)]" role="status">{t("Memuat halaman…")}</div>}><Outlet /></Suspense></main>
       {["/", "/bengkel", "/tentang"].includes(location.pathname) && getWhatsAppNumber() && <motion.a
         href={buildWhatsAppUrl({ message: t("Halo HCBTECH, saya ingin berkonsultasi tentang kebutuhan mesin atau fabrikasi."), language }) ?? "/kontak"}
         target="_blank" rel="noreferrer"

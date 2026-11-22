@@ -27,7 +27,7 @@ for name,folder in [('logo_hcbtech.jpeg','brand'),('hcb_pricelist.jpeg','priceli
  manifest.append({'id':folder,'group':folder,'classification':'owner-supplied','path':str(dest.relative_to(root)),'sha256':hashlib.sha256(dest.read_bytes()).hexdigest(),'sourceFiles':[name]})
 (root/'assets/manifest.json').write_text(json.dumps({'sourceArchive':'wa hcb.zip','sourceFileCount':102,'uniqueFileCount':52,'duplicatePhotoCount':50,'assets':manifest},indent=2)+'\n')
 # Web derivatives preserve full frame and aspect ratio. Unmodified JPEGs are above.
-for n in [6,36,39,45,47]:
+for n in [4,6,9,12,29,32,36,39,45,47]:
  p=next(source.glob(f'photo_{n}_*.jpg'));dest=root/f'public/images/products/photo-{n:02d}.webp';dest.parent.mkdir(parents=True,exist_ok=True);im=Image.open(p);im.save(dest,'WEBP',quality=82)
 p=root/'public/brand/hcbtech.webp';Image.open(source/'logo_hcbtech.jpeg').save(p,'WEBP',quality=88)
 temporary.cleanup()

@@ -4,8 +4,8 @@
   "effectiveDate": null,
   "currency": "IDR",
   "status": "transcribed-owner-reference",
-  "publicationStatus": "pending-model-mapping",
-  "note": "Prices must be reconfirmed before ordering. Blank drive cell preserved as null. PK and model labels are transcribed, not measured. No exact photo-to-variant match is established.",
+  "publicationStatus": "published-as-family-reference",
+  "note": "Published as owner price-sheet references. Reconfirm prices before ordering. Exact photo-to-variant associations and availability remain unconfirmed.",
   "variants": [
     {
       "id": "PRICE-01",
@@ -13,7 +13,7 @@
       "model": "Mini",
       "driveLabel": "Dinamo 1 PK",
       "listedPriceIDR": 4000000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-PARUT",
       "availability": null,
       "photoIds": []
     },
@@ -23,7 +23,7 @@
       "model": "Berdiri",
       "driveLabel": "Dinamo 1 PK",
       "listedPriceIDR": 5000000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-PARUT",
       "availability": null,
       "photoIds": []
     },
@@ -33,7 +33,7 @@
       "model": "Berdiri",
       "driveLabel": "Dinamo 2 PK",
       "listedPriceIDR": 5500000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-PARUT",
       "availability": null,
       "photoIds": []
     },
@@ -43,7 +43,7 @@
       "model": "Berdiri",
       "driveLabel": "Stihl Bensin",
       "listedPriceIDR": 6000000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-PARUT",
       "availability": null,
       "photoIds": []
     },
@@ -53,7 +53,7 @@
       "model": "Jumbo",
       "driveLabel": "Genset 13 PK",
       "listedPriceIDR": 13500000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-PARUT",
       "availability": null,
       "photoIds": []
     },
@@ -63,7 +63,7 @@
       "model": "Ampar tanpa kaki",
       "driveLabel": null,
       "listedPriceIDR": 6000000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-KUPAS",
       "availability": null,
       "photoIds": []
     },
@@ -73,7 +73,7 @@
       "model": "Duduk",
       "driveLabel": "Dinamo",
       "listedPriceIDR": 7000000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-KUPAS",
       "availability": null,
       "photoIds": []
     },
@@ -83,7 +83,7 @@
       "model": "Duduk",
       "driveLabel": "Bensin",
       "listedPriceIDR": 7500000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-KUPAS",
       "availability": null,
       "photoIds": []
     },
@@ -93,7 +93,7 @@
       "model": "Berdiri",
       "driveLabel": "Dinamo",
       "listedPriceIDR": 8000000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-KUPAS",
       "availability": null,
       "photoIds": []
     },
@@ -103,7 +103,7 @@
       "model": "Berdiri",
       "driveLabel": "Bensin",
       "listedPriceIDR": 8500000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-KUPAS",
       "availability": null,
       "photoIds": []
     },
@@ -113,7 +113,7 @@
       "model": "Mini A10",
       "driveLabel": "General",
       "listedPriceIDR": 10000000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-PERAS",
       "availability": null,
       "photoIds": []
     },
@@ -123,7 +123,7 @@
       "model": "A11",
       "driveLabel": "Honda GP160",
       "listedPriceIDR": 12000000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-PERAS",
       "availability": null,
       "photoIds": []
     },
@@ -133,7 +133,7 @@
       "model": "A22",
       "driveLabel": "Honda GP160",
       "listedPriceIDR": 14000000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-PERAS",
       "availability": null,
       "photoIds": []
     },
@@ -143,7 +143,7 @@
       "model": "A33",
       "driveLabel": "Honda GP200",
       "listedPriceIDR": 16000000,
-      "catalogProductId": null,
+      "catalogProductId": "HCB-PERAS",
       "availability": null,
       "photoIds": []
     }

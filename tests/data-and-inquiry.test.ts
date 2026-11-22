@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { products } from "../src/data/products";
+import { legacyProducts as products } from "../src/data/legacy-products";
 import { buildContactFallback, buildInquiryMessage, displaySpec, formatIDR } from "../src/lib/inquiry";
 import { createProductSchema } from "../src/lib/seo";
 

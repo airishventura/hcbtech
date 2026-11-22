@@ -8,6 +8,8 @@ import { Reveal, SectionIntro } from "../components/Reveal";
 import Seo from "../components/Seo";
 import { useContent } from "../i18n/LanguageContext";
 import { buildInquiryMessage, buildWhatsAppUrl, copyText, FACEBOOK_URL, formatWhatsAppNumber, getWhatsAppNumber, TIKTOK_URL } from "../lib/inquiry";
+import { legacyProducts } from "../data/legacy-products";
+import { localizeProduct } from "../i18n/localize";
 import { isRecord, readStored, removeStored, writeStored } from "../lib/storage";
 
 interface Draft { productSlug: string; name: string; city: string; message: string; variantId: string; }
@@ -38,7 +40,8 @@ export default function Contact() {
   const [generated, setGenerated] = useState("");
   const [status, setStatus] = useState("");
   const [persistent, setPersistent] = useState(true);
-  const product = products.find((item) => item.slug === draft.productSlug);
+  const legacy = legacyProducts.find(item => item.slug === draft.productSlug);
+  const product = products.find((item) => item.slug === draft.productSlug) ?? (legacy ? localizeProduct(legacy, t) : undefined);
   const variant = product?.variants.find((item) => item.id === draft.variantId) ?? product?.variants[0];
   const whatsappConfigured = Boolean(getWhatsAppNumber());
   const directWhatsApp = buildWhatsAppUrl({ message: "Halo HCBTECH, saya ingin berkonsultasi tentang kebutuhan mesin atau fabrikasi." });
@@ -47,7 +50,7 @@ export default function Contact() {
   useEffect(() => {
     if (product && !product.variants.some((item) => item.id === draft.variantId)) {
       const drive = product.driveType === "engine" ? "engine" : "listrik";
-      setDraft((current) => ({ ...current, variantId: product.variants.find((item) => item.drive === drive)?.id ?? product.variants[0]?.id ?? "" }));
+      setDraft((current) => ({ ...current, variantId: product.defaultVariantId ?? product.variants.find((item) => item.drive === drive)?.id ?? product.variants[0]?.id ?? "" }));
     }
   }, [product, draft.variantId]);
   useEffect(() => { if (!status) return; const timeout = setTimeout(() => setStatus(""), 4500); return () => clearTimeout(timeout); }, [status]);
@@ -97,7 +100,7 @@ export default function Contact() {
       <div className="lg:col-span-7">
         <Reveal><div className="mb-8 border-t hairline pt-5"><p className="mono text-steel-dark"><span className="text-industrial">01</span> / {t("Formulir kebutuhan")}</p><h2 className="title-lg mt-4">{t("Siapkan permintaan penawaran")}</h2></div>
           <form onSubmit={submit} className="grid gap-7" aria-describedby="form-note">
-            <div><label htmlFor="contact-product" className="label">{t("Produk referensi (opsional)")}</label><select id="contact-product" name="product" className="field" value={draft.productSlug} onChange={(event) => { update("productSlug", event.target.value); update("variantId", ""); }}><option value="">{t("Konsultasi mesin / fabrikasi umum")}</option>{products.map((item) => <option key={item.id} value={item.slug}>{item.id} — {item.name}</option>)}</select></div>
+            <div><label htmlFor="contact-product" className="label">{t("Produk referensi (opsional)")}</label><select id="contact-product" name="product" className="field" value={draft.productSlug} onChange={(event) => { update("productSlug", event.target.value); update("variantId", ""); }}><option value="">{t("Konsultasi mesin / fabrikasi umum")}</option>{legacy && <option value={legacy.slug}>{t(legacy.name)}</option>}{products.map((item) => <option key={item.id} value={item.slug}>{item.id} — {item.name}</option>)}</select></div>
             {product && <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }}><label htmlFor="contact-variant" className="label">{t("Konfigurasi yang diminati")}</label><select id="contact-variant" name="variant" className="field" value={variant?.id ?? ""} onChange={(event) => update("variantId", event.target.value)}>{product.variants.map((item) => <option key={item.id} value={item.id}>{item.label} — {t("konfirmasi spesifikasi")}</option>)}</select><p className="mt-3 text-xs leading-relaxed text-steel-dark">{variant?.note}</p></motion.div>}
             <div className="grid gap-7 sm:grid-cols-2"><div><label htmlFor="contact-name" className="label">{t("Nama")} <span className="text-industrial">*</span></label><input id="contact-name" name="name" className="field" required autoComplete="name" value={draft.name} onChange={(event) => update("name", event.target.value)} placeholder={t("Nama Anda")} maxLength={100} /></div><div><label htmlFor="contact-city" className="label">{t("Kota pemasangan")}</label><input id="contact-city" name="city" className="field" autoComplete="address-level2" value={draft.city} onChange={(event) => update("city", event.target.value)} placeholder={t("Kota / kabupaten")} maxLength={100} /></div></div>
             <div><div className="flex flex-wrap items-end justify-between gap-3"><label htmlFor="contact-message" className="label">{t("Kebutuhan kerja")}</label><span className="mono mb-2 text-steel-dark">{t("Tambah cepat, lalu edit sesuai kebutuhan")}</span></div><div className="no-scrollbar mb-3 flex gap-2 overflow-x-auto pb-1" role="group" aria-label={t("Tambahkan pertanyaan cepat")}>{quickPrompts.map((prompt) => <button key={prompt.label} type="button" className="mono min-h-11 shrink-0 border hairline px-3 text-left transition-colors hover:border-graphite hover:bg-graphite hover:text-ivory" onClick={() => appendPrompt(t(prompt.text))}>{t(prompt.label)}<span className="ml-2 text-industrial">+</span></button>)}</div><textarea id="contact-message" name="message" className="field min-h-[160px] resize-y" value={draft.message} onChange={(event) => update("message", event.target.value)} placeholder={t("Bahan yang diproses, kondisi awal, hasil yang diinginkan, cara kerja harian, sumber listrik, atau pertanyaan spesifikasi…")} maxLength={2000} /><div className="mt-2 flex justify-between gap-4"><span className="mono text-steel-dark">{t("Jangan kirim data sensitif")}</span><span className="mono text-steel-dark">{draft.message.length}/2000</span></div></div>

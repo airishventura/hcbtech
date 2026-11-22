@@ -1,5 +1,7 @@
-# Direktori model
+# HCBTECH exterior-reference GLBs
 
-Belum ada GLB pemilik yang tersedia. Jangan menaruh mesin generik di sini lalu menghubungkannya ke produk HCBTECH.
+Three photo-based visual approximations are published: `pilot-parut-kelapa-v1.glb`, `pilot-kupas-batok-v1.glb`, and `pilot-peras-santan-v1.glb`.
 
-Nama file: `<product-id>.glb`, misalnya `REF-D01.glb` setelah unit dan geometri diverifikasi. Ikuti `/docs/blender-pipeline.md`. Simpan `.blend` sumber di luar output deployment, misalnya `models/source/`, dengan foto dan catatan revisi.
+Source: `scripts/build-pilot-models.mjs`. Regenerate with Node from the repository root. `models/pilots.json` records source photos, mesh/triangle counts and byte sizes. Every model embeds unmeasured provenance in its scene extras. These are exterior studies without exact price-variant associations, measured dimensions, internal mechanisms or working animations.
+
+Do not mark geometry verified until measured references and approval are recorded. Future measured assets follow `/docs/blender-pipeline.md`; its old REF examples are historical.

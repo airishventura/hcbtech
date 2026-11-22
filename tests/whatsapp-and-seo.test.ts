@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { products } from "../src/data/products";
+import { legacyProducts as products } from "../src/data/legacy-products";
 import { buildWhatsAppUrl, formatWhatsAppNumber, getWhatsAppNumber } from "../src/lib/inquiry";
 import { createBreadcrumbSchema, createFaqSchema, createOrganizationSchema, createProductSchema } from "../src/lib/seo";
 

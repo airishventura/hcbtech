@@ -5,20 +5,27 @@ test("pengurutan nama mengubah urutan produk berbasis data", async ({ page }, te
   const sortId = testInfo.project.name === "android" ? "#sort-mobile" : "#sort";
   if (testInfo.project.name === "android") await page.getByRole("button", { name: /Filter/ }).click();
   await page.selectOption(sortId, "name");
-  await expect(page.locator("article[data-product]").first()).toHaveAttribute("data-product", "drum-tertutup-transmisi-belt-samping");
+  await expect(page.locator("article[data-product]").first()).toHaveAttribute("data-product", "kupas-batok-kelapa");
 });
 
 test("dua produk dapat dibandingkan dan dialog dapat ditutup dengan Escape", async ({ page }) => {
   await page.goto("/mesin");
-  const first = page.locator('article[data-product="piringan-gearbox-meja-listrik"]');
-  const second = page.locator('article[data-product="drum-tertutup-stainless-listrik"]');
+  const first = page.locator('article[data-product="kupas-batok-kelapa"]');
+  const second = page.locator('article[data-product="parut-kelapa"]');
   await first.getByRole("button", { name: /Tambah .* perbandingan/ }).click();
   await second.getByRole("button", { name: /Tambah .* perbandingan/ }).click();
   await page.getByRole("button", { name: "Bandingkan", exact: true }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await expect(page.getByRole("dialog").locator("thead th")).toHaveCount(3);
+  const close = page.getByRole("button", { name: "Tutup perbandingan" });
+  await close.focus();
+  await page.keyboard.press("Shift+Tab");
+  await expect(page.getByRole("dialog").getByRole("button", { name: "Hapus", exact: true }).last()).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(close).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toBeHidden();
+  await expect(page.locator("[data-compare-trigger]")).toBeFocused();
 });
 
 test("tab media mendukung Arrow, Home, dan End", async ({ page }) => {

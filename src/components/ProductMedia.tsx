@@ -17,9 +17,9 @@ export default function ProductMedia({ product, variant }: { product: Product; v
   const galleryRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const hasOriginal = product.gallery.some((item) => item.kind === "original-photo");
-  const mediaLabel = hasOriginal ? t("Foto & visualisasi") : t("Visualisasi");
+  const mediaLabel = hasOriginal ? t(product.gallery.every(item => item.kind === "original-photo") ? "Foto asli" : "Foto & visualisasi") : t("Visualisasi");
   const tabs = [
-    ...(product.modelAccuracy !== "none" ? [{ id: "3d" as const, label: t("Lihat 3D"), icon: Box }] : []),
+    ...(product.modelAccuracy !== "none" ? [{ id: "3d" as const, label: t(product.modelGLB ? "3D referensi" : "Lihat 3D"), icon: Box }] : []),
     ...(product.gallery.length ? [{ id: "media" as const, label: mediaLabel, icon: Images }] : []),
     ...(product.demonstrationVideo ? [{ id: "video" as const, label: t("Video Demo"), icon: Play }] : []),
   ];
@@ -43,7 +43,8 @@ export default function ProductMedia({ product, variant }: { product: Product; v
 
   if (!tabs.length) return <EmptyState compact variant="media" eyebrow={t("Media / belum tersedia")} title={t("Belum ada media untuk unit ini.")} description={t("Deskripsi dan tabel spesifikasi tetap dapat diperiksa. Foto atau model hanya akan ditampilkan setelah asetnya tersedia dan statusnya jelas.")} reassurance={t("Tidak ada foto atau video yang disembunyikan dari Anda.")} actions={<InquiryLink product={product} className="btn btn-dark" label={t("Minta foto unit")} message={t("Mohon foto aktual unit ini dari beberapa sisi dan informasi media yang tersedia.")} />} />;
 
-  return <div>
+  return <div className="min-w-0">
+    {tab === "3d" && product.modelReferenceNote && <p className="mb-4 border-l-2 border-industrial pl-3 text-sm leading-relaxed text-steel-dark">{product.modelReferenceNote}</p>}
     <div role="tablist" aria-label={t("Media {name}", { name: product.name })} className="no-scrollbar mb-3 flex gap-1 overflow-x-auto border-b hairline">
       {tabs.map((item, index) => <button key={item.id} type="button" role="tab" id={`tab-${product.id}-${item.id}`} tabIndex={tab === item.id ? 0 : -1} aria-selected={tab === item.id} aria-controls={`panel-${product.id}-${item.id}`} onKeyDown={(event) => onTabKey(event, index)} onClick={() => setTab(item.id)} className={`mono relative flex min-h-12 shrink-0 items-center gap-2 px-4 transition-colors ${tab === item.id ? "text-graphite" : "text-steel-dark hover:text-graphite"}`}><item.icon size={15} />{item.label}{tab === item.id && <motion.span layoutId="media-tab" className="absolute inset-x-0 bottom-[-1px] h-[2px] bg-industrial" />}</button>)}
     </div>
@@ -63,9 +64,9 @@ export default function ProductMedia({ product, variant }: { product: Product; v
             <div className="absolute bottom-16 left-1/2 flex -translate-x-1/2">{product.gallery.map((_, index) => <button key={index} type="button" className="flex h-11 w-11 items-center justify-center" onClick={() => goToImage(index)} aria-label={t("Buka foto {index}", { index: index + 1 })} aria-current={index === imageIndex}><span className={`h-2 rounded-full transition-all ${index === imageIndex ? "w-7 bg-industrial" : "w-2 bg-graphite/35"}`} /></button>)}</div>
           </>}
         </div>}
-        {tab === "3d" && <div className="aspect-[4/4.7] min-h-[460px] md:aspect-[4/4.35]">
+        {tab === "3d" && <div className="w-full aspect-[4/4.7] min-h-[460px] md:aspect-[4/4.35]">
           <Suspense fallback={<div className="flex h-full min-h-[460px] flex-col items-center justify-center bg-[#e8e4dc]" role="status"><span className="loader-ring mb-5 h-8 w-8 rounded-full border-2 border-graphite/20 border-t-industrial" /><span className="mono">{t("Menyiapkan viewer 3D")}</span><span className="mt-2 max-w-xs text-center text-xs text-steel-dark">{t("Konten produk tetap tersedia tanpa WebGL.")}</span></div>}>
-            <MachineViewer glbUrl={product.modelGLB} posterImage={product.posterImage} family={product.category} drive={variant?.drive ?? (product.driveType === "engine" ? "engine" : "listrik")} hotspots={product.hotspots} modelAccuracy={product.modelAccuracy} productName={product.name} />
+            <MachineViewer key={product.modelGLB ?? product.id} glbUrl={product.modelGLB} posterImage={product.posterImage} family={product.category} drive={variant?.drive === "engine" ? "engine" : "listrik"} hotspots={product.hotspots} modelAccuracy={product.modelAccuracy} productName={product.name} />
           </Suspense>
         </div>}
         {tab === "video" && product.demonstrationVideo && <div className="aspect-video bg-graphite">

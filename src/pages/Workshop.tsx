@@ -10,7 +10,7 @@ import { FACEBOOK_URL, TIKTOK_URL } from "../lib/inquiry";
 const evidence = [
   { icon: Camera, title: "Foto asli multi-sudut", status: "Foto pemilik tersedia", text: "Foto pemilik sudah tersedia pada galeri referensi. Setiap foto asli dibedakan dari visualisasi; model dan ukuran final tetap dikonfirmasi." },
   { icon: Video, title: "Video demonstrasi per unit", status: "Belum ditautkan", text: "Kanal TikTok tersedia sebagai sumber sosial. Video baru masuk tab produk setelah unit, isi demo, dan URL-nya dikonfirmasi." },
-  { icon: FileBox, title: "Model GLB terverifikasi", status: "Belum tersedia", text: "Viewer saat ini memakai aproksimasi komponen. Tidak ada animasi kerja, pengujian digital, atau klaim akurasi dimensi." },
+  { icon: FileBox, title: "Model GLB terverifikasi", status: "Belum tersedia", text: "Tiga studi GLB bentuk luar sudah tersedia sebagai referensi. Ukuran belum diukur dan tidak ada model yang berstatus geometri terverifikasi." },
   { icon: CheckCircle2, title: "Hasil uji kapasitas", status: "Belum ada data", text: "Kapasitas dan performa tidak ditampilkan. Minta pengujian dengan bahan Anda bila hal tersebut menjadi syarat pembelian." },
 ];
 

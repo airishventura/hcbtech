@@ -22,13 +22,14 @@ const intentLabels: Record<Intent, string> = {
 
 const steps = [
   {
-    eyebrow: "Bentuk referensi",
+    eyebrow: "Jenis mesin",
     title: "Mana yang paling mendekati bayangan Anda?",
-    description: "Pilih berdasarkan tata letak yang ingin dibicarakan, bukan fungsi yang diasumsikan.",
+    description: "Pilih pekerjaan yang ingin Anda lakukan dengan mesin.",
     key: "category" as const,
     options: [
-      { value: "piringan-gearbox", label: "Piringan & gearbox", text: "Piringan terbuka, poros, gearbox, rangka, dan corong." },
-      { value: "drum-tertutup", label: "Drum tertutup", text: "Housing horizontal tertutup, tutup atas, dan saluran keluar." },
+      { value: "kupas-batok-kelapa", label: "Kupas batok", text: "Lihat pilihan Ampar, Duduk, dan Berdiri." },
+      { value: "parut-kelapa", label: "Parut kelapa", text: "Lihat pilihan Mini, Berdiri, dan Jumbo." },
+      { value: "peras-santan", label: "Peras santan", text: "Lihat pilihan Mini A10, A11, A22, dan A33." },
       { value: "unknown", label: "Belum tahu", text: "Mulai dari kebutuhan kerja tanpa memilih model terlebih dahulu." },
     ],
   },
@@ -69,12 +70,12 @@ export default function NeedsGuide() {
 
   const result = useMemo(() => {
     const product = answers.category && answers.category !== "unknown"
-      ? products.find((item) => item.category === answers.category && (!answers.drive || answers.drive === "unknown" || item.driveType === answers.drive))
+      ? products.find((item) => item.category === answers.category && (!answers.drive || answers.drive === "unknown" || item.variants.some(variant => variant.drive === answers.drive)))
       : undefined;
     const variant = product && answers.drive && answers.drive !== "unknown"
       ? product.variants.find((item) => item.drive === answers.drive)
       : undefined;
-    const categoryText = t(answers.category === "piringan-gearbox" ? "Piringan & gearbox" : answers.category === "drum-tertutup" ? "Drum tertutup" : "Belum memilih bentuk");
+    const categoryText = t(answers.category === "kupas-batok-kelapa" ? "Kupas batok" : answers.category === "parut-kelapa" ? "Parut kelapa" : answers.category === "peras-santan" ? "Peras santan" : "Belum memilih bentuk");
     const driveText = t(answers.drive === "listrik" ? "Motor listrik" : answers.drive === "engine" ? "Engine" : "Minta masukan penggerak");
     const intentText = t(answers.intent ? intentLabels[answers.intent] : "Konsultasi kebutuhan");
     const message = t("Saya menggunakan panduan kebutuhan di situs HCBTECH.\nBentuk: {category}.\nPenggerak: {drive}.\nTujuan: {intent}.\n\nMohon bantu konfirmasi kesesuaian dan informasi yang masih diperlukan. Saya memahami panduan ini hanya titik awal, bukan rekomendasi teknis.", { category: categoryText, drive: driveText, intent: intentText });
@@ -113,7 +114,7 @@ export default function NeedsGuide() {
           <p className="mono mb-3 text-industrial">{t("Titik awal percakapan Anda")}</p>
           <h3 className="title-lg">{result.product ? result.product.name : t("Konsultasi tanpa memilih model")}</h3>{result.product?.nameStatus === "draft" && <p className="mono mt-2 text-industrial">{t("Nama model sementara")}</p>}
           <div className="mt-6 grid gap-6 md:grid-cols-5">
-            {result.product && <Link to={`/mesin/${result.product.slug}`} className="relative aspect-[4/3] overflow-hidden bg-[#e8e4dc] md:col-span-2"><img src={result.product.posterImage} alt={result.product.gallery[0]?.alt ?? result.product.name} className="h-full w-full object-cover" /><span className="media-label absolute left-3 top-3">{t("Visualisasi")}</span></Link>}
+            {result.product && <Link to={`/mesin/${result.product.slug}`} className="relative aspect-[4/3] overflow-hidden bg-[#e8e4dc] md:col-span-2"><img src={result.product.posterImage} alt={result.product.gallery[0]?.alt ?? result.product.name} className="h-full w-full object-cover" /><span className="media-label absolute left-3 top-3">{t(result.product.gallery[0]?.kind === "original-photo" ? "Foto asli" : "Visualisasi")}</span></Link>}
             <dl className={`grid gap-4 ${result.product ? "md:col-span-3" : ""}`}>
               <div><dt className="mono text-steel-dark">{t("Bentuk")}</dt><dd className="mt-1 text-sm font-medium">{result.categoryText}</dd></div>
               <div><dt className="mono text-steel-dark">{t("Penggerak")}</dt><dd className="mt-1 text-sm font-medium">{result.driveText}</dd></div>

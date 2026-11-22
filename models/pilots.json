@@ -1,0 +1,44 @@
+[
+  {
+    "id": "pilot-parut-kelapa-v1",
+    "family": "parut-kelapa",
+    "sourcePhotoIds": [
+      "photo-47"
+    ],
+    "path": "/models/pilot-parut-kelapa-v1.glb",
+    "accuracy": "approximation",
+    "measuredDimensions": null,
+    "variantIds": [],
+    "bytes": 161636,
+    "meshes": 35,
+    "triangles": 3296
+  },
+  {
+    "id": "pilot-kupas-batok-v1",
+    "family": "kupas-batok-kelapa",
+    "sourcePhotoIds": [
+      "photo-36"
+    ],
+    "path": "/models/pilot-kupas-batok-v1.glb",
+    "accuracy": "approximation",
+    "measuredDimensions": null,
+    "variantIds": [],
+    "bytes": 113772,
+    "meshes": 34,
+    "triangles": 1968
+  },
+  {
+    "id": "pilot-peras-santan-v1",
+    "family": "peras-santan",
+    "sourcePhotoIds": [
+      "photo-04"
+    ],
+    "path": "/models/pilot-peras-santan-v1.glb",
+    "accuracy": "approximation",
+    "measuredDimensions": null,
+    "variantIds": [],
+    "bytes": 153524,
+    "meshes": 49,
+    "triangles": 2428
+  }
+]

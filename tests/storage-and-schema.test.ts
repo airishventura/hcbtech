@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { products } from "../src/data/products";
+import { legacyProducts as products } from "../src/data/legacy-products";
 import { createProductSchema } from "../src/lib/seo";
 import { isRecord, isStringArray, readStored, removeStored, writeStored } from "../src/lib/storage";
 

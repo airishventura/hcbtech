@@ -19,24 +19,23 @@ Contact sheets: [01](../docs/asset-contact-sheet-01.jpg), [02](../docs/asset-con
 
 ## Web assets
 
-`public/brand/hcbtech.webp` uses the supplied logo, preserving the full image. Five optimized full-frame photos are used in the existing reference catalog:
+`public/brand/hcbtech.webp` uses the supplied logo, preserving the full image. Ten optimized full-frame photo derivatives are available:
 
-| Reference | Photo | Basis |
+| Family / context | Photos | Use |
 | --- | --- | --- |
-| REF-D01 | photo-36 | Electric motor/gearbox and disc on table |
-| REF-D02 | photo-06 | Engine below table and disc/gearbox above |
-| REF-S01 | photo-47 | Standing enclosed housing with lower electric drive |
-| REF-S02 | photo-39 | Standing enclosed housing with lower engine |
-| REF-S03 | photo-45 | Enclosed housing with side belt layout |
+| Coconut grater | 47, 39, 45 | Family reference gallery |
+| Shell peeler | 36, 06, 29 | Family reference gallery |
+| Milk press | 04, 12, 32 | Family reference gallery |
+| Workshop | 09 | Home introduction |
 
-These are visual layout matches, not verified model specifications. REF-D03 retains its labeled illustration because the supplied photos do not establish that exact layout. Existing generated illustrations remain explicitly labeled. Original photos and 3D schematics have separate accuracy labels.
+These are family references, without exact price-variant associations. The three GLB pilots derive exterior layouts from photos 47, 36 and 04 respectively. Measurements and internals are not inferred. Old REF pages retain their archived media.
 
 ## Price reference
 
 `pricelist.json` transcribes all **14 variants**: 5 graters, 5 shell peelers, 4 milk presses. The sheet has no effective date, stock, tax, freight or warranty terms. Its note says prices can be reconfirmed before ordering. The first shell-peeler drive cell is blank and stays null. “Genset 13 PK” and “General” are literal source labels, not inferred specifications.
 
-Do not attach these amounts to the six old REF products: they are layout references, not the 14 priced variants. The new product mapping is the first refactor milestone. The supplied standalone logo and price-sheet logo differ; the site uses the standalone file pending a broader brand decision.
+Do not attach these amounts to the six old REF products: they are layout references, not the 14 priced variants. All 14 rows are now published under their sourced family and retain their source IDs. `photoIds` remains empty for each price variant because exact associations are unconfirmed. The source screenshot is available unchanged at `public/docs/daftar-harga.jpeg`. The supplied standalone logo and price-sheet logo differ; the site uses the standalone file pending a broader brand decision.
 
 ## Repeat import
 
-With Pillow installed, run `python3 scripts/import-assets.py '/path/to/wa hcb.zip'`. It validates archive paths, checks duplicate hashes, preserves originals, and recreates the manifest and web photo derivatives. No image-generation service is used.
+With Pillow installed, run `python3 scripts/import-assets.py '/path/to/wa hcb.zip'`. It validates archive paths, checks duplicate hashes, preserves originals, and recreates the manifest and web photo derivatives. Review the generated transcription metadata before replacing the curated `pricelist.json`. No image-generation service is used.

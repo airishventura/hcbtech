@@ -95,3 +95,8 @@ select.field { cursor: pointer; }
 
 @keyframes loader-turn { to { transform: rotate(360deg); } }
 .loader-ring { animation: loader-turn 1s linear infinite; }
+
+label:has(> input.sr-only:focus-visible) { outline: 2px solid #C92525; outline-offset: 3px; }
+
+html { scroll-padding-top: calc(var(--header-height) + 16px); scroll-padding-bottom: 100px; }
+.viewer-touch button { scroll-margin-top: calc(var(--header-height) + 20px); scroll-margin-bottom: 110px; }

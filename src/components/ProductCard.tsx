@@ -1,6 +1,6 @@
 import { ArrowRight, GitCompareArrows } from "lucide-react";
 import { Link } from "react-router-dom";
-import type { Product } from "../data/products";
+import { getPriceRange, type Product } from "../data/products";
 import InquiryLink from "./InquiryLink";
 import { displayAvailability, displayDrive, formatIDR } from "../lib/inquiry";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -8,6 +8,7 @@ import { useLanguage } from "../i18n/LanguageContext";
 export default function ProductCard({ product, index, onCompare, compared = false }: { product: Product; index: number; onCompare?: (product: Product) => void; compared?: boolean }) {
   const { t } = useLanguage();
   const image = product.gallery[0];
+  const range = getPriceRange(product);
   return (
     <article className="group flex h-full min-w-0 flex-col border-t hairline pt-5" data-product={product.slug}>
       <div className="mb-4 flex items-center justify-between gap-3">
@@ -26,14 +27,14 @@ export default function ProductCard({ product, index, onCompare, compared = fals
         </div>
         <p className="mb-6 max-w-md text-[.94rem] leading-relaxed text-steel-dark">{product.shortDescription}</p>
         <dl className="mb-6 grid grid-cols-2 gap-4 border-y hairline py-5">
-          <div><dt className="mono mb-1 text-steel-dark">{t("Harga")}</dt><dd className="text-sm font-medium">{t(formatIDR(product.priceIDR))}</dd></div>
-          <div><dt className="mono mb-1 text-steel-dark">{t("Penggerak referensi")}</dt><dd className="text-sm font-medium">{t(displayDrive(product.driveType))}</dd></div>
+          <div><dt className="mono mb-1 text-steel-dark">{t(range ? "Harga daftar mulai" : "Harga")}</dt><dd className="text-sm font-medium">{t(formatIDR(range?.min ?? product.priceIDR))}</dd></div>
+          <div><dt className="mono mb-1 text-steel-dark">{t(product.priceSource ? "Pilihan tipe" : "Penggerak referensi")}</dt><dd className="text-sm font-medium">{product.priceSource ? t("{count} varian", { count: product.variants.length }) : t(displayDrive(product.driveType))}</dd></div>
         </dl>
         <div className="mt-auto flex flex-wrap gap-2">
           <InquiryLink product={product} className="btn btn-dark flex-1" label="Minta penawaran" />
           {onCompare && <button type="button" className={`icon-button ${compared ? "bg-graphite text-ivory" : ""}`} onClick={() => onCompare(product)} aria-pressed={compared} aria-label={compared ? t("Hapus {name} dari perbandingan", { name: product.name }) : t("Tambah {name} ke perbandingan", { name: product.name })}><GitCompareArrows size={18} /></button>}
         </div>
-        <p className="mono mt-3 text-steel-dark">{t(displayAvailability(product.availability))} · {t("opsi varian dikonfirmasi")}</p>
+        <p className="mono mt-3 text-steel-dark">{range ? t("Harga daftar dikonfirmasi sebelum pesan") : t(displayAvailability(product.availability))}</p>
       </div>
     </article>
   );

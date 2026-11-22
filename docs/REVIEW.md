@@ -1,5 +1,8 @@
 # HCBTECH debug and review
 
+Current status: this report records the initial baseline. The [22 November release](RELEASE-2026-11-22.md) supersedes its open catalog, contact, route-splitting and comparison-focus findings. Rendering/SEO, actual-device performance and measured variant models remain open.
+
+
 Reviewed 21 November 2026 against the supplied source zip and the existing Vercel deployment. The review follows the buyer story: browse a configuration → choose a drive → inspect photos/3D → create a quotation request → hand off to WhatsApp or save a draft.
 
 ## Existing production

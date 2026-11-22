@@ -1,13 +1,14 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { lazy } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./components/Layout";
-import About from "./pages/About";
-import Catalog from "./pages/Catalog";
-import Contact from "./pages/Contact";
+const About = lazy(() => import("./pages/About"));
+const Catalog = lazy(() => import("./pages/Catalog"));
+const Contact = lazy(() => import("./pages/Contact"));
 import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
-import ProductDetail from "./pages/ProductDetail";
-import Workshop from "./pages/Workshop";
+const NotFound = lazy(() => import("./pages/NotFound"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
+const Workshop = lazy(() => import("./pages/Workshop"));
 import { spring } from "./lib/motion";
 import { LanguageProvider } from "./i18n/LanguageContext";
 

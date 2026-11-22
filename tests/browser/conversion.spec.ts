@@ -3,18 +3,18 @@ import { expect, test } from "@playwright/test";
 test("panduan tiga langkah dapat dikoreksi dan membawa pilihan ke kontak", async ({ page }) => {
   await page.goto("/");
   const guide = page.getByRole("region", { name: "Panduan kebutuhan tiga langkah" });
-  await guide.getByText("Piringan & gearbox", { exact: true }).click();
+  await guide.getByText("Kupas batok", { exact: true }).click();
   await guide.getByRole("button", { name: "Lanjut", exact: true }).click();
   await guide.getByRole("button", { name: "Kembali", exact: true }).click();
-  await expect(guide.getByRole("radio", { name: /Piringan & gearbox/ })).toBeChecked();
+  await expect(guide.getByRole("radio", { name: /Kupas batok/ })).toBeChecked();
   await guide.getByRole("button", { name: "Lanjut", exact: true }).click();
   await guide.getByText("Motor listrik", { exact: true }).click();
   await guide.getByRole("button", { name: "Lanjut", exact: true }).click();
   await guide.getByText("Harga & cakupan", { exact: true }).click();
   await guide.getByRole("button", { name: "Lihat ringkasan" }).click();
-  await expect(guide.getByRole("heading", { name: "Unit Piringan + Gearbox / Meja" })).toBeVisible();
+  await expect(guide.getByRole("heading", { name: "Mesin Kupas Batok Kelapa" })).toBeVisible();
   await guide.getByRole("link", { name: "Lanjut ke formulir kontak" }).click();
-  await expect(page).toHaveURL(/\/kontak\?produk=piringan-gearbox-meja-listrik/);
+  await expect(page).toHaveURL(/\/kontak\?produk=kupas-batok-kelapa/);
   await expect(page.getByLabel("Kebutuhan kerja")).toHaveValue(/panduan kebutuhan/);
 });
 
