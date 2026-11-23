@@ -3,18 +3,19 @@ import { generalFaq, principles, processSteps, services } from "../data/site";
 
 export type Translate = (text: string, variables?: Record<string, string | number>) => string;
 
-export function localizeProduct(product: Product, t: Translate): Product {
+export function localizeProduct(product: Product, t: Translate, language: "id" | "en" = "id"): Product {
+  const edited = language === "en" ? product.contentRevision : undefined;
   return {
     ...product,
-    name: t(product.name),
+    name: edited?.name.en ?? t(product.name),
     familyLabel: t(product.familyLabel),
-    description: t(product.description),
-    shortDescription: t(product.shortDescription),
+    description: edited?.description.en ?? t(product.description),
+    shortDescription: edited?.shortDescription.en ?? t(product.shortDescription),
     material: product.material ? t(product.material) : null,
     dimensions: product.dimensions ? t(product.dimensions) : null,
     capacity: product.capacity ? t(product.capacity) : null,
     features: product.features.map((feature) => ({ ...feature, label: t(feature.label) })),
-    variants: product.variants.map((variant) => ({ ...variant, label: t(variant.label), note: t(variant.note) })),
+    variants: product.variants.map((variant) => ({ ...variant, label: edited?.variants.find(item => item.id === variant.id)?.label.en ?? t(variant.label), note: edited?.variants.find(item => item.id === variant.id)?.note.en ?? t(variant.note) })),
     gallery: product.gallery.map((item) => ({ ...item, alt: t(item.alt), caption: t(item.caption) })),
     demonstrationVideo: product.demonstrationVideo ? { ...product.demonstrationVideo, title: t(product.demonstrationVideo.title) } : null,
     specifications: product.specifications.map((spec) => ({ ...spec, label: t(spec.label), value: spec.value ? t(spec.value) : null, note: spec.note ? t(spec.note) : undefined })),
@@ -25,8 +26,8 @@ export function localizeProduct(product: Product, t: Translate): Product {
   };
 }
 
-export function localizeProducts(t: Translate) {
-  return products.map((product) => localizeProduct(product, t));
+export function localizeProducts(t: Translate, language: "id" | "en" = "id") {
+  return products.map((product) => localizeProduct(product, t, language));
 }
 
 export function localizeSite(t: Translate) {

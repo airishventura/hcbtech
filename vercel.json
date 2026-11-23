@@ -454,6 +454,21 @@
       "dest": "/__pages/id/tentang.html"
     },
     {
+      "src": "^/kelola-katalog/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/kelola-katalog.html"
+    },
+    {
+      "src": "^/kelola-katalog/?$",
+      "dest": "/__pages/id/kelola-katalog.html"
+    },
+    {
       "src": "^/kontak/?$",
       "has": [
         {

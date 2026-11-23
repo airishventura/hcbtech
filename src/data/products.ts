@@ -1,4 +1,6 @@
 import priceSheet from "../../assets/pricelist.json";
+import savedContent from "../../assets/catalog-content.json";
+import { parseCatalogRevision, type CatalogEditProduct } from "../lib/catalog-editing";
 const referencePrice = (id: string) => priceSheet.variants.find(row => row.id === id)?.listedPriceIDR ?? null;
 
 export type DriveType = "listrik" | "engine" | "listrik-atau-engine";
@@ -43,6 +45,7 @@ export interface Hotspot {
 }
 
 export interface Product {
+  contentRevision?: CatalogEditProduct;
   id: string;
   slug: string;
   name: string;
@@ -77,7 +80,7 @@ export interface Product {
   modelReferenceNote?: string | null;
 }
 
-export const products: Product[] = [
+const referenceProducts: Product[] = [
   {
     "id": "HCB-PARUT",
     "slug": "parut-kelapa",
@@ -223,7 +226,7 @@ export const products: Product[] = [
     "faq": [
       {
         "question": "Apakah harga pada daftar sudah final?",
-        "answer": "Harga mengacu pada daftar pemilik yang diterima 21 November 2026. Harga, komponen yang termasuk, stok, dan pengiriman dikonfirmasi sebelum pemesanan."
+        "answer": "Harga mengikuti sumber yang ditautkan pada halaman produk. Harga akhir, komponen yang termasuk, ketersediaan, dan pengiriman dikonfirmasi sebelum pemesanan."
       },
       {
         "question": "Apakah foto dan 3D mewakili semua varian?",
@@ -384,7 +387,7 @@ export const products: Product[] = [
     "faq": [
       {
         "question": "Apakah harga pada daftar sudah final?",
-        "answer": "Harga mengacu pada daftar pemilik yang diterima 21 November 2026. Harga, komponen yang termasuk, stok, dan pengiriman dikonfirmasi sebelum pemesanan."
+        "answer": "Harga mengikuti sumber yang ditautkan pada halaman produk. Harga akhir, komponen yang termasuk, ketersediaan, dan pengiriman dikonfirmasi sebelum pemesanan."
       },
       {
         "question": "Apakah foto dan 3D mewakili semua varian?",
@@ -535,7 +538,7 @@ export const products: Product[] = [
     "faq": [
       {
         "question": "Apakah harga pada daftar sudah final?",
-        "answer": "Harga mengacu pada daftar pemilik yang diterima 21 November 2026. Harga, komponen yang termasuk, stok, dan pengiriman dikonfirmasi sebelum pemesanan."
+        "answer": "Harga mengikuti sumber yang ditautkan pada halaman produk. Harga akhir, komponen yang termasuk, ketersediaan, dan pengiriman dikonfirmasi sebelum pemesanan."
       },
       {
         "question": "Apakah foto dan 3D mewakili semua varian?",
@@ -554,6 +557,20 @@ export const products: Product[] = [
 ];
 
 export const categories = [{"id": "all", "label": "Semua mesin"}, {"id": "parut-kelapa", "label": "Mesin Parut Kelapa"}, {"id": "kupas-batok-kelapa", "label": "Mesin Kupas Batok Kelapa"}, {"id": "peras-santan", "label": "Mesin Peras Santan"}] as const;
+const revision = savedContent.products.length ? parseCatalogRevision(savedContent) : null;
+export const products: Product[] = referenceProducts.map(product => {
+  const edit = revision?.products.find(item => item.id === product.id);
+  if (!edit || !revision) return product;
+  return {
+    ...product, contentRevision: edit, name: edit.name.id, shortDescription: edit.shortDescription.id,
+    description: edit.description.id,
+    priceSource: { receivedDate: revision.review.date, url: "/docs/catalog-update.json" },
+    variants: product.variants.map(variant => {
+      const update = edit.variants.find(item => item.id === variant.id)!;
+      return { ...variant, label: update.label.id, note: update.note.id, priceIDR: update.priceIDR, priceKind: update.priceKind, availability: update.availability };
+    }),
+  };
+});
 export function getProduct(slug: string) { return products.find(product => product.slug === slug); }
 export function getProductPrice(product: Product, variantId?: string) { return product.variants.find(item => item.id === variantId)?.priceIDR ?? product.priceIDR; }
 export function getPriceRange(product: Product) { const values = product.variants.map(item => item.priceIDR).filter((value): value is number => value !== null); return values.length ? { min: Math.min(...values), max: Math.max(...values) } : null; }

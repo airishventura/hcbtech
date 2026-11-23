@@ -8,6 +8,7 @@ const pages = {
   About: lazy(() => import("./pages/About")), Catalog: lazy(() => import("./pages/Catalog")),
   Contact: lazy(() => import("./pages/Contact")), ProductDetail: lazy(() => import("./pages/ProductDetail")),
   Workshop: lazy(() => import("./pages/Workshop")), NotFound: lazy(() => import("./pages/NotFound")),
+  CatalogEditor: lazy(() => import("./pages/CatalogEditor")),
 };
 export async function preparePage(path: string) {
   if (path.startsWith("/mesin/")) await import("./pages/ProductDetail");
@@ -15,6 +16,7 @@ export async function preparePage(path: string) {
   else if (path === "/kontak") await import("./pages/Contact");
   else if (path === "/bengkel") await import("./pages/Workshop");
   else if (path === "/tentang") await import("./pages/About");
+  else if (path === "/kelola-katalog") await import("./pages/CatalogEditor");
   else if (path !== "/") await import("./pages/NotFound");
 }
 export default function App() {

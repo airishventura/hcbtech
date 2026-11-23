@@ -4,6 +4,8 @@ Updated 23 November 2026 (Jakarta). The sourced catalog, fourteen reference-pric
 
 ## Current direction
 
+The owner paused further 3D work on 23 November 2026 until measurements are available. Existing approximate viewers remain labeled and available; no new models or geometry changes are part of the current work. After the surface/readability pass, the owner selected catalog editing as the next priority. Phase 4A provides a browser draft workbench and validated, reviewed GitHub publishing workflow: [owner instructions](CATALOG-EDITING.md). It has no direct server writes or private inquiry queue. Catalog factual confirmation remains deferred until owner-supplied evidence is available.
+
 The owner asked to skip phase 1 on 23 November 2026. Catalog confirmation remains deferred. Phase 3 is implemented in the current release: [rendering and interface record](PHASE-3.md), with 58 localized route/variant documents, social cards, optional component loading and HTTP 404 routing. Physical-device and screen-reader acceptance remain outstanding.
 
 ## Phase 1 — Confirm the sellable catalog

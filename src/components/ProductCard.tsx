@@ -10,12 +10,12 @@ export default function ProductCard({ product, index, onCompare, compared = fals
   const image = product.gallery[0];
   const range = getPriceRange(product);
   return (
-    <article className="group flex h-full min-w-0 flex-col border-t hairline pt-5" data-product={product.slug}>
+    <article className="product-card group flex h-full min-w-0 flex-col" data-product={product.slug}>
       <div className="mb-4 flex items-center justify-between gap-3">
         <span className="mono text-steel-dark">{String(index + 1).padStart(2, "0")} / {product.id}</span>
         <span className="mono text-right text-steel-dark">{product.familyLabel}</span>
       </div>
-      <Link to={`/mesin/${product.slug}`} className="image-visual relative block aspect-[4/4.5] overflow-hidden" aria-label={t("Lihat detail {name}", { name: product.name })}>
+      <Link to={`/mesin/${product.slug}`} className="product-card-image image-visual relative block aspect-[4/3.8] overflow-hidden" aria-label={t("Lihat detail {name}", { name: product.name })}>
         <img src={image.src} alt={image.alt} loading="lazy" decoding="async" width={image.width ?? 768} height={image.height ?? 960} className={`h-full w-full ${image.kind === "original-photo" ? "object-contain" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.035]`} />
         <span className="media-label absolute left-3 top-3">{image.kind === "original-photo" ? t("Foto asli") : t("Visualisasi")}</span>
         <span className="absolute bottom-3 right-3 flex h-12 w-12 items-center justify-center bg-graphite text-ivory transition-colors group-hover:bg-industrial"><ArrowRight size={19} aria-hidden="true" /></span>
@@ -23,15 +23,15 @@ export default function ProductCard({ product, index, onCompare, compared = fals
       <div className="flex flex-1 flex-col pt-6">
         <div className="mb-4">
           <p className="mono mb-2 text-industrial">{product.nameStatus === "draft" ? t("Nama model sementara") : product.sku ?? product.id}</p>
-          <h3 className="title-lg"><Link to={`/mesin/${product.slug}`} className="hover:text-industrial">{product.name}</Link></h3>
+          <h3 className="product-card-title"><Link to={`/mesin/${product.slug}`} className="hover:text-industrial">{product.name}</Link></h3>
         </div>
-        <p className="mb-6 max-w-md text-[.94rem] leading-relaxed text-steel-dark">{product.shortDescription}</p>
+        <p className="product-card-description mb-5 max-w-md text-sm leading-relaxed text-steel-dark">{product.shortDescription}</p>
         <dl className="mb-6 grid grid-cols-2 gap-4 border-y hairline py-5">
           <div><dt className="mono mb-1 text-steel-dark">{t(range ? "Harga daftar mulai" : "Harga")}</dt><dd className="text-sm font-medium">{t(formatIDR(range?.min ?? product.priceIDR))}</dd></div>
           <div><dt className="mono mb-1 text-steel-dark">{t(product.priceSource ? "Pilihan tipe" : "Penggerak referensi")}</dt><dd className="text-sm font-medium">{product.priceSource ? t("{count} varian", { count: product.variants.length }) : t(displayDrive(product.driveType))}</dd></div>
         </dl>
-        <div className="mt-auto flex flex-wrap gap-2">
-          <InquiryLink product={product} className="btn btn-dark flex-1" label="Minta penawaran" />
+        <div className={`product-card-actions mt-auto ${onCompare ? "has-compare" : ""}`}>
+          <InquiryLink product={product} className="btn btn-dark" label="Minta penawaran" showIcon={false} />
           {onCompare && <button type="button" className={`icon-button ${compared ? "bg-graphite text-ivory" : ""}`} onClick={() => onCompare(product)} aria-pressed={compared} aria-label={compared ? t("Hapus {name} dari perbandingan", { name: product.name }) : t("Tambah {name} ke perbandingan", { name: product.name })}><GitCompareArrows size={18} /></button>}
         </div>
         <p className="mono mt-3 text-steel-dark">{range ? t("Harga daftar dikonfirmasi sebelum pesan") : t(displayAvailability(product.availability))}</p>

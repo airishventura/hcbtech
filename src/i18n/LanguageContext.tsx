@@ -76,5 +76,5 @@ export function useLanguage() {
 
 export function useContent() {
   const { language, t } = useLanguage();
-  return useMemo(() => ({ language, t, products: localizeProducts(t), ...localizeSite(t) }), [language, t]);
+  return useMemo(() => ({ language, t, products: localizeProducts(t, language), ...localizeSite(t) }), [language, t]);
 }

@@ -80,7 +80,7 @@ export const generalFaq = [
   },
   {
     question: "Apakah harga daftar sudah final?",
-    answer: "Harga bersumber dari daftar pemilik yang diterima 21 November 2026. Harga akhir, komponen yang termasuk, ketersediaan, dan pengiriman dikonfirmasi sebelum pemesanan.",
+    answer: "Harga mengikuti sumber yang ditautkan pada halaman produk. Harga akhir, komponen yang termasuk, ketersediaan, dan pengiriman dikonfirmasi sebelum pemesanan.",
   },
   {
     question: "Apakah visualisasi 3D merupakan gambar teknik?",

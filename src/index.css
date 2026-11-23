@@ -26,9 +26,10 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: #F2F0EB; }
 body { margin: 0; min-width: 320px; overflow-x: hidden; }
-button, input, textarea, select { font: inherit; }
+@layer base { button, input, textarea, select { font: inherit; } }
 button, a { -webkit-tap-highlight-color: transparent; }
-a { color: inherit; text-decoration: none; }
+/* Resets belong in the base layer so Tailwind link colors can win. */
+@layer base { a { color: inherit; text-decoration: none; } }
 img { display: block; max-width: 100%; }
 ::selection { background: #C92525; color: #F2F0EB; }
 :focus-visible { outline: 2px solid #C92525; outline-offset: 4px; }
@@ -56,6 +57,7 @@ img { display: block; max-width: 100%; }
 .hairline { border-color: rgba(23,23,23,.18); }
 .hairline-light { border-color: rgba(242,240,235,.2); }
 
+@layer components {
 .btn { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 14px; padding: 13px 18px; border: 1px solid transparent; font-family: "IBM Plex Mono", monospace; font-size: .7rem; line-height: 1.2; letter-spacing: .07em; text-transform: uppercase; cursor: pointer; transition: background-color .25s ease, color .25s ease, border-color .25s ease, transform .25s ease; }
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: translateY(0) scale(.985); transition-duration: .1s; }
@@ -73,20 +75,21 @@ img { display: block; max-width: 100%; }
 .icon-button { width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(23,23,23,.2); background: transparent; cursor: pointer; transition: background-color .2s ease, color .2s ease, opacity .2s ease; }
 .icon-button:disabled { opacity: .35; cursor: not-allowed; }
 
-.field { width: 100%; min-height: 50px; border: 0; border-bottom: 1px solid rgba(23,23,23,.35); border-radius: 0; padding: 12px 0; background: transparent; color: #171717; outline: none; }
+.field { width: 100%; min-width: 0; min-height: 50px; border: 0; border-bottom: 1px solid rgba(23,23,23,.35); border-radius: 0; padding: 12px 0; background: transparent; color: #171717; outline: none; }
 .field:focus { border-color: #C92525; box-shadow: 0 1px 0 #C92525; }
 .field::placeholder { color: #777d80; }
 select.field { cursor: pointer; }
 .label { display: block; margin-bottom: 8px; font-family: "IBM Plex Mono", monospace; font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; }
 
+}
+
 .image-visual { background: #e8e4dc; }
 .media-label { display: inline-flex; align-items: center; gap: 7px; padding: 7px 9px; background: rgba(242,240,235,.94); color: #171717; font-family: "IBM Plex Mono", monospace; font-size: .58rem; letter-spacing: .07em; text-transform: uppercase; }
 .media-label::before { content: ""; width: 6px; height: 6px; background: #C92525; border-radius: 50%; }
 .red-rule { width: 32px; height: 3px; background: #C92525; }
-.section-space { padding-block: 96px; }
-@media (min-width: 768px) { .section-space { padding-block: 120px; } }
-@media (min-width: 1024px) { .section-space { padding-block: 168px; } }
-@media (min-width: 1536px) { .section-space { padding-block: 192px; } }
+.section-space { padding-block: 64px; }
+@media (min-width: 768px) { .section-space { padding-block: 88px; } }
+@media (min-width: 1024px) { .section-space { padding-block: 112px; } }
 .safe-bottom { padding-bottom: calc(.75rem + env(safe-area-inset-bottom)); }
 
 .no-scrollbar { scrollbar-width: none; }
@@ -182,3 +185,56 @@ html:not([data-js]) .floating-header .header-inquiry { background: #171717; colo
 .footer-wordmark { width: min(100%, 1920px); margin-inline: auto; height: clamp(96px, 23vw, 390px); padding-inline: clamp(8px, 1.2vw, 24px); overflow: clip; color: #F2F0EB; }
 .footer-wordmark-art { width: 100%; height: 100%; }
 .footer-wordmark-still { display: block; width: 100%; height: 100%; }
+
+/* Brushed-metal surfaces echo the owner's stainless machinery and red identity. */
+.page-hero {
+  position: relative; overflow: clip; border-bottom: 1px solid rgb(23 23 23 / .12);
+  background: radial-gradient(ellipse at 100% 0%, rgb(201 37 37 / .1), transparent 48%), linear-gradient(125deg, #faf9f6 12%, #e7e9e8 68%, #d9dfe1);
+}
+.page-hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .26; background: repeating-linear-gradient(115deg, transparent 0 79px, rgb(255 255 255 / .6) 80px, transparent 81px 160px); }
+.page-hero-inner { position: relative; z-index: 1; padding-top: calc(var(--header-height) + 44px); padding-bottom: 44px; }
+.page-hero-eyebrow { margin-bottom: 24px; }
+.page-hero-title { max-width: 19ch; font-size: clamp(2.65rem, 5.7vw, 6.25rem); font-weight: 500; line-height: 1.02; letter-spacing: -.055em; }
+.page-hero-summary { display: grid; gap: 24px; margin-top: 28px; }
+.page-hero-summary > p { max-width: 63ch; font-size: clamp(.98rem, 1.25vw, 1.12rem); }
+.page-hero-aside { align-self: end; }
+.page-hero-aside .btn { text-align: left; }
+@media (min-width: 1024px) {
+  .page-hero-inner { padding-top: calc(var(--header-height) + 56px); padding-bottom: 56px; }
+  .page-hero-summary { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 64px; margin-top: 32px; }
+  .page-hero-aside { justify-self: end; max-width: 320px; }
+}
+.page-hero + .site-shell { padding-top: 40px; }
+.product-card { padding: 16px; border: 1px solid rgb(23 23 23 / .14); border-radius: 16px; background: linear-gradient(155deg, #fff 0%, #f6f5f1 56%, #e9eeef 100%); box-shadow: 0 2px 2px rgb(0 0 0 / .015), 0 10px 28px rgb(0 0 0 / .035); }
+.product-card-image { border-radius: 8px; background: linear-gradient(145deg, #e5e9e9, #f4f3ef); outline: 1px solid rgb(0 0 0 / .08); outline-offset: -1px; }
+.product-card-title { min-height: 2.2em; font-size: clamp(1.3rem, 1.7vw, 1.65rem); font-weight: 500; line-height: 1.1; letter-spacing: -.035em; }
+.product-card-description { min-height: 4.8em; }
+.product-card-actions { display: grid; gap: 8px; }
+.product-card-actions.has-compare { grid-template-columns: minmax(0, 1fr) 48px; }
+.product-card-actions .btn { min-width: 0; padding-inline: 10px; gap: 8px; }
+.product-card-actions .icon-button { border-radius: 8px; }
+.product-card-actions .icon-button[aria-pressed="true"] { background: #171717; color: #f2f0eb; border-color: #171717; }
+.btn svg { flex-shrink: 0; }
+.surface-panel { border: 1px solid rgb(23 23 23 / .14); border-radius: 16px; background: linear-gradient(145deg, #fff, #f4f3ee 68%, #e6ecee); padding: 24px; }
+.surface-dark { color: #f2f0eb; background: radial-gradient(ellipse at 100% 0, rgb(201 37 37 / .2), transparent 65%), linear-gradient(135deg, #303a40, #171b1e 75%); }
+.surface-red { color: #fff; background: radial-gradient(ellipse at 100% 0, rgb(255 255 255 / .1), transparent 70%), linear-gradient(135deg, #b12026, #81171d); }
+.social-card { border-radius: 16px; border: 1px solid rgb(255 255 255 / .12); }
+.social-card .mono, .social-card p { color: rgb(255 255 255 / .8); }
+.social-card h3, .social-card > svg { color: #fff; }
+.contact-channel { border-radius: 12px; }
+.contact-channel .mono, .contact-channel .text-xs { color: rgb(242 240 235 / .8); }
+.workshop-evidence { padding: 24px !important; border: 1px solid rgb(23 23 23 / .14); border-radius: 16px; background: linear-gradient(145deg, #fff, #edf0ef); }
+.workshop-evidence h3 { margin-top: 24px; }
+.service-card { background: linear-gradient(145deg, #faf9f6, #e3e8e8); }
+@media (min-width: 768px) { .surface-panel { padding: 32px; } }
+.editor-mode { display: inline-flex; border: 1px solid rgb(23 23 23 / .2); border-radius: 999px; padding: 10px 16px; font-size: .8rem; background: rgb(255 255 255 / .55); }
+.editor-toolbar { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 20px; }
+.editor-toolbar > div:first-child { width: min(100%, 420px); }
+.editor-field { display: block; width: 100%; min-width: 0; min-height: 46px; border: 1px solid rgb(23 23 23 / .25); border-radius: 8px; padding: 10px 12px; background: #fff; color: #171717; font-size: .875rem; line-height: 1.5; }
+textarea.editor-field { min-height: 96px; resize: vertical; }
+.editor-field:focus { outline: 2px solid #bb2020; outline-offset: 2px; }
+.editor-variant { min-width: 0; border: 1px solid rgb(23 23 23 / .17); border-radius: 12px; padding: 20px 16px; background: rgb(255 255 255 / .6); }
+.editor-variant .label { letter-spacing: .025em; font-size: .6rem; }
+.editor-variant details summary { min-height: 44px; }
+.editor-toolbar label:focus-within { outline: 2px solid #bb2020; outline-offset: 4px; }
+.product-detail-surface { background: radial-gradient(ellipse 70% 460px at 100% 0, rgb(169 184 190 / .24), transparent), linear-gradient(#f7f6f2, #f2f0eb 700px); }

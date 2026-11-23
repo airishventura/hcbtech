@@ -1,5 +1,8 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { isDeepStrictEqual } from 'node:util';
 import { render, paths, variantPages } from '../.prerender/entry-server.js';
+const revision = JSON.parse(await readFile('assets/catalog-content.json', 'utf8'));
+if (revision.products.length && !isDeepStrictEqual(revision, JSON.parse(await readFile('public/docs/catalog-update.json', 'utf8')))) throw new Error('Catalog content and its public source copy differ. Reapply the reviewed catalog revision.');
 const template = await readFile('dist/index.html','utf8');
 // Replace only managed SEO fields; keep Vite's hashed JS/CSS asset references.
 const shell = template.replace(/<title>[\s\S]*?<\/title>/g,'').replace(/<meta (?:name="(?:description|robots)"|property="og:[^"]+")[^>]*>/g,'').replace(/<script id="organization-jsonld"[\s\S]*?<\/script>/g,'').replace(/<noscript>[\s\S]*?<\/noscript>/g,'');
