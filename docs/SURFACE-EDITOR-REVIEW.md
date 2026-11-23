@@ -13,6 +13,7 @@ Mode: full. Scope: shared inner-page headers, catalog cards, social/contact acti
 | Severity | Location | Before | After | Why |
 | --- | --- | --- | --- | --- |
 | HIGH | `src/index.css`, shared anchors in `Layout.tsx`, `Contact.tsx`, `Workshop.tsx` | Unlayered link reset overrode Tailwind foreground utilities | Reset is in the base layer; dark and red social surfaces use explicit paired colors | WhatsApp/Facebook labels and hovered links must remain readable |
+| MEDIUM | `src/components/PageElements.tsx`, documentation CTA in `Workshop.tsx` | Standard red hover text on a dark section | Explicit light link variant with a light hover foreground | Hover feedback must preserve contrast |
 | MEDIUM | `src/index.css`, shared buttons and fields | Component rules overrode responsive display and field padding utilities | Shared primitives use the components layer, below utilities | Hides mobile-only controls on desktop and restores search/icon spacing |
 | MEDIUM | `src/components/PageElements.tsx` | Large clearance and description offset left a disconnected header | Compact gradient header, aligned title/description, contextual action at right | Whitespace should establish hierarchy and make the next action easy to find |
 | MEDIUM | `src/components/ProductCard.tsx` | Flat border-only cards, inconsistent text height and wrapping actions | Consistent metal surface, photo inset, title/description rhythm and action grid | Buyers can scan families and compare prices/actions along shared baselines |

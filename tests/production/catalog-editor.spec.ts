@@ -37,12 +37,17 @@ test("owner exports a reviewed revision, reimports it, and rejects malformed fil
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex,follow");
 });
 
-test("social CTA text retains a readable foreground on dark surfaces", async ({ page }) => {
+test("social CTA text retains a readable foreground on dark surfaces", async ({ page }, testInfo) => {
   await page.goto("/bengkel");
   const facebook = page.locator('a.social-card[href*="facebook.com"]');
   await facebook.scrollIntoViewIfNeeded();
   await expect(facebook).toHaveCSS("color", "rgb(242, 240, 235)");
   await expect(facebook.getByRole("heading")).toHaveCSS("color", "rgb(255, 255, 255)");
+  const documentation = page.getByRole("link", { name: "Siapkan permintaan dokumentasi" });
+  if (testInfo.project.name === "desktop") {
+    await documentation.hover();
+    await expect(documentation).toHaveCSS("color", "rgb(242, 240, 235)");
+  }
   await page.goto("/");
   const whatsapp = page.locator('a.fixed[href*="wa.me"]');
   if (await whatsapp.count()) await expect(whatsapp).toHaveCSS("color", "rgb(242, 240, 235)");

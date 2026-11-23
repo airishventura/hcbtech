@@ -23,8 +23,8 @@ export function BackToCatalog() {
   return <Link to="/mesin" className="mono inline-flex min-h-12 items-center gap-3 text-steel-dark hover:text-industrial"><ArrowLeft size={15} /> {t("Kembali ke katalog")}</Link>;
 }
 
-export function TextLink({ to, children, external = false }: { to: string; children: ReactNode; external?: boolean }) {
-  const className = "mono inline-flex min-h-12 items-center gap-3 border-b border-graphite/30 transition-colors hover:border-industrial hover:text-industrial";
+export function TextLink({ to, children, external = false, light = false }: { to: string; children: ReactNode; external?: boolean; light?: boolean }) {
+  const className = `mono inline-flex min-h-12 items-center gap-3 border-b transition-colors ${light ? "border-ivory/40 text-ivory/80 hover:border-ivory hover:text-ivory" : "border-graphite/30 hover:border-industrial hover:text-industrial"}`;
   if (external) return <a href={to} target="_blank" rel="noreferrer" className={className}>{children}<ArrowUpRight size={15} /></a>;
   return <Link to={to} className={className}>{children}<ArrowUpRight size={15} /></Link>;
 }

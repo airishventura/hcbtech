@@ -46,6 +46,6 @@ export default function Workshop() {
       ["02", "Detail material", "Tanyakan close-up housing, rangka, las, bearing, serta bagian yang menyentuh bahan."],
       ["03", "Demo dengan konteks", "Jika video demo penting, tentukan bahan, kondisi awal, hasil yang ingin dilihat, dan unit yang direkam."],
       ["04", "Ukuran & pemasangan", "Minta dimensi tertulis dan bahas ruang kerja, sumber daya, akses bongkar, serta posisi operator."],
-    ].map(([number, title, text]) => <li key={number} className="grid gap-3 border-b hairline-light py-6 md:grid-cols-12"><span className="mono text-industrial md:col-span-2">{number}</span><h3 className="font-medium md:col-span-4">{t(title)}</h3><p className="text-sm leading-relaxed text-ivory/55 md:col-span-6">{t(text)}</p></li>)}</ol><div className="mt-8"><TextLink to="/kontak" external={false}>{t("Siapkan permintaan dokumentasi")}</TextLink></div></Reveal></div></section>
+    ].map(([number, title, text]) => <li key={number} className="grid gap-3 border-b hairline-light py-6 md:grid-cols-12"><span className="mono text-industrial md:col-span-2">{number}</span><h3 className="font-medium md:col-span-4">{t(title)}</h3><p className="text-sm leading-relaxed text-ivory/55 md:col-span-6">{t(text)}</p></li>)}</ol><div className="mt-8"><TextLink to="/kontak" light>{t("Siapkan permintaan dokumentasi")}</TextLink></div></Reveal></div></section>
   </>;
 }

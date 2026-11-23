@@ -8,6 +8,7 @@
 - Manual visual checks cover catalog, workshop/social cards, contact and the English owner workbench at 320, 390 and 1308 px. No horizontal overflow or page runtime errors remain in the inspected states. The contact form's implicit grid track was corrected after the first visual pass found overflow; its final three-width rescan is clean.
 - Scoped axe WCAG A/AA scans of those twelve page/viewport states report zero violations. This is scoped automated coverage, not a complete accessibility certification.
 - CTA background/position transitions were inspected at 10% playback (250 ms source timing); the editor's keyboard focus indicator appears immediately as a solid 2 px outline. No new staged motion sequence was added.
+- A final dark-section link check added an explicit light variant to the documentation CTA so its hover state retains contrast. The production CTA cases were rerun for this final change.
 - Import integration tests check a real temporary project: check-only changes no files, valid apply writes both catalog/provenance files, and invalid input leaves the accepted data intact. A mocked reviewed revision also reaches buyer data, English copy, price source and inquiry text while preserving IDs, photos, dimensions and model scope.
 
 The initial browser chunk is approximately 466 KB (152 KB gzip), with the 11 KB owner editor loaded separately. English, Dotmark, photo lightbox and Three.js remain optional. No new package dependency, server-side data store, authentication service, tracking or direct publishing endpoint is introduced.
