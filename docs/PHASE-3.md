@@ -8,7 +8,7 @@ Vite builds the browser application and a build-only server renderer. React rend
 
 `vercel.json` serves exact English and variant-query documents, keeps canonical URLs at family level, and returns localized HTTP 404 responses for unknown paths. Old REF routes remain archived and noindex. Hashed assets retain immutable caching; stable media URLs revalidate. `scripts/preview.mjs` mirrors the production path/query behavior for local verification.
 
-Pages include visible product content, source-price variants, canonical/hreflang metadata, social previews and JSON-LD before JavaScript loads. Variant links, quotation links, FAQ disclosures, English navigation and mobile fallback navigation remain usable without JavaScript. Search/filter controls, 3D and form drafting require JavaScript. Browser-stored preferences apply after the interactive application starts; server HTML reflects the URL rather than private localStorage.
+Pages include visible product content, source-price variants, canonical/hreflang metadata, social previews and JSON-LD before JavaScript loads. Variant links, quotation links, FAQ disclosures, English navigation and mobile fallback navigation remain usable without JavaScript. Search/filter controls, 3D and form drafting require JavaScript. Prerendered buttons and form controls stay disabled until React mounts their handlers, preventing an early tap from being lost; native links and FAQ disclosures remain available immediately. Browser-stored preferences apply after the interactive application starts; server HTML reflects the URL rather than private localStorage.
 
 ## Performance
 

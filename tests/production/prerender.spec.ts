@@ -84,8 +84,14 @@ test("Framer family index supports keyboard selection and same-tab navigation", 
 test("English, 3D engine and lightbox stay out of the initial Indonesian network load", async ({ page }) => {
   const urls: string[] = [];
   page.on("request", request => urls.push(request.url()));
-  await page.goto("/");
+  let resume!: () => void;
+  const ready = new Promise<void>(resolve => { resume = resolve; });
+  await page.route(/\/assets\/index-.*\.js$/, async route => { await ready; await route.continue(); });
+  await page.goto("/", { waitUntil: "commit" });
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Switch to English" })).toBeDisabled();
+  resume();
+  await expect(page.getByRole("button", { name: "Switch to English" })).toBeEnabled();
   await page.waitForLoadState("networkidle");
   expect(urls.some(url => /english-|MachineViewer-|PhotoLightbox-/.test(url))).toBe(false);
   expect(urls.some(url => /fonts\.googleapis|fonts\.gstatic/.test(url))).toBe(false);

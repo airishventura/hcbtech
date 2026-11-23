@@ -7,7 +7,9 @@ const entries=[...paths,'/404'].map(path=>({path,variant:null})).concat(variantP
 for(const language of ['id','en']) for(const {path,variant} of entries) {
   const query=new URLSearchParams();if(language==='en')query.set('lang','en');if(variant)query.set('varian',variant);const url=path+(query.size?'?'+query:'');
   const result=await render(url);
-  const html=shell.replace('<html lang="id">',`<html lang="${language}">`).replace('</head>',result.head+'</head>').replace('<div id="root"></div>',`<div id="root" data-prerendered="true">${result.html}</div>`);
+  // Native links/disclosures work immediately; client-only controls enable at mount.
+  const content=result.html.replace(/<(button|input|select|textarea)\b([^>]*)>/g,(match,tag,attrs)=>/\bdisabled(?:=|\s|$)/.test(attrs)?match:`<${tag} disabled=""${attrs}>`);
+  const html=shell.replace('<html lang="id">',`<html lang="${language}">`).replace('</head>',result.head+'</head>').replace('<div id="root"></div>',`<div id="root" data-prerendered="true">${content}</div>`);
   const target=variant?`dist/__variants/${language}/${path.slice(1)}/${variant}.html`:`dist/__pages/${language}/${path==='/'?'home':path.slice(1)}.html`;
   await mkdir(target.slice(0,target.lastIndexOf('/')),{recursive:true});await writeFile(target,html);
   if(!variant&&path==='/404'&&language==='id')await writeFile('dist/404.html',html);
