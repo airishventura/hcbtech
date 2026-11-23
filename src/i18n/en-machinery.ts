@@ -100,5 +100,8 @@ export const enMachinery: Record<string, string> = {
   "Harga bersumber dari daftar pemilik yang diterima 21 November 2026. Harga akhir, komponen yang termasuk, ketersediaan, dan pengiriman dikonfirmasi sebelum pemesanan.": "Prices come from the owner’s list received on 21 November 2026. Confirm final pricing, included components, availability, and delivery before ordering.",
   "Tiga studi GLB bentuk luar sudah tersedia sebagai referensi. Ukuran belum diukur dan tidak ada model yang berstatus geometri terverifikasi.": "Three exterior-form GLB studies are available as references. Dimensions remain unmeasured and none has verified geometry.",
 "Referensi 3D: hopper, rol luar, rangka, dan penggerak dari foto 04. Bukan model khusus semua varian dan belum memiliki ukuran terukur.": "3D reference: hopper, exterior rollers, frame and drive from photo 04. It does not represent every variant and has no measured dimensions.",
-"Memuat halaman…": "Loading page…"
+"Memuat halaman…": "Loading page…",
+  "Ilustrasi mesin kupas batok dengan motor listrik, gearbox, piringan, dan saluran keluar pada rangka meja": "Illustration of a shell peeler with an electric motor, gearbox, disc and discharge chute on a table frame",
+  "Mesin parut kelapa, kupas batok, dan peras santan. Pilih konfigurasi yang sesuai, lalu bicarakan kebutuhan Anda dengan HCBTECH.": "Coconut graters, shell peelers and milk presses. Choose a configuration, then discuss your requirements with HCBTECH.",
+  "Ilustrasi bentuk dari foto pemilik. Konfigurasi unit dikonfirmasi saat penawaran.": "Shape illustration based on owner photos. Confirm the unit configuration when requesting a quotation.",
 };

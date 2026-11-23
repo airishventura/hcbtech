@@ -23,6 +23,10 @@ The supplied logo is displayed in the header and footer. Ten full-frame WebP pho
 
 The current catalog publishes three machine families and all 14 variants from the owner’s sheet. Prices retain their PRICE IDs and are labeled references requiring reconfirmation. Missing drive details, stock, exact photo-to-variant matches and measurements remain unconfirmed. See the [release record](docs/RELEASE-2026-11-22.md) and [development and 3D roadmap](docs/DEVELOPMENT-PLAN.md).
 
+## Latest visual update
+
+The original hero headline and immersive machinery composition are restored with improved illustrative artwork. Header/footer use the transparent logo; a full-resolution PNG is downloadable from `/brand/hcbtech-transparent.png`. [Artwork sources and prompts](docs/HERO-ARTWORK.md) and [next phases](docs/NEXT-PHASES.md) document the update and remaining work.
+
 ## Content and media
 
 - `src/data/products.ts`: current family catalog, sourced variants, galleries and verification fields. Legacy entries live separately in `src/data/legacy-products.ts`.

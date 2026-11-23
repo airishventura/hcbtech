@@ -1,5 +1,3 @@
 # Brand assets
 
-`hcbtech.webp` is an optimized, full-frame derivative of the owner's supplied logo. The unmodified original is preserved at `assets/reference/brand/logo_hcbtech.jpeg` in the repository.
-
-The price sheet uses a different blue/yellow identity. Confirm the final brand system before a broader visual refactor.
+`hcbtech-transparent.webp` is the website logo, with an actual alpha channel. `hcbtech-transparent.png` is the downloadable high-resolution cutout. Both preserve the supplied HCBTECH wordmark, gear, welder and tagline. The background was removed with the built-in image tool. The original JPEG remains unchanged under `assets/reference/brand/`; the old opaque WebP is retained for provenance.

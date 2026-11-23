@@ -100,3 +100,30 @@ label:has(> input.sr-only:focus-visible) { outline: 2px solid #C92525; outline-o
 
 html { scroll-padding-top: calc(var(--header-height) + 16px); scroll-padding-bottom: 100px; }
 .viewer-touch button { scroll-margin-top: calc(var(--header-height) + 20px); scroll-margin-bottom: 110px; }
+
+/* Restored immersive machinery hero, with a separate mobile art area. */
+.home-hero { position: relative; background: #101112; color: #f2f0eb; }
+.home-hero-stage { position: relative; overflow: hidden; padding-top: var(--header-height); }
+.home-hero-art { position: relative; margin: 0; order: 2; height: clamp(320px, 85vw, 560px); overflow: hidden; }
+.home-hero-art img { height: 100%; width: 100%; object-fit: cover; object-position: 85% center; }
+.home-hero-content { position: relative; display: contents; }
+.home-hero-stage { display: flex; flex-direction: column; }
+.home-hero-copy { position: relative; z-index: 1; padding: 40px var(--gutter) 8px; }
+.home-hero-title { max-width: 12ch; margin: 0; font-size: clamp(3.2rem, 12.5vw, 5.8rem); font-weight: 500; line-height: .97; letter-spacing: -.06em; }
+.home-hero-title span { display: block; }
+.home-hero-description { max-width: 31rem; margin-top: 24px; color: rgb(242 240 235 / .72); line-height: 1.7; }
+.home-hero-caption { order: 3; position: relative; z-index: 1; display: flex; align-items: end; justify-content: space-between; gap: 24px; margin: 0 var(--gutter); border-top: 1px solid rgb(242 240 235 / .22); padding-block: 20px 28px; }
+.home-hero-shade { display: none; }
+@media (min-width: 1024px) {
+  .home-hero { height: 125svh; }
+  .home-hero-stage { position: sticky; top: 0; display: block; height: 100svh; min-height: 740px; }
+  .home-hero-art { position: absolute; inset: var(--header-height) 0 0; height: auto; }
+  .home-hero-art img { object-position: center; }
+  .home-hero-shade { display: block; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(10 11 12 / .75) 0%, rgb(10 11 12 / .36) 35%, transparent 65%), linear-gradient(0deg, rgb(10 11 12 / .88), transparent 20%); }
+  .home-hero-content { display: flex; height: 100%; flex-direction: column; justify-content: space-between; padding-top: clamp(32px, 5vh, 80px); }
+  .home-hero-copy { width: 48%; padding: 0; }
+  .home-hero-title { max-width: 10ch; font-size: clamp(4.1rem, 6.6vw, 7.4rem); }
+  .home-hero-caption { margin: 28px 0 0; padding-block: 20px 28px; }
+  .home-hero-static { height: auto; }
+  .home-hero-static .home-hero-stage { position: relative; }
+}
