@@ -119,7 +119,7 @@ html { scroll-padding-top: calc(var(--header-height) + 16px); scroll-padding-bot
 @media (min-width: 1024px) {
   .home-hero { height: 125svh; }
   .home-hero-stage { position: sticky; top: 0; display: block; height: 100svh; min-height: 740px; }
-  .home-hero-art { position: absolute; inset: var(--header-height) 0 0; height: auto; }
+  .home-hero-art { position: absolute; inset: 0; height: auto; }
   .home-hero-art img { object-position: center; }
   .home-hero-shade { display: block; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(10 11 12 / .75) 0%, rgb(10 11 12 / .36) 35%, transparent 65%), linear-gradient(0deg, rgb(10 11 12 / .88), transparent 20%); }
   .home-hero-content { display: flex; height: 100%; flex-direction: column; justify-content: space-between; padding-top: clamp(32px, 5vh, 80px); }
@@ -146,3 +146,39 @@ p, figcaption { text-wrap: pretty; }
 /* Text accent variants retain contrast on light steel and dark workshop surfaces. */
 .text-industrial { color: #BB2020; }
 footer .text-industrial, .bg-graphite .text-industrial { color: #F17870; }
+
+/* Floating Pill Navigation: transparent over the hero, glass revealed on scroll. */
+.floating-header { color: #171717; }
+.floating-header > .site-shell { position: relative; isolation: isolate; }
+.floating-header > .site-shell::before {
+  content: ""; position: absolute; z-index: -1; inset: 8px max(12px, calc(var(--gutter) - 18px));
+  border: 1px solid rgb(23 23 23 / .12); border-radius: 999px;
+  background: rgb(242 240 235 / .93); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgb(0 0 0 / .08); opacity: 0; transform: translateY(-8px);
+  transition: opacity 220ms cubic-bezier(.23,1,.32,1), transform 220ms cubic-bezier(.23,1,.32,1);
+}
+.floating-header[data-scrolled="true"] > .site-shell::before { opacity: 1; transform: translateY(0); }
+.floating-header[data-light="true"] { color: #F2F0EB; }
+html:not([data-js]) .floating-header { color: #171717; }
+html:not([data-js]) .floating-header > .site-shell::before { opacity: 1; transform: none; }
+html:not([data-js]) .floating-header .header-inquiry { background: #171717; color: #F2F0EB; border-color: transparent; }
+.floating-header img { width: 112px; }
+.floating-pill { align-items: center; gap: 2px; padding: 5px; border-radius: 999px; }
+.floating-pill-link { position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 12px 16px; border-radius: 999px; font-size: .82rem; transition: color 180ms ease, background-color 180ms ease; }
+.floating-pill-number { font-size: .54rem; letter-spacing: .04em; }
+.floating-pill-active { position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: #171717; }
+.floating-pill-link[aria-current="page"] { color: #F2F0EB; }
+.header-actions > button, .header-inquiry, .header-menu { border-radius: 999px; }
+.floating-header[data-light="true"] .header-menu { border-color: rgb(242 240 235 / .45); }
+.floating-header .header-inquiry { min-height: 44px; padding-inline: 18px; }
+@media (min-width: 1024px) { .floating-header img { width: 132px; } }
+@media (hover: hover) and (pointer: fine) {
+  .floating-pill-link:not([aria-current="page"]):hover { background: rgb(23 23 23 / .08); }
+  .floating-header[data-light="true"] .floating-pill-link:hover { background: rgb(242 240 235 / .12); }
+  .header-menu:hover { background: #171717; color: #F2F0EB; }
+  .floating-header[data-light="true"] .header-menu:hover { background: #F2F0EB; color: #171717; }
+}
+/* Full-width signature, reserved size before the optional Dotmark engine loads. */
+.footer-wordmark { width: min(100%, 1920px); margin-inline: auto; height: clamp(96px, 23vw, 390px); padding-inline: clamp(8px, 1.2vw, 24px); overflow: clip; color: #F2F0EB; }
+.footer-wordmark-art { width: 100%; height: 100%; }
+.footer-wordmark-still { display: block; width: 100%; height: 100%; }

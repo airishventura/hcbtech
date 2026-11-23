@@ -1,5 +1,17 @@
 # Interface review — phase 3
 
+## Floating navigation and footer follow-up
+
+| Location | Before | After | Why |
+| --- | --- | --- | --- |
+| Shared header | Opaque edge-to-edge rectangular bar | Transparent top state, inset glass capsule revealed on scroll, active spring pill | Implements the supplied Floating Pill Navigation while keeping links available immediately |
+| Navigation interaction | Framer source uses clickable divs | Localized anchors, native modified clicks, route-driven `aria-current`, reduced-motion support | Preserves browser and keyboard behavior |
+| Footer | Ends after the copyright row | Huge responsive HCBTECH Dotmark signature | Implements the owner's supplied footer component |
+| Wordmark loading | Published renderer starts on mount | SVG in server HTML, reserved size, optional renderer near footer, static reduced-motion mode | Keeps the initial page lean and preserves a no-JavaScript signature |
+| Footer contact | Fixed WhatsApp shortcut overlays bottom right | Shortcut yields while footer is visible | Keeps the large wordmark and footer controls unobstructed |
+
+Manual browser inspection covers 320, 390, 768, 1024, 1308 and 1920 px widths with no horizontal overflow or runtime errors. Desktop and mobile scoped axe scans found no WCAG A/AA violations in the inspected footer/navigation states. Physical devices and manual screen-reader operation remain unverified. Component provenance and integration details are in [Framer components](FRAMER-COMPONENTS.md). Final regression results are recorded in [navigation validation](NAVIGATION-FOOTER-VALIDATION.md).
+
 Mode: full review of the changed home family selector, product media, navigation, FAQ and shared controls. React 19 / Vite 7 with the established Tailwind and plain CSS system. This is a scoped interface review, not a claim of complete accessibility certification.
 
 | Category | Evidence inspected | Result |

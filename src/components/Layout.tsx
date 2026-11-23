@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } from "framer-motion";
 import { ArrowUpRight, Menu, MessageCircle, Play, X } from "lucide-react";
 
 function FacebookMark({ size = 16, className = "" }: { size?: number; className?: string }) {
@@ -10,6 +10,8 @@ import { Link, NavLink } from "./LocalizedLink";
 import { buildWhatsAppUrl, FACEBOOK_URL, formatWhatsAppNumber, TIKTOK_URL, getWhatsAppNumber } from "../lib/inquiry";
 import InquiryLink from "./InquiryLink";
 import Logo from "./Logo";
+import FloatingPillNavigation from "./FloatingPillNavigation";
+import FooterWordmark from "./FooterWordmark";
 import LanguageToggle from "./LanguageToggle";
 import { useLanguage } from "../i18n/LanguageContext";
 
@@ -23,10 +25,22 @@ const nav = [
 export default function Layout() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLElement>(null);
+  const [footerVisible, setFooterVisible] = useState(false);
   const { t, language } = useLanguage();
   const location = useLocation();
-  const { scrollYProgress } = useScroll();
+  const { scrollY, scrollYProgress } = useScroll();
+  const [scrolled, setScrolled] = useState(false);
+  useMotionValueEvent(scrollY, "change", value => setScrolled(value > 48));
+  const lightHeader = location.pathname === "/" && !scrolled;
   const progress = useSpring(scrollYProgress, { stiffness: 160, damping: 28, mass: 0.25 });
+
+  useEffect(() => {
+    if (!footerRef.current || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(([entry]) => setFooterVisible(entry.isIntersecting));
+    observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -58,23 +72,16 @@ export default function Layout() {
   return (
     <>
       <a href="#konten" className="sr-only-focusable fixed left-4 top-4 z-[100] bg-ivory px-4 py-3 text-graphite">{t("Lewati ke konten utama")}</a>
-      <header className="fixed inset-x-0 top-0 z-50 h-[var(--header-height)] border-b hairline bg-ivory/95 backdrop-blur-md">
+      <header data-scrolled={scrolled} data-light={lightHeader} className="floating-header fixed inset-x-0 top-0 z-50 h-[var(--header-height)]">
         <motion.div className="absolute inset-x-0 top-0 h-[3px] origin-left bg-industrial" style={{ scaleX: progress }} />
-        <div className="site-shell flex h-full items-center justify-between gap-6">
+        <div className="site-shell flex h-full items-center justify-between gap-4">
           <Logo />
-          <nav aria-label={t("Navigasi utama")} className="hidden h-full items-center lg:flex">
-            {nav.map((item) => (
-              <NavLink key={item.to} to={item.to} className={({ isActive }) => `relative flex h-full items-center gap-2 px-5 text-[.82rem] transition-colors hover:text-industrial ${isActive ? "text-industrial" : "text-graphite"}`}>
-                <span className="mono text-[.54rem] text-steel-dark">{item.number}</span>{t(item.label)}
-              </NavLink>
-            ))}
-          </nav>
-          <div className="hidden items-center gap-4 lg:flex">
-            <span className="mono hidden text-steel-dark xl:inline">Machining / Fabrication</span>
-            <LanguageToggle compact />
-            <InquiryLink className="btn btn-dark" label="Minta penawaran" showIcon={false} />
+          <FloatingPillNavigation items={nav} />
+          <div className="header-actions hidden items-center gap-3 lg:flex">
+            <LanguageToggle compact light={lightHeader} />
+            <InquiryLink className={`btn header-inquiry ${lightHeader ? "btn-outline-light" : "btn-dark"}`} label="Minta penawaran" showIcon={false} />
           </div>
-          <div className="flex items-center gap-2 lg:hidden"><LanguageToggle compact /><button type="button" className="icon-button" onClick={() => setOpen(true)} aria-expanded={open} aria-controls="mobile-menu" aria-label={t("Buka menu navigasi")}><Menu size={21} /></button></div>
+          <div className="header-actions flex items-center gap-2 lg:hidden"><LanguageToggle compact light={lightHeader} /><button type="button" className="icon-button header-menu" onClick={() => setOpen(true)} aria-expanded={open} aria-controls="mobile-menu" aria-label={t("Buka menu navigasi")}><Menu size={21} /></button></div>
         </div>
       </header>
       <noscript><style>{`@media(max-width:1023px){html:not([data-js]) #konten{padding-top:56px}html:not([data-js]) header button{display:none!important}}`}</style><nav aria-label={t("Navigasi tanpa JavaScript")} className="fixed inset-x-0 top-[var(--header-height)] z-40 flex min-h-14 flex-wrap items-center justify-center gap-1 border-b hairline bg-ivory px-2 lg:hidden">{nav.map(item => <Link key={item.to} to={item.to} className="inline-flex min-h-11 items-center px-2 text-sm">{t(item.label)}</Link>)}<Link to={`${location.pathname}?${new URLSearchParams({ ...Object.fromEntries(new URLSearchParams(location.search)), lang: language === "en" ? "id" : "en" })}`} className="inline-flex min-h-11 items-center px-2 text-sm">{language === "en" ? "ID" : "EN"}</Link></nav></noscript>
@@ -102,15 +109,15 @@ export default function Layout() {
         )}
       </AnimatePresence>
       <main id="konten"><Suspense fallback={<div className="site-shell min-h-[60vh] pt-[calc(var(--header-height)+60px)]" role="status">{t("Memuat halaman…")}</div>}><Outlet /></Suspense></main>
-      {["/", "/bengkel", "/tentang"].includes(location.pathname) && getWhatsAppNumber() && <motion.a
+      {!footerVisible && ["/", "/bengkel", "/tentang"].includes(location.pathname) && getWhatsAppNumber() && <motion.a
         href={buildWhatsAppUrl({ message: t("Halo HCBTECH, saya ingin berkonsultasi tentang kebutuhan mesin atau fabrikasi."), language }) ?? "/kontak"}
         target="_blank" rel="noreferrer"
         aria-label={t("Chat WhatsApp HCBTECH di {number}", { number: formatWhatsAppNumber() })}
         className="fixed bottom-6 right-6 z-40 hidden min-h-14 items-center gap-3 border border-ivory/20 bg-graphite px-5 py-3 text-ivory shadow-2xl transition-colors hover:bg-industrial md:flex"
         initial={false} animate={{ opacity: 1, y: 0 }} transition={{ delay: .7 }}
       ><MessageCircle size={19} aria-hidden="true" /><span><span className="mono block text-ivory/55">{t("WhatsApp HCBTECH")}</span><span className="mt-0.5 block text-sm font-medium">{formatWhatsAppNumber()}</span></span><ArrowUpRight size={16} aria-hidden="true" /></motion.a>}
-      <footer className="bg-graphite text-ivory">
-        <div className="site-shell py-24 md:py-32">
+      <footer ref={footerRef} className="bg-graphite text-ivory">
+        <div className="site-shell pt-24 pb-10 md:pt-32 md:pb-14">
           <div className="grid gap-12 border-b hairline-light pb-16 lg:grid-cols-12">
             <div className="lg:col-span-8">
               <p className="mono mb-6 text-ivory/50"><span className="text-industrial">05</span> / {t("Mulai dari kebutuhan")}</p>
@@ -125,6 +132,7 @@ export default function Layout() {
           </div>
           <div className="mt-14 flex flex-col gap-3 border-t hairline-light pt-5 md:flex-row md:items-center md:justify-between"><p className="mono text-ivory/60">© {new Date().getFullYear()} HCBTECH / Indonesia</p><p className="mono text-ivory/60">{getWhatsAppNumber() ? t("WhatsApp bisnis terhubung") : t("WhatsApp belum dikonfigurasi — formulir & Facebook aktif")}</p></div>
         </div>
+        <FooterWordmark />
       </footer>
     </>
   );
