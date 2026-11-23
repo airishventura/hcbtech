@@ -1,6 +1,7 @@
 import { Check, ChevronRight, FileQuestion, Info } from "lucide-react";
 import { useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
+import { Link } from "../components/LocalizedLink";
 import Faq from "../components/Faq";
 import InquiryLink from "../components/InquiryLink";
 import { BackToCatalog } from "../components/PageElements";
@@ -16,7 +17,7 @@ import { localizeProduct } from "../i18n/localize";
 import NotFound from "./NotFound";
 
 function ProductDetailContent({ product }: { product: Product }) {
-  const { products, t } = useContent();
+  const { products, t, language } = useContent();
   const [params, setParams] = useSearchParams();
   const [message, setMessage] = useState("");
   const variant = product.variants.find(item => item.id === params.get("varian")) ?? product.variants.find(item => item.id === product.defaultVariantId) ?? product.variants.find(item => item.drive === (product.driveType === "engine" ? "engine" : "listrik")) ?? product.variants[0];
@@ -42,7 +43,8 @@ function ProductDetailContent({ product }: { product: Product }) {
 
               <div className="mt-9 border-y hairline py-6"><p className="mono mb-2 text-steel-dark">{t(product.priceSource ? "Harga daftar varian" : "Harga konfigurasi")}</p><p data-testid="variant-price" className="text-[clamp(1.8rem,3vw,2.8rem)] font-medium tracking-[-.04em]">{t(price)}</p><p className="mt-2 text-sm text-steel-dark">{product.priceSource ? <>{product.referenceNote} <a href={product.priceSource.url} target="_blank" rel="noreferrer" className="underline">{t("Lihat daftar sumber")}</a></> : priceValue !== null ? t("Harga berdasarkan data terverifikasi pada repositori produk.") : t("Belum ada harga terverifikasi. Tidak ada harga mulai atau estimasi yang dibuat-buat.")}</p></div>
 
-              <fieldset className="mt-8"><legend className="label mb-4">{t("01 / Pilih konfigurasi yang diminati")}</legend><div className="grid grid-cols-1 gap-2 sm:grid-cols-2">{product.variants.map((item) => { const selected = item.id === variant?.id; return <label key={item.id} className={`relative flex min-h-[74px] cursor-pointer items-center gap-3 border p-4 transition-colors ${selected ? "border-graphite bg-graphite text-ivory" : "hairline border hover:border-graphite"}`}><input type="radio" name={`variant-${product.id}`} value={item.id} checked={selected} onChange={() => setVariantId(item.id)} onClick={() => { if (selected) setVariantId(item.id); }} className="sr-only" /><span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${selected ? "border-ivory bg-industrial" : "border-graphite/35"}`}>{selected && <Check size={12} />}</span><span><span className="block text-sm font-medium">{item.label}</span><span className={`mono mt-1 block ${selected ? "text-ivory/50" : "text-steel-dark"}`}>{item.priceKind === "reference" ? formatIDR(item.priceIDR) : t("Konfirmasi opsi")}</span></span></label>; })}</div><p className="mt-3 text-xs leading-relaxed text-steel-dark">{variant?.note}</p></fieldset>
+              <noscript><style>{`html:not([data-js]) .variant-picker { display: none; }`}</style><div className="mt-8 grid gap-2">{product.variants.map(item => <Link key={item.id} to={`?${new URLSearchParams({ ...(language === "en" ? { lang: "en" } : {}), varian: item.id })}`} className="min-h-11 border hairline px-4 py-3 text-sm">{item.label} — {formatIDR(item.priceIDR)}</Link>)}</div></noscript>
+              <fieldset className="variant-picker mt-8"><legend className="label mb-4">{t("01 / Pilih konfigurasi yang diminati")}</legend><div className="grid grid-cols-1 gap-2 sm:grid-cols-2">{product.variants.map((item) => { const selected = item.id === variant?.id; return <label key={item.id} className={`relative flex min-h-[74px] cursor-pointer items-center gap-3 border p-4 transition-colors ${selected ? "border-graphite bg-graphite text-ivory" : "hairline border hover:border-graphite"}`}><input type="radio" name={`variant-${product.id}`} value={item.id} checked={selected} onChange={() => setVariantId(item.id)} onClick={() => { if (selected) setVariantId(item.id); }} className="sr-only" /><span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${selected ? "border-ivory bg-industrial" : "border-graphite/35"}`}>{selected && <Check size={12} />}</span><span><span className="block text-sm font-medium">{item.label}</span><span className={`mono mt-1 block ${selected ? "text-ivory/50" : "text-steel-dark"}`}>{item.priceKind === "reference" ? formatIDR(item.priceIDR) : t("Konfirmasi opsi")}</span></span></label>; })}</div><p className="mt-3 text-xs leading-relaxed text-steel-dark">{variant?.note}</p></fieldset>
 
               <div className="mt-7"><label htmlFor="product-message" className="label">{t("02 / Tambahkan kebutuhan (opsional)")}</label><textarea id="product-message" className="field min-h-[96px] resize-y" value={message} onChange={(event) => setMessage(event.target.value)} placeholder={t("Contoh: bahan yang diproses, hasil yang diinginkan, kota pemasangan…")} maxLength={1000} /><p className="mono mt-2 text-right text-steel-dark">{message.length}/1000</p></div>
               <InquiryLink product={product} variant={variant} message={message} className="btn btn-red mt-4 w-full" label="Minta penawaran konfigurasi ini" />

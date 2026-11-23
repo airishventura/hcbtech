@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Check, Clipboard, Download, MessageSquareText, Play, RotateCcw, Send } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import { Link } from "../components/LocalizedLink";
 import Faq from "../components/Faq";
 import { PageHero } from "../components/PageElements";
 import { Reveal, SectionIntro } from "../components/Reveal";

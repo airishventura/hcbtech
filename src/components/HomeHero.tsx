@@ -1,7 +1,7 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "./LocalizedLink";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export default function HomeHero() {
@@ -13,12 +13,12 @@ export default function HomeHero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 65]);
   return <section ref={ref} className={`home-hero ${reduced ? "home-hero-static" : ""}`} aria-labelledby="hero-title">
     <div className="home-hero-stage">
-      <motion.figure className="home-hero-art" style={reduced ? undefined : { scale, y }} initial={reduced ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .8 }}>
+      <motion.figure className="home-hero-art" style={reduced ? undefined : { scale, y }} initial={false} animate={{ opacity: 1 }} transition={{ duration: .8 }}>
         <img src="/images/hero-shell-peeler.webp" alt={t("Ilustrasi mesin kupas batok dengan motor listrik, gearbox, piringan, dan saluran keluar pada rangka meja")} width="1536" height="1024" fetchPriority="high" />
       </motion.figure>
       <div className="home-hero-shade" aria-hidden="true" />
       <div className="site-shell home-hero-content">
-        <motion.div className="home-hero-copy" initial={reduced ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .12 }}>
+        <motion.div className="home-hero-copy" initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .12 }}>
           <p className="mb-6 flex items-center gap-3 text-sm text-ivory/70"><span className="h-px w-8 bg-industrial" aria-hidden="true" />{t("Katalog mesin & fabrikasi / Indonesia")}</p>
           <h1 id="hero-title" className="home-hero-title"><span>{t("Mesin yang dibuat")}</span> <span>{t("untuk kerja nyata")}</span></h1>
           <p className="home-hero-description">{t("Mesin parut kelapa, kupas batok, dan peras santan. Pilih konfigurasi yang sesuai, lalu bicarakan kebutuhan Anda dengan HCBTECH.")}</p>

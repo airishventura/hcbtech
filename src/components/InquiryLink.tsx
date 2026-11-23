@@ -1,5 +1,5 @@
 import { ArrowUpRight, MessageSquareText } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "./LocalizedLink";
 import type { Product, ProductVariant } from "../data/products";
 import { buildContactFallback, buildWhatsAppUrl, getWhatsAppNumber } from "../lib/inquiry";
 import { useLanguage } from "../i18n/LanguageContext";

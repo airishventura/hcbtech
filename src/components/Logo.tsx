@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "./LocalizedLink";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Logo(_props: { light?: boolean }) {

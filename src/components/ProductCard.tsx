@@ -1,5 +1,5 @@
 import { ArrowRight, GitCompareArrows } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "./LocalizedLink";
 import { getPriceRange, type Product } from "../data/products";
 import InquiryLink from "./InquiryLink";
 import { displayAvailability, displayDrive, formatIDR } from "../lib/inquiry";
@@ -16,7 +16,7 @@ export default function ProductCard({ product, index, onCompare, compared = fals
         <span className="mono text-right text-steel-dark">{product.familyLabel}</span>
       </div>
       <Link to={`/mesin/${product.slug}`} className="image-visual relative block aspect-[4/4.5] overflow-hidden" aria-label={t("Lihat detail {name}", { name: product.name })}>
-        <img src={image.src} alt={image.alt} loading={index < 2 ? "eager" : "lazy"} decoding="async" width={image.width ?? 768} height={image.height ?? 960} className={`h-full w-full ${image.kind === "original-photo" ? "object-contain" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.035]`} />
+        <img src={image.src} alt={image.alt} loading="lazy" decoding="async" width={image.width ?? 768} height={image.height ?? 960} className={`h-full w-full ${image.kind === "original-photo" ? "object-contain" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.035]`} />
         <span className="media-label absolute left-3 top-3">{image.kind === "original-photo" ? t("Foto asli") : t("Visualisasi")}</span>
         <span className="absolute bottom-3 right-3 flex h-12 w-12 items-center justify-center bg-graphite text-ivory transition-colors group-hover:bg-industrial"><ArrowRight size={19} aria-hidden="true" /></span>
       </Link>

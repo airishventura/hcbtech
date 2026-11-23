@@ -44,7 +44,7 @@ test("metadata canonical, OG, dan structured data produk tersedia tanpa WebGL", 
   await page.goto("/mesin/drum-tertutup-stainless-listrik");
   await expect(page).toHaveTitle(/Unit Drum Tertutup \/ Listrik — HCBTECH/);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/mesin\/drum-tertutup-stainless-listrik$/);
-  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /products\/photo-47/);
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /social\/home-id\.png/);
   const schema = JSON.parse(await page.locator("#page-jsonld").textContent() ?? "{}");
   expect(schema["@type"]).toBe("Product");
   expect(schema.offers).toBeUndefined();

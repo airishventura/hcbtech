@@ -1,5 +1,5 @@
 import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "../components/LocalizedLink";
 import Seo from "../components/Seo";
 import { useLanguage } from "../i18n/LanguageContext";
 

@@ -1,12 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useSearchParams } from "react-router-dom";
-import { enMachinery } from "./en-machinery";
-import { enData } from "./en-data";
-import { enUi } from "./en-ui";
-import { enCatalog } from "./en-catalog";
-import { enProduct } from "./en-product";
-import { enContact } from "./en-contact";
-import { enInfo } from "./en-info";
+import { englishText, englishReady, loadEnglish } from "./load-English";
 import { localizeProducts, localizeSite } from "./localize";
 import { readStored, writeStored } from "../lib/storage";
 
@@ -19,15 +13,13 @@ interface LanguageContextValue {
   t: (text: string, variables?: Variables) => string;
 }
 
-const translations: Record<string, string> = { ...enData, ...enUi, ...enCatalog, ...enProduct, ...enContact, ...enInfo, ...enMachinery };
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 function isLanguage(value: unknown): value is Language {
   return value === "id" || value === "en";
 }
 
-function initialLanguage(): Language {
-  const query = new URLSearchParams(window.location.search).get("lang");
+function initialLanguage(query: string | null): Language {
   if (isLanguage(query)) return query;
   const stored = readStored<unknown>("hcbtech-language", "id");
   return isLanguage(stored) ? stored : "id";
@@ -35,10 +27,11 @@ function initialLanguage(): Language {
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [language, setLanguageState] = useState<Language>(initialLanguage);
+  const [language, setLanguageState] = useState<Language>(() => initialLanguage(searchParams.get("lang")));
   const pendingLanguage = useRef<Language | null>(null);
 
-  const setLanguage = useCallback((next: Language) => {
+  const setLanguage = useCallback(async (next: Language) => {
+    if (next === "en") await loadEnglish();
     pendingLanguage.current = next;
     setLanguageState(next);
     writeStored("hcbtech-language", next);
@@ -66,11 +59,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const toggleLanguage = useCallback(() => setLanguage(language === "id" ? "en" : "id"), [language, setLanguage]);
   const t = useCallback((text: string, variables?: Variables) => {
-    let translated = language === "en" ? translations[text] ?? text : text;
+    let translated = language === "en" ? englishText(text) : text;
     if (variables) for (const [key, value] of Object.entries(variables)) translated = translated.split(`{${key}}`).join(String(value));
     return translated;
   }, [language]);
   const value = useMemo(() => ({ language, toggleLanguage, setLanguage, t }), [language, toggleLanguage, setLanguage, t]);
+  if (language === "en" && !englishReady()) throw loadEnglish();
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 

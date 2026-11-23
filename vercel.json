@@ -1,28 +1,632 @@
 {
-  "rewrites": [
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "routes": [
     {
-      "source": "/((?!.*\\.).*)",
-      "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
+      "src": "/assets/(.*)",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      },
+      "continue": true
     },
     {
-      "source": "/(images|brand|models)/(.*)",
-      "headers": [
+      "src": "/(images|brand|models|docs|fonts|social)/(.*)",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      },
+      "continue": true
+    },
+    {
+      "src": "^/mesin/parut-kelapa/?$",
+      "has": [
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-01"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
         }
-      ]
+      ],
+      "dest": "/__variants/en/mesin/parut-kelapa/PRICE-01.html"
+    },
+    {
+      "src": "^/mesin/parut-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-01"
+        }
+      ],
+      "dest": "/__variants/id/mesin/parut-kelapa/PRICE-01.html"
+    },
+    {
+      "src": "^/mesin/parut-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-02"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/parut-kelapa/PRICE-02.html"
+    },
+    {
+      "src": "^/mesin/parut-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-02"
+        }
+      ],
+      "dest": "/__variants/id/mesin/parut-kelapa/PRICE-02.html"
+    },
+    {
+      "src": "^/mesin/parut-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-03"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/parut-kelapa/PRICE-03.html"
+    },
+    {
+      "src": "^/mesin/parut-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-03"
+        }
+      ],
+      "dest": "/__variants/id/mesin/parut-kelapa/PRICE-03.html"
+    },
+    {
+      "src": "^/mesin/parut-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-04"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/parut-kelapa/PRICE-04.html"
+    },
+    {
+      "src": "^/mesin/parut-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-04"
+        }
+      ],
+      "dest": "/__variants/id/mesin/parut-kelapa/PRICE-04.html"
+    },
+    {
+      "src": "^/mesin/parut-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-05"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/parut-kelapa/PRICE-05.html"
+    },
+    {
+      "src": "^/mesin/parut-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-05"
+        }
+      ],
+      "dest": "/__variants/id/mesin/parut-kelapa/PRICE-05.html"
+    },
+    {
+      "src": "^/mesin/kupas-batok-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-06"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/kupas-batok-kelapa/PRICE-06.html"
+    },
+    {
+      "src": "^/mesin/kupas-batok-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-06"
+        }
+      ],
+      "dest": "/__variants/id/mesin/kupas-batok-kelapa/PRICE-06.html"
+    },
+    {
+      "src": "^/mesin/kupas-batok-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-07"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/kupas-batok-kelapa/PRICE-07.html"
+    },
+    {
+      "src": "^/mesin/kupas-batok-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-07"
+        }
+      ],
+      "dest": "/__variants/id/mesin/kupas-batok-kelapa/PRICE-07.html"
+    },
+    {
+      "src": "^/mesin/kupas-batok-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-08"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/kupas-batok-kelapa/PRICE-08.html"
+    },
+    {
+      "src": "^/mesin/kupas-batok-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-08"
+        }
+      ],
+      "dest": "/__variants/id/mesin/kupas-batok-kelapa/PRICE-08.html"
+    },
+    {
+      "src": "^/mesin/kupas-batok-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-09"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/kupas-batok-kelapa/PRICE-09.html"
+    },
+    {
+      "src": "^/mesin/kupas-batok-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-09"
+        }
+      ],
+      "dest": "/__variants/id/mesin/kupas-batok-kelapa/PRICE-09.html"
+    },
+    {
+      "src": "^/mesin/kupas-batok-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-10"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/kupas-batok-kelapa/PRICE-10.html"
+    },
+    {
+      "src": "^/mesin/kupas-batok-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-10"
+        }
+      ],
+      "dest": "/__variants/id/mesin/kupas-batok-kelapa/PRICE-10.html"
+    },
+    {
+      "src": "^/mesin/peras-santan/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-11"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/peras-santan/PRICE-11.html"
+    },
+    {
+      "src": "^/mesin/peras-santan/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-11"
+        }
+      ],
+      "dest": "/__variants/id/mesin/peras-santan/PRICE-11.html"
+    },
+    {
+      "src": "^/mesin/peras-santan/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-12"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/peras-santan/PRICE-12.html"
+    },
+    {
+      "src": "^/mesin/peras-santan/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-12"
+        }
+      ],
+      "dest": "/__variants/id/mesin/peras-santan/PRICE-12.html"
+    },
+    {
+      "src": "^/mesin/peras-santan/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-13"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/peras-santan/PRICE-13.html"
+    },
+    {
+      "src": "^/mesin/peras-santan/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-13"
+        }
+      ],
+      "dest": "/__variants/id/mesin/peras-santan/PRICE-13.html"
+    },
+    {
+      "src": "^/mesin/peras-santan/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-14"
+        },
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__variants/en/mesin/peras-santan/PRICE-14.html"
+    },
+    {
+      "src": "^/mesin/peras-santan/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "varian",
+          "value": "PRICE-14"
+        }
+      ],
+      "dest": "/__variants/id/mesin/peras-santan/PRICE-14.html"
+    },
+    {
+      "src": "^/$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/home.html"
+    },
+    {
+      "src": "^/$",
+      "dest": "/__pages/id/home.html"
+    },
+    {
+      "src": "^/mesin/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/mesin.html"
+    },
+    {
+      "src": "^/mesin/?$",
+      "dest": "/__pages/id/mesin.html"
+    },
+    {
+      "src": "^/bengkel/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/bengkel.html"
+    },
+    {
+      "src": "^/bengkel/?$",
+      "dest": "/__pages/id/bengkel.html"
+    },
+    {
+      "src": "^/tentang/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/tentang.html"
+    },
+    {
+      "src": "^/tentang/?$",
+      "dest": "/__pages/id/tentang.html"
+    },
+    {
+      "src": "^/kontak/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/kontak.html"
+    },
+    {
+      "src": "^/kontak/?$",
+      "dest": "/__pages/id/kontak.html"
+    },
+    {
+      "src": "^/mesin/parut-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/mesin/parut-kelapa.html"
+    },
+    {
+      "src": "^/mesin/parut-kelapa/?$",
+      "dest": "/__pages/id/mesin/parut-kelapa.html"
+    },
+    {
+      "src": "^/mesin/kupas-batok-kelapa/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/mesin/kupas-batok-kelapa.html"
+    },
+    {
+      "src": "^/mesin/kupas-batok-kelapa/?$",
+      "dest": "/__pages/id/mesin/kupas-batok-kelapa.html"
+    },
+    {
+      "src": "^/mesin/peras-santan/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/mesin/peras-santan.html"
+    },
+    {
+      "src": "^/mesin/peras-santan/?$",
+      "dest": "/__pages/id/mesin/peras-santan.html"
+    },
+    {
+      "src": "^/mesin/piringan-gearbox-meja-listrik/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/mesin/piringan-gearbox-meja-listrik.html"
+    },
+    {
+      "src": "^/mesin/piringan-gearbox-meja-listrik/?$",
+      "dest": "/__pages/id/mesin/piringan-gearbox-meja-listrik.html"
+    },
+    {
+      "src": "^/mesin/piringan-gearbox-meja-engine/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/mesin/piringan-gearbox-meja-engine.html"
+    },
+    {
+      "src": "^/mesin/piringan-gearbox-meja-engine/?$",
+      "dest": "/__pages/id/mesin/piringan-gearbox-meja-engine.html"
+    },
+    {
+      "src": "^/mesin/piringan-gearbox-lantai-transmisi-belt/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/mesin/piringan-gearbox-lantai-transmisi-belt.html"
+    },
+    {
+      "src": "^/mesin/piringan-gearbox-lantai-transmisi-belt/?$",
+      "dest": "/__pages/id/mesin/piringan-gearbox-lantai-transmisi-belt.html"
+    },
+    {
+      "src": "^/mesin/drum-tertutup-stainless-listrik/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/mesin/drum-tertutup-stainless-listrik.html"
+    },
+    {
+      "src": "^/mesin/drum-tertutup-stainless-listrik/?$",
+      "dest": "/__pages/id/mesin/drum-tertutup-stainless-listrik.html"
+    },
+    {
+      "src": "^/mesin/drum-tertutup-stainless-engine/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/mesin/drum-tertutup-stainless-engine.html"
+    },
+    {
+      "src": "^/mesin/drum-tertutup-stainless-engine/?$",
+      "dest": "/__pages/id/mesin/drum-tertutup-stainless-engine.html"
+    },
+    {
+      "src": "^/mesin/drum-tertutup-transmisi-belt-samping/?$",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "dest": "/__pages/en/mesin/drum-tertutup-transmisi-belt-samping.html"
+    },
+    {
+      "src": "^/mesin/drum-tertutup-transmisi-belt-samping/?$",
+      "dest": "/__pages/id/mesin/drum-tertutup-transmisi-belt-samping.html"
+    },
+    {
+      "src": "/(assets|images|brand|models|docs|fonts|social)/(.*)",
+      "dest": "/$1/$2"
+    },
+    {
+      "src": "/(favicon\\.svg|robots\\.txt|sitemap(?:-en)?\\.xml|llms\\.txt)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "status": 404,
+      "dest": "/__pages/en/404.html"
+    },
+    {
+      "src": "/(.*)",
+      "status": 404,
+      "dest": "/__pages/id/404.html"
     }
   ]
 }

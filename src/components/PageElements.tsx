@@ -1,14 +1,13 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "./LocalizedLink";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export function PageHero({ number, eyebrow, title, description, aside }: { number: string; eyebrow: string; title: string; description: string; aside?: ReactNode }) {
-  const reduced = useReducedMotion();
   return (
     <section className="site-shell pb-20 pt-[calc(var(--header-height)+72px)] md:pb-32 md:pt-[calc(var(--header-height)+112px)]">
-      <motion.div initial={reduced ? false : "hidden"} animate="show" variants={{ show: { transition: { staggerChildren: .09 } } }}>
+      <motion.div initial={false} animate="show" variants={{ show: { transition: { staggerChildren: .09 } } }}>
         <motion.p variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }} className="mono mb-12 border-t hairline pt-5 text-steel-dark"><span className="text-industrial">{number}</span> / {eyebrow}</motion.p>
         <div className="overflow-hidden"><motion.h1 variants={{ hidden: { y: "110%" }, show: { y: 0 } }} transition={{ duration: .9, ease: [0.22, 1, 0.36, 1] }} className="display-lg max-w-6xl">{title}</motion.h1></div>
         <div className="mt-12 grid gap-10 md:grid-cols-12">

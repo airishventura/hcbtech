@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/ibm-plex-mono-400.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/ibm-plex-mono-500.woff2') format('woff2'); }
+@font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/fonts/space-grotesk.woff2') format('woff2'); }
 @import "tailwindcss";
 
 @theme {
@@ -127,3 +129,20 @@ html { scroll-padding-top: calc(var(--header-height) + 16px); scroll-padding-bot
   .home-hero-static { height: auto; }
   .home-hero-static .home-hero-stage { position: relative; }
 }
+
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-toggle { transition: transform 180ms cubic-bezier(.23,1,.32,1); }
+.faq-item[open] .faq-toggle { transform: rotate(45deg); }
+.btn:active, .icon-button:active { scale: .96; }
+h1, h2, h3 { text-wrap: balance; }
+p, figcaption { text-wrap: pretty; }
+[data-testid="variant-price"], .ipi-number { font-variant-numeric: tabular-nums; }
+.ipi-image { object-fit: contain !important; background: #E8E4DC; outline: 1px solid rgb(0 0 0 / .1); outline-offset: -1px; }
+.ipi-root .ipi-row { min-height: 100px; }
+.ipi-root .ipi-row:focus-visible { outline-offset: -3px; }
+@media (hover: none), (pointer: coarse) { .group:hover img { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .btn:active, .icon-button:active { scale: 1; } }
+
+/* Text accent variants retain contrast on light steel and dark workshop surfaces. */
+.text-industrial { color: #BB2020; }
+footer .text-industrial, .bg-graphite .text-industrial { color: #F17870; }

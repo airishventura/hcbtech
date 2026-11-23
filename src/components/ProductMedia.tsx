@@ -1,11 +1,13 @@
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Box, ChevronLeft, ChevronRight, Images, Play } from "lucide-react";
-import { lazy, Suspense, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import { Box, ChevronLeft, ChevronRight, Images, Play, Maximize2 } from "lucide-react";
+import { lazy, Suspense, useCallback, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import type { Product, ProductVariant } from "../data/products";
 import EmptyState from "./EmptyState";
 import InquiryLink from "./InquiryLink";
 import { useLanguage } from "../i18n/LanguageContext";
 
+const PhotoLightbox = lazy(() => import("./PhotoLightbox"));
 const MachineViewer = lazy(() => import("./MachineViewer"));
 
 type Tab = "media" | "3d" | "video";
@@ -13,6 +15,8 @@ type Tab = "media" | "3d" | "video";
 export default function ProductMedia({ product, variant }: { product: Product; variant?: ProductVariant }) {
   const { t } = useLanguage();
   const [tab, setTab] = useState<Tab>(() => product.gallery.length ? "media" : product.modelAccuracy !== "none" ? "3d" : "video");
+  const [zoomOpen, setZoomOpen] = useState(false);
+  const closeZoom = useCallback(() => setZoomOpen(false), []);
   const [imageIndex, setImageIndex] = useState(0);
   const galleryRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
@@ -28,6 +32,10 @@ export default function ProductMedia({ product, variant }: { product: Product; v
     setImageIndex(next);
     galleryRef.current?.scrollTo({ left: next * galleryRef.current.clientWidth, behavior: reduced ? "auto" : "smooth" });
   };
+  const changeZoomImage = useCallback((index: number) => {
+    setImageIndex(index);
+    galleryRef.current?.scrollTo({ left: index * galleryRef.current.clientWidth, behavior: "instant" });
+  }, []);
   const onTabKey = (event: ReactKeyboardEvent<HTMLButtonElement>, index: number) => {
     let next = index;
     if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
@@ -51,13 +59,14 @@ export default function ProductMedia({ product, variant }: { product: Product; v
     <AnimatePresence mode="wait" initial={false}>
       <motion.div key={tab} id={`panel-${product.id}-${tab}`} role="tabpanel" aria-labelledby={`tab-${product.id}-${tab}`} initial={reduced ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: .25 }}>
         {tab === "media" && <div className="relative">
-          <div ref={galleryRef} className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto" onScroll={(event) => { const element = event.currentTarget; setImageIndex(Math.round(element.scrollLeft / element.clientWidth)); }}>
+          <div ref={galleryRef} tabIndex={0} role="region" aria-label={t("Galeri foto")} className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto" onScroll={(event) => { const element = event.currentTarget; setImageIndex(Math.round(element.scrollLeft / element.clientWidth)); }}>
             {product.gallery.map((image, index) => <figure key={`${image.src}-${index}`} className="relative aspect-[4/4.7] w-full shrink-0 snap-start overflow-hidden bg-[#e8e4dc] md:aspect-[4/4.35]">
               <img src={image.src} alt={image.alt} width={image.width ?? 768} height={image.height ?? 960} loading={index === 0 ? "eager" : "lazy"} decoding="async" className={`h-full w-full ${image.kind === "original-photo" ? "object-contain" : "object-cover"}`} />
               <span className="media-label absolute left-4 top-4">{image.kind === "original-photo" ? t("Foto asli") : t("Visualisasi / bukan foto unit")}</span>
               <figcaption className="absolute inset-x-0 bottom-0 bg-graphite/90 px-4 py-3 text-xs leading-relaxed text-ivory/75">{image.caption}</figcaption>
             </figure>)}
           </div>
+          <button type="button" data-photo-zoom className="icon-button absolute right-3 top-3 bg-ivory/95" onClick={() => setZoomOpen(true)} aria-label={t("Perbesar foto")}><Maximize2 size={18} /></button>
           {product.gallery.length > 1 && <>
             <button type="button" className="icon-button absolute left-3 top-1/2 -translate-y-1/2 bg-ivory/90" onClick={() => goToImage(imageIndex - 1)} disabled={imageIndex === 0} aria-label={t("Foto sebelumnya")}><ChevronLeft size={18} /></button>
             <button type="button" className="icon-button absolute right-3 top-1/2 -translate-y-1/2 bg-ivory/90" onClick={() => goToImage(imageIndex + 1)} disabled={imageIndex === product.gallery.length - 1} aria-label={t("Foto berikutnya")}><ChevronRight size={18} /></button>
@@ -74,6 +83,7 @@ export default function ProductMedia({ product, variant }: { product: Product; v
         </div>}
       </motion.div>
     </AnimatePresence>
+    {zoomOpen && createPortal(<Suspense fallback={<div role="status" className="fixed inset-0 z-[100] bg-black/90 p-12 text-white">{t("Memuat halaman…")}</div>}><PhotoLightbox images={product.gallery} index={imageIndex} onChange={changeZoomImage} onClose={closeZoom} /></Suspense>, document.body)}
     <p className="mono mt-3 leading-relaxed text-steel-dark">{tab === "3d" ? product.modelAccuracy === "geometry-verified" ? t("Geometri model telah diverifikasi terhadap referensi; bukan sertifikasi performa atau keselamatan.") : t("Model interaktif adalah aproksimasi bentuk luar; bukan gambar teknik atau animasi kerja.") : tab === "video" ? t("Video ditampilkan dari sumber yang dicantumkan pada data produk.") : hasOriginal ? t("Foto asli disediakan pemilik. Klik dan geser galeri pada layar sentuh.") : t("Visualisasi digunakan sementara sampai foto asli pemilik tersedia di aset proyek.")}</p>
   </div>;
 }

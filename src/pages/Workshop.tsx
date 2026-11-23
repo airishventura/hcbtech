@@ -1,5 +1,5 @@
 import { ArrowUpRight, Camera, CheckCircle2, FileBox, MessageSquareText, Play, Video } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "../components/LocalizedLink";
 import InquiryLink from "../components/InquiryLink";
 import { PageHero, TextLink } from "../components/PageElements";
 import { Reveal, SectionIntro } from "../components/Reveal";

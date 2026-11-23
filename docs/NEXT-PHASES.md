@@ -2,6 +2,10 @@
 
 Updated 23 November 2026 (Jakarta). The sourced catalog, fourteen reference-price variants, three approximate family GLBs and WhatsApp handoff are live. The current visual pass restores the original hero with improved illustrative artwork and transparent brand assets.
 
+## Current direction
+
+The owner asked to skip phase 1 on 23 November 2026. Catalog confirmation remains deferred. Phase 3 is implemented in the current release: [rendering and interface record](PHASE-3.md), with 58 localized route/variant documents, social cards, optional component loading and HTTP 404 routing. Physical-device and screen-reader acceptance remain outstanding.
+
 ## Phase 1 — Confirm the sellable catalog
 
 Match each PRICE-01–14 configuration to its exact photographs and drive nameplate. Confirm names, included components, current prices and price scope, lead times, availability and sales terms. Resolve the blank drive for Ampar and the meaning of General/Genset before publishing stronger claims. Add short demonstration videos and useful buyer specifications only when supplied. Cabinet and parts photographs remain unassigned until identified.

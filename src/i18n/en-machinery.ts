@@ -104,4 +104,11 @@ export const enMachinery: Record<string, string> = {
   "Ilustrasi mesin kupas batok dengan motor listrik, gearbox, piringan, dan saluran keluar pada rangka meja": "Illustration of a shell peeler with an electric motor, gearbox, disc and discharge chute on a table frame",
   "Mesin parut kelapa, kupas batok, dan peras santan. Pilih konfigurasi yang sesuai, lalu bicarakan kebutuhan Anda dengan HCBTECH.": "Coconut graters, shell peelers and milk presses. Choose a configuration, then discuss your requirements with HCBTECH.",
   "Ilustrasi bentuk dari foto pemilik. Konfigurasi unit dikonfirmasi saat penawaran.": "Shape illustration based on owner photos. Confirm the unit configuration when requesting a quotation.",
+  "Foto keluarga mesin": "Family photo",
+  "Pratinjau": "Preview",
+  "Lihat detail": "View details",
+  "Perbesar foto": "Enlarge photo",
+  "Tutup foto": "Close photo",
+  "Navigasi tanpa JavaScript": "Navigation without JavaScript",
+  "Galeri foto": "Photo gallery",
 };

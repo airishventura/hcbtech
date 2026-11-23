@@ -19,6 +19,7 @@ test("toggle English mengubah konten, URL, metadata, 3D, dan inquiry lalu bertah
   const schema = JSON.parse(await page.locator("#page-jsonld").textContent() ?? "{}");
   expect(schema.name).toContain("draft model name");
   await page.getByRole("tab", { name: "View 3D" }).click();
+  await expect(page.locator("canvas")).toBeVisible({ timeout: 15000 });
   await expect(page.getByRole("button", { name: "Separate components" })).toBeVisible();
 
   await page.goto("/kontak?lang=en");

@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Check, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "./LocalizedLink";
 import type { DriveType, Product } from "../data/products";
 import { useContent } from "../i18n/LanguageContext";
 import InquiryLink from "./InquiryLink";

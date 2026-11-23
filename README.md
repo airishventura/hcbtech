@@ -11,6 +11,7 @@ npm run dev
 npm run check
 npx playwright install chromium
 npm run test:browser
+npm run test:production
 ```
 
 Use a Node version supported by Vite 7 (the existing Vercel project uses Node 26). `npm run check` runs TypeScript, unit tests, and a production build. Browser tests cover desktop Chrome and Android-sized Chrome. For an installed system browser, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium`. Tests intentionally clear WhatsApp configuration to exercise the contact fallback; production uses the configured business number.
@@ -42,9 +43,9 @@ The original hero headline and immersive machinery composition are restored with
 - `VITE_WHATSAPP_NUMBER`: business number in international or Indonesian local format. Empty/invalid values use the contact/draft fallback. Production and preview are configured with the supplied business number `6285315527000`.
 - `VITE_SITE_URL`: canonical origin. Empty values use the browser origin. Static robots and sitemap files currently use the observed deployment alias `https://hcbtech.vercel.app`; update these together if the domain changes.
 
-Vercel framework: **Vite**; build: `npm run build`; output: `dist`. `vercel.json` rewrites extensionless routes for the SPA. Hashed build assets are immutable; stable image/model URLs are revalidated so replacing a product photo does not leave year-long stale copies. The 3D engine is a separate chunk loaded when a user opens its tab.
+Vercel framework: **Vite**; build: `npm run build`; output: `dist`. `vercel.json` selects prerendered routes and variant/language queries. Hashed build assets are immutable; stable image/model URLs are revalidated so replacing a product photo does not leave year-long stale copies. The 3D engine is a separate chunk loaded when a user opens its tab. English translations and the photo lightbox also load on demand.
 
-This is a client-rendered SPA. Per-route metadata and structured data are updated in the browser. Server-rendered product HTML, social previews, and true HTTP 404 responses remain in the rendering roadmap. Non-home pages and the viewer load separately.
+The catalog is prerendered at build time into 58 Indonesian/English route and selected-variant pages. Product HTML, social metadata and JSON-LD are server-readable; the browser then mounts the interactive app. Vercel returns real HTTP 404 responses for unknown paths. `npm run preview` serves the generated route manifest locally, including English and variant query selection. See [phase 3](docs/PHASE-3.md).
 
 ## Review
 

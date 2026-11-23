@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import type { Product } from "../data/products";
 import { getWhatsAppNumber } from "../lib/inquiry";
 import { useLanguage } from "../i18n/LanguageContext";
 import { createBreadcrumbSchema, createFaqSchema, createOrganizationSchema, createProductSchema, type FaqSchemaItem } from "../lib/seo";
 
-interface SeoProps {
+export interface SeoProps {
   title: string;
   description: string;
   path: string;
@@ -13,6 +13,8 @@ interface SeoProps {
   faqs?: FaqSchemaItem[];
   noIndex?: boolean;
 }
+
+export const SeoCollector = createContext<((props: SeoProps & { language: "id" | "en" }) => void) | null>(null);
 
 function setMeta(selector: string, attribute: "name" | "property", key: string, content: string) {
   let element = document.head.querySelector<HTMLMetaElement>(selector);
@@ -38,11 +40,14 @@ function setSchema(id: string, value: unknown) {
 
 export default function Seo({ title, description, path, image, product, faqs, noIndex = false }: SeoProps) {
   const { language, t } = useLanguage();
+  const collect = useContext(SeoCollector);
+  collect?.({ title, description, path, image, product, faqs, noIndex, language });
   useEffect(() => {
     const siteUrl = (import.meta.env.VITE_SITE_URL || window.location.origin).replace(/\/$/, "");
     const baseCanonical = `${siteUrl}${path}`;
     const canonical = language === "en" ? `${baseCanonical}?lang=en` : baseCanonical;
-    const socialImage = image ? `${siteUrl}${image}` : `${siteUrl}/images/visual-disc-hero.webp`;
+    const socialSlug = product?.nameStatus === "confirmed" ? product.slug : "home";
+    const socialImage = `${siteUrl}/social/${socialSlug}-${language}.png`;
     const socialImageAlt = product?.gallery[0]?.alt ?? t("Visualisasi mesin HCBTECH pada katalog machining dan fabrikasi");
     const fullTitle = `${title} — HCBTECH`;
     document.documentElement.lang = language;
