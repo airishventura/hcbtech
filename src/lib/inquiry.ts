@@ -62,11 +62,12 @@ export function buildInquiryMessage({ product, variant, name, city, message, lan
   if (english) query.set("lang", "en");
   if (variant) query.set("varian", variant.id);
   const productPath = `/mesin/${product?.slug ?? ""}${query.size ? `?${query}` : ""}`;
+  const pageOrigin = typeof window === "undefined" ? (import.meta.env.VITE_SITE_URL || "https://hcbtech.vercel.app").replace(/\/$/, "") : window.location.origin;
   const lines = english ? [
     "Hello HCBTECH, I would like to request a quotation.",
     "",
     product ? `Product: ${product.name} (${product.id})` : "Requirement: Machinery / fabrication consultation",
-    product ? `Page: ${typeof window === "undefined" ? productPath : `${window.location.origin}${productPath}`}` : "",
+    product ? `Page: ${pageOrigin}${productPath}` : "",
     variant ? `Preferred configuration: ${variant.label}` : "",
     variant ? `Configuration note: ${variant.note}` : "",
     variant?.priceKind === "reference" ? `Price-list reference: ${variant.priceSourceId}; ${formatIDR(variant.priceIDR)} (please reconfirm)` : "",
@@ -79,7 +80,7 @@ export function buildInquiryMessage({ product, variant, name, city, message, lan
     "Halo HCBTECH, saya ingin meminta penawaran.",
     "",
     product ? `Produk: ${product.name} (${product.id})` : "Kebutuhan: Konsultasi mesin / fabrikasi",
-    product ? `Halaman: ${typeof window === "undefined" ? productPath : `${window.location.origin}${productPath}`}` : "",
+    product ? `Halaman: ${pageOrigin}${productPath}` : "",
     variant ? `Konfigurasi yang diminati: ${variant.label}` : "",
     variant ? `Catatan konfigurasi: ${variant.note}` : "",
     variant?.priceKind === "reference" ? `Referensi daftar harga: ${variant.priceSourceId}; ${formatIDR(variant.priceIDR)} (mohon konfirmasi)` : "",

@@ -25,6 +25,7 @@ test("all 14 shared variants retain the selected configuration in server HTML", 
     const input = html.match(new RegExp(`<input[^>]*value="${variant}"[^>]*>`))![0];
     expect(input).toContain('checked=""');
     expect(html).toContain(`varian%3D${variant}`);
+    expect(html).toContain("https%3A%2F%2Fhcbtech.vercel.app%2Fmesin%2F");
     expect(html).toContain('data-testid="variant-price"');
   }
 });
